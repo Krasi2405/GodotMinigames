@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="TestPlayer" type="Node2D"]
+
+position = Vector2( 362.554, 641.317 )
+
+
