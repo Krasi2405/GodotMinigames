@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://LevelPicker/icon.png" type="Texture" id=1]
+[ext_resource path="res://LevelPicker/LevelChoice.gd" type="Script" id=2]
+
+
+[node name="LevelChoice" type="TextureButton"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 128.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 200, 200 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 1 )
+expand = true
+script = ExtResource( 2 )
+_sections_unfolded = [ "Rect", "Textures" ]
+
+[connection signal="button_down" from="." to="." method="_on_TextureButton_button_down"]
+
+
