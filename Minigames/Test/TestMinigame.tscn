@@ -6,22 +6,22 @@
 
 [node name="MinigameBase" instance=ExtResource( 1 )]
 
-[node name="TestPlayer" parent="." index="0" instance=ExtResource( 2 )]
+[node name="Player" parent="PlayerController0" index="0" instance=ExtResource( 2 )]
 
 script = ExtResource( 3 )
 player_id = 0
 
-[node name="TestPlayer2" parent="." index="1" instance=ExtResource( 2 )]
+[node name="Player" parent="PlayerController1" index="0" instance=ExtResource( 2 )]
 
 script = ExtResource( 3 )
 player_id = 1
 
-[node name="TestPlayer3" parent="." index="2" instance=ExtResource( 2 )]
+[node name="Player" parent="PlayerController2" index="0" instance=ExtResource( 2 )]
 
 script = ExtResource( 3 )
 player_id = 2
 
-[node name="TestPlayer4" parent="." index="3" instance=ExtResource( 2 )]
+[node name="Player" parent="PlayerController3" index="0" instance=ExtResource( 2 )]
 
 script = ExtResource( 3 )
 player_id = 3

@@ -1,13 +1,41 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Minigames/Base/MinigameManager.gd" type="Script" id=1]
-[ext_resource path="res://Minigames/Base/InputManager.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Minigames/Base/PlayerController.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Minigames/Base/PlayerController.gd" type="Script" id=3]
+[ext_resource path="res://Minigames/Base/InputManager.tscn" type="PackedScene" id=4]
 
-[node name="MinigameBase" type="Node2D"]
+[node name="MinigameBase" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
-player_count = 4
+player_count = 2
 
-[node name="InputManager" parent="." index="0" instance=ExtResource( 2 )]
+[node name="PlayerController0" parent="." index="0" instance=ExtResource( 2 )]
+
+script = ExtResource( 3 )
+player_id = 0
+
+[node name="PlayerController1" parent="." index="1" instance=ExtResource( 2 )]
+
+script = ExtResource( 3 )
+player_id = 1
+
+[node name="PlayerController2" parent="." index="2" instance=ExtResource( 2 )]
+
+script = ExtResource( 3 )
+player_id = 2
+
+[node name="PlayerController3" parent="." index="3" instance=ExtResource( 2 )]
+
+script = ExtResource( 3 )
+player_id = 3
+
+[node name="InputManager" parent="." index="4" instance=ExtResource( 4 )]
+
+[connection signal="on_button_hold" from="InputManager" to="." method="_on_InputManager_on_button_hold"]
+
+[connection signal="on_button_press" from="InputManager" to="." method="_on_InputManager_on_button_press"]
+
+[connection signal="on_button_release" from="InputManager" to="." method="_on_InputManager_on_button_release"]
 
 

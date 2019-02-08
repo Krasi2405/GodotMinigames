@@ -88,10 +88,18 @@ _sections_unfolded = [ "Rect", "Textures", "Visibility" ]
 
 [connection signal="button_down" from="GameCamera/GUI/Button1" to="." method="_on_Button1_button_down"]
 
+[connection signal="button_up" from="GameCamera/GUI/Button1" to="." method="_on_Button1_button_up"]
+
 [connection signal="button_down" from="GameCamera/GUI/Button2" to="." method="_on_Button2_button_down"]
+
+[connection signal="button_up" from="GameCamera/GUI/Button2" to="." method="_on_Button2_button_up"]
 
 [connection signal="button_down" from="GameCamera/GUI/Button3" to="." method="_on_Button3_button_down"]
 
+[connection signal="button_up" from="GameCamera/GUI/Button3" to="." method="_on_Button3_button_up"]
+
 [connection signal="button_down" from="GameCamera/GUI/Button4" to="." method="_on_Button4_button_down"]
+
+[connection signal="button_up" from="GameCamera/GUI/Button4" to="." method="_on_Button4_button_up"]
 
 
