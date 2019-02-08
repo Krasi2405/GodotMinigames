@@ -1,7 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="TestPlayer" type="Node2D"]
+[ext_resource path="res://Minigames/Test/TestPlayer.gd" type="Script" id=1]
 
-position = Vector2( 362.554, 641.317 )
+[node name="Player" type="Node2D"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+player_id = 0
 
 

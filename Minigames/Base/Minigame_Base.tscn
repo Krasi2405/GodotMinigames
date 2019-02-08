@@ -9,6 +9,9 @@
 
 script = ExtResource( 1 )
 player_count = 2
+use_press_signal = true
+use_hold_signal = true
+use_release_signal = true
 
 [node name="PlayerController0" parent="." index="0" instance=ExtResource( 2 )]
 
