@@ -1,7 +1,7 @@
 extends Node2D
 
 
-export var player_id = 0
+var player_id = 0
 
 
 func _ready():
@@ -14,9 +14,9 @@ func press_action():
 	else:
 		print("Implement press_action() method in script for Player!")
 	
-func hold_action():
+func hold_action(delta):
 	if $Player.has_method("hold_action"):
-		$Player.hold_action()
+		$Player.hold_action(delta)
 	else:
 		print("Implement hold_action() method in script for Player!")
 	

@@ -18,14 +18,10 @@ func _enter_tree():
 
 
 func _ready():
-	var players = get_player_nodes()
-	var id = 0
-	for player in players:
-		player.player_id = id
-		self.players[id] = player
-		id += 1
-	
 	remove_unused_players()
+	
+	self.players = get_player_nodes();
+	set_player_ids();
 
 
 func get_player_nodes():
@@ -37,6 +33,13 @@ func get_player_nodes():
 		else:
 			print("Cannot get player_controller %s!" % i)
 	return players
+	
+
+func set_player_ids():
+	var id = 0
+	for player in self.players:
+		player.player_id = id
+		id += 1
 
 
 func remove_unused_players():
@@ -58,12 +61,12 @@ func _on_InputManager_on_button_press(button_id):
 	player.press_action()
 
 
-func _on_InputManager_on_button_hold(button_id):
+func _on_InputManager_on_button_hold(button_id, delta):
 	if not use_press_signal:
 		return
 	
 	var player = players[button_id]
-	player.hold_action()
+	player.hold_action(delta)
 
 
 func _on_InputManager_on_button_release(button_id):

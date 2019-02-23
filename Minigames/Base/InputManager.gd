@@ -5,7 +5,7 @@ var button_count = 4
 var button_states_is_held = []
 
 signal on_button_press(button_id)
-signal on_button_hold(button_id)
+signal on_button_hold(button_id, delta)
 signal on_button_release(button_id)
 
 func _enter_tree():
@@ -13,16 +13,13 @@ func _enter_tree():
 
 func _ready():
 	var minigame_manager = Global.MinigameManager
+	
 	if minigame_manager:
 		button_count = minigame_manager.get_player_count()
 	else:
-		print("No minigame manager to talk to!")
+		print("No minigame manager!")
 	
-	if button_count <= 3:
-		$GameCamera/GUI/Button4.queue_free()
-	
-	if button_count <= 2:
-		$GameCamera/GUI/Button3.queue_free()
+	remove_unused_buttons();
 	
 	if button_count <= 1:
 		print("Minigame developer is debil!!!")
@@ -31,11 +28,18 @@ func _ready():
 	for i in range (0, button_count):
 		button_states_is_held.append(false)
 		
+func remove_unused_buttons():
+	if button_count <= 3:
+		$GameCamera/GUI/Button4.queue_free()
+	
+	if button_count <= 2:
+		$GameCamera/GUI/Button3.queue_free()
+		
 func _physics_process(delta):
 	for i in range(0, button_count):
 		var button_is_held = button_states_is_held[i]
 		if button_is_held:
-			emit_signal("on_button_hold", i)
+			emit_signal("on_button_hold", i, delta)
 
 
 func _on_Button1_button_down():
