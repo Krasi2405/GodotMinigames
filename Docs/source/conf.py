@@ -20,8 +20,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Minigames'
-copyright = '2019, KeePo24 ShimoNchick'
-author = 'KeePo24 ShimoNchick'
+copyright = '2019, KeePo24 V€R$0'
+author = 'KeePo24 V€R$0'
 
 # The short X.Y version
 version = ''

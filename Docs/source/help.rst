@@ -1,11 +1,8 @@
 Help
 ====
 
-Q: deibl li sum?
+Q: How to use the base minigame scene?
 
-A: mhm
+A: Everything is explained over at `the quickstart guide`_.
 
-
-Q: wtf e tozi proekt?
-
-A: nz
+.. _the quickstart guide: quickstart.html
