@@ -8,18 +8,11 @@ Repo for game is here_
 
 
 .. toctree::
-   	:maxdepth: 2
+   	:maxdepth: 1
    	:caption: Contents:
 
    	quickstart
-   	documentation
+   	documentation/index
+   	minigames/index
    	help
    	license
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

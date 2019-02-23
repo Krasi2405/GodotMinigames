@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Minigames/Spaceship/BoostSpawner.gd" type="Script" id=1]
+
+[node name="BoostSpawner" type="Node2D"]
+
+script = ExtResource( 1 )
+distance_from_borders = 200
+spawn_delay = 3
+boost_list = null
+
+[node name="SpawnDelayTimer" type="Timer" parent="." index="0"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="SpawnDelayTimer" to="." method="_on_SpawnDelayTimer_timeout"]
+
+

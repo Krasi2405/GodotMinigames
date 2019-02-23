@@ -9,7 +9,7 @@ func press_action():
 
 
 func hold_action(delta):
-	print("Hold with delta %s!" % delta)
+	move_and_slide(Vector2(0, -1) * 5000 * delta)
 
 
 func release_action():
