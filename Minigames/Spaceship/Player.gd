@@ -26,9 +26,9 @@ func release_action():
 func _process(delta):
 	if log_rotate:
 		if is_rotate_direction_positive:
-			rotation = self.rotation + deg2rad(90 * rotation_speed)
+			rotation = self.rotation + deg2rad(90 * rotation_speed * delta)
 		else:
-			rotation = self.rotation - deg2rad(90 * rotation_speed)
+			rotation = self.rotation - deg2rad(90 * rotation_speed * delta)
 
 
 func _on_HitArea_body_entered(body):
