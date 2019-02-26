@@ -15,20 +15,20 @@ flags = 4
 gradient = SubResource( 1 )
 width = 2048
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=3]
 
 min_value = 0.0
 max_value = 1.0
 bake_resolution = 100
 _data = [ Vector2( 0, 0.467773 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.886719 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
+[sub_resource type="CurveTexture" id=4]
 
 flags = 4
 width = 2048
-curve = SubResource( 5 )
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=5]
 
 render_priority = 0
 trail_divisor = 1
@@ -58,7 +58,7 @@ angle = 0.0
 angle_random = 0.0
 scale = 10.0
 scale_random = 0.0
-scale_curve = SubResource( 6 )
+scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 hue_variation = 0.0
 hue_variation_random = 0.0
@@ -107,7 +107,7 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 7 )
+process_material = SubResource( 5 )
 texture = null
 normal_map = null
 h_frames = 1
@@ -116,14 +116,14 @@ _sections_unfolded = [ "Process Material", "Transform" ]
 
 [node name="BoostSpawner" parent="." index="2" instance=ExtResource( 2 )]
 
-spawn_delay = 1
+spawn_delay = 4
 boost_list = [ "res://Minigames/Spaceship/AsteroidBoost.tscn" ]
 
 [node name="Player" parent="PlayerController0" index="0" instance=ExtResource( 3 )]
 
 modulate = Color( 1, 0.914063, 0, 1 )
 position = Vector2( 581.564, 381.83 )
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Collision", "Visibility" ]
 
 [node name="Player" parent="PlayerController1" index="0" instance=ExtResource( 3 )]
 
@@ -133,12 +133,12 @@ position = Vector2( 960.176, 520.032 )
 
 modulate = Color( 0.628906, 0.6521, 1, 1 )
 position = Vector2( 292.424, 520.032 )
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Collision", "Visibility" ]
 
 [node name="Player" parent="PlayerController3" index="0" instance=ExtResource( 3 )]
 
 modulate = Color( 0.0078125, 1, 0, 1 )
 position = Vector2( 896.867, 167.315 )
-_sections_unfolded = [ "Transform", "Visibility" ]
+_sections_unfolded = [ "Collision", "Transform", "Visibility" ]
 
 

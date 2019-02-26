@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="GodotMinigames"
-run/main_scene="res://Minigames/Test/TestMinigame.tscn"
+run/main_scene="res://Minigames/Spaceship/SpaceshipMinigame.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -26,6 +26,11 @@ window/handheld/orientation="portrait"
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 "window/Use Vsync"=false
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Hazards"
 
 [rendering]
 
