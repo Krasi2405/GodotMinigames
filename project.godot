@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="GodotMinigames"
-run/main_scene="res://Minigames/Test/TestMinigame.tscn"
+run/main_scene="res://Minigames/Spaceship/SpaceshipMinigame.tscn"
 config/icon="res://icon.png"
 
 [autoload]
