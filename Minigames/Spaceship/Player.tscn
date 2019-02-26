@@ -10,6 +10,8 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
+rotation_speed = 0.06
+movement_speed = 5000
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -19,5 +21,23 @@ texture = ExtResource( 2 )
 
 build_mode = 0
 polygon = PoolVector2Array( -15.9529, 9.87817, 15.9003, 9.92922, 15.9514, 4.21197, 6.86343, -0.0746784, 3.98485, -11, -0.0261726, -16.0138, -3.84917, -10.8747, -6.83289, 0.000370026, -16.0076, 3.79063 )
+
+[node name="HitArea" type="Area2D" parent="." index="2"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="HitArea" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -16.6395, 10.5131, 16.3458, 10.3742, 16.3458, 3.98547, 0.0267677, -17.264, -16.6395, 3.98547 )
+
+[connection signal="body_entered" from="HitArea" to="." method="_on_HitArea_body_entered"]
 
 

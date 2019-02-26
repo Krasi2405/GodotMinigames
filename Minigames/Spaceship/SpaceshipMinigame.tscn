@@ -15,30 +15,22 @@ boost_list = [ "res://Minigames/Spaceship/AsteroidBoost.tscn" ]
 
 modulate = Color( 1, 0.914063, 0, 1 )
 position = Vector2( 581.564, 381.83 )
-_sections_unfolded = [ "Visibility" ]
-rotationSpeed = 0.06
-movmentSpeed = 5000
+_sections_unfolded = [ "Collision", "Visibility" ]
 
 [node name="Player" parent="PlayerController1" index="0" instance=ExtResource( 3 )]
 
-position = Vector2( 960.176, 520.032 )
-rotationSpeed = 0.06
-movmentSpeed = 5000
+position = Vector2( 583.341, 416.026 )
 
 [node name="Player" parent="PlayerController2" index="0" instance=ExtResource( 3 )]
 
 modulate = Color( 0.628906, 0.6521, 1, 1 )
 position = Vector2( 292.424, 520.032 )
 _sections_unfolded = [ "Visibility" ]
-rotationSpeed = 0.06
-movmentSpeed = 5000
 
 [node name="Player" parent="PlayerController3" index="0" instance=ExtResource( 3 )]
 
 modulate = Color( 0.0078125, 1, 0, 1 )
 position = Vector2( 896.867, 167.315 )
 _sections_unfolded = [ "Transform", "Visibility" ]
-rotationSpeed = 0.06
-movmentSpeed = 5000
 
 

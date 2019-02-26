@@ -3,7 +3,8 @@ extends Node2D
 export var player_count = 4
 
 var input_manager
-var players = {}
+
+var player_map = {}
 
 
 
@@ -20,8 +21,8 @@ func _enter_tree():
 func _ready():
 	remove_unused_players()
 	
-	self.players = get_player_nodes();
-	set_player_ids();
+	var players = get_player_nodes();
+	create_player_map(players);
 
 
 func get_player_nodes():
@@ -35,10 +36,11 @@ func get_player_nodes():
 	return players
 	
 
-func set_player_ids():
+func create_player_map(var players):
 	var id = 0
-	for player in self.players:
+	for player in players:
 		player.player_id = id
+		player_map[id] = player;
 		id += 1
 
 
@@ -53,25 +55,32 @@ func get_player_count():
 	return player_count
 
 
+func remove_player(player_id):
+	player_map.erase(player_id)
+
+
 func _on_InputManager_on_button_press(button_id):
 	if not use_press_signal:
 		return
 
-	var player = players[button_id]
-	player.press_action()
+	if player_map.has(button_id):
+		var player = player_map[button_id]
+		player.press_action()
 
 
 func _on_InputManager_on_button_hold(button_id, delta):
 	if not use_press_signal:
 		return
 	
-	var player = players[button_id]
-	player.hold_action(delta)
+	if player_map.has(button_id):
+		var player = player_map[button_id]
+		player.hold_action(delta)
 
 
 func _on_InputManager_on_button_release(button_id):
 	if not use_press_signal:
 		return
 	
-	var player = players[button_id]
-	player.release_action()
+	if player_map.has(button_id):
+		var player = player_map[button_id]
+		player.release_action()
