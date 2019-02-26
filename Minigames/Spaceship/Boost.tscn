@@ -20,7 +20,7 @@ initial_velocity_random = 0.0
 angular_velocity = 30.0
 angular_velocity_random = 1.0
 orbit_velocity = 0.5
-orbit_velocity_random = 0.0
+orbit_velocity_random = 0.5
 linear_accel = 0.0
 linear_accel_random = 0.0
 radial_accel = 0.0
@@ -41,12 +41,12 @@ anim_speed_random = 0.0
 anim_offset = 0.0
 anim_offset_random = 0.0
 anim_loop = false
-_sections_unfolded = [ "Emission Shape", "Gravity", "Orbit Velocity", "Scale", "Spread", "Trail" ]
+_sections_unfolded = [ "Emission Shape", "Scale", "Trail" ]
 
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 13.909, 14.2647 )
+extents = Vector2( 16.2961, 16.0456 )
 
 [node name="Boost" type="Area2D"]
 
@@ -67,13 +67,14 @@ texture = ExtResource( 2 )
 [node name="Particles2D" type="Particles2D" parent="." index="1"]
 
 modulate = Color( 1, 1, 1, 0.524863 )
+position = Vector2( -1.25566, 0.192688 )
 emitting = true
-amount = 10
-lifetime = 600.0
+amount = 20
+lifetime = 5.0
 one_shot = false
 preprocess = 0.0
 speed_scale = 1.0
-explosiveness = 1.0
+explosiveness = 0.5
 randomness = 0.1
 fixed_fps = 0
 fract_delta = true
@@ -85,11 +86,11 @@ texture = null
 normal_map = null
 h_frames = 1
 v_frames = 1
-_sections_unfolded = [ "Process Material", "Textures", "Visibility" ]
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Visibility" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 
-position = Vector2( 1.04384, -0.115982 )
+position = Vector2( 0.193621, 0.167423 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
@@ -99,10 +100,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -5.0
-margin_top = -6.0
-margin_right = 7.0
-margin_bottom = 6.0
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 10.0
+margin_bottom = 10.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -113,6 +114,15 @@ expand = true
 stretch_mode = 0
 _sections_unfolded = [ "Rect" ]
 
+[node name="DestroyTime" type="Timer" parent="." index="4"]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = false
+autostart = false
+
 [connection signal="body_entered" from="." to="." method="_on_Boost_body_entered"]
+
+[connection signal="timeout" from="DestroyTime" to="." method="_on_DestroyTime_timeout"]
 
 

@@ -9,6 +9,7 @@
 [node name="BoostController" type="Node2D" parent="." index="0"]
 
 script = ExtResource( 2 )
+ASTEROID_PREFAB_PATH = "res://Minigames/Spaceship/Asteroid.tscn"
 
 [node name="BoostIcon" parent="." index="4"]
 
