@@ -1,12 +1,120 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Minigames/Base/Minigame_Base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Minigames/Spaceship/BoostSpawner.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Minigames/Spaceship/Player.tscn" type="PackedScene" id=3]
 
+[sub_resource type="Gradient" id=1]
+
+offsets = PoolRealArray( 0, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.232039, 0.975368, 0.975368, 0.975368, 0.845294 )
+
+[sub_resource type="GradientTexture" id=2]
+
+flags = 4
+gradient = SubResource( 1 )
+width = 2048
+
+[sub_resource type="Curve" id=5]
+
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0, 0.467773 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.886719 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+
+flags = 4
+width = 2048
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 2
+emission_box_extents = Vector3( 640, 360, 1 )
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 180.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 20.0
+initial_velocity_random = 1.0
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 10.0
+scale_random = 0.0
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 2 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Color", "Emission Shape", "Flags", "Initial Velocity", "Scale" ]
+
 [node name="MinigameManager" index="0" instance=ExtResource( 1 )]
 
-[node name="BoostSpawner" parent="." index="0" instance=ExtResource( 2 )]
+[node name="ColorRect" type="ColorRect" parent="." index="0"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 1260.0
+margin_bottom = 695.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 0, 0, 1 )
+_sections_unfolded = [ "Grow Direction", "Material", "Theme" ]
+
+[node name="Particles2D" type="Particles2D" parent="." index="1"]
+
+position = Vector2( 656.754, 356.102 )
+rotation = -0.000186227
+emitting = true
+amount = 40
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 7 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Process Material", "Transform" ]
+
+[node name="BoostSpawner" parent="." index="2" instance=ExtResource( 2 )]
 
 spawn_delay = 1
 boost_list = [ "res://Minigames/Spaceship/AsteroidBoost.tscn" ]
@@ -16,29 +124,21 @@ boost_list = [ "res://Minigames/Spaceship/AsteroidBoost.tscn" ]
 modulate = Color( 1, 0.914063, 0, 1 )
 position = Vector2( 581.564, 381.83 )
 _sections_unfolded = [ "Visibility" ]
-rotationSpeed = 0.06
-movmentSpeed = 5000
 
 [node name="Player" parent="PlayerController1" index="0" instance=ExtResource( 3 )]
 
 position = Vector2( 960.176, 520.032 )
-rotationSpeed = 0.06
-movmentSpeed = 5000
 
 [node name="Player" parent="PlayerController2" index="0" instance=ExtResource( 3 )]
 
 modulate = Color( 0.628906, 0.6521, 1, 1 )
 position = Vector2( 292.424, 520.032 )
 _sections_unfolded = [ "Visibility" ]
-rotationSpeed = 0.06
-movmentSpeed = 5000
 
 [node name="Player" parent="PlayerController3" index="0" instance=ExtResource( 3 )]
 
 modulate = Color( 0.0078125, 1, 0, 1 )
 position = Vector2( 896.867, 167.315 )
 _sections_unfolded = [ "Transform", "Visibility" ]
-rotationSpeed = 0.06
-movmentSpeed = 5000
 
 
