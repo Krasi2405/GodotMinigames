@@ -3,7 +3,6 @@ extends Node2D
 
 var player_id = 0
 
-
 func _ready():
 	assert($Player != null)
 

@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/minigames_base_hierarchy.png-c877cef607e3a4833c70c244ad4f8303.stex"
+path="res://.import/minigames_base_hierarchy.png-b5ddd1ddac99e2c1b5a6793d1c1a455a.stex"
 
 [deps]
 
-source_file="res://Docs/source/_static/minigames_base_hierarchy.png"
-dest_files=[ "res://.import/minigames_base_hierarchy.png-c877cef607e3a4833c70c244ad4f8303.stex" ]
+source_file="res://Docs/build/html/_static/minigames_base_hierarchy.png"
+dest_files=[ "res://.import/minigames_base_hierarchy.png-b5ddd1ddac99e2c1b5a6793d1c1a455a.stex" ]
 
 [params]
 

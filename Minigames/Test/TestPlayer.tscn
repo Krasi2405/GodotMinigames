@@ -6,6 +6,5 @@
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-player_id = 0
 
 
