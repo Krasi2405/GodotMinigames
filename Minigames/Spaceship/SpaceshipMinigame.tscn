@@ -119,21 +119,37 @@ _sections_unfolded = [ "Process Material", "Transform" ]
 spawn_delay = 4
 boost_list = [ "res://Minigames/Spaceship/AsteroidBoost.tscn" ]
 
+[node name="PlayerController0" parent="." index="3"]
+
+editor/display_folded = true
+
 [node name="Player" parent="PlayerController0" index="0" instance=ExtResource( 3 )]
 
 modulate = Color( 1, 0.914063, 0, 1 )
 position = Vector2( 581.564, 381.83 )
 _sections_unfolded = [ "Collision", "Visibility" ]
 
+[node name="PlayerController1" parent="." index="4"]
+
+editor/display_folded = true
+
 [node name="Player" parent="PlayerController1" index="0" instance=ExtResource( 3 )]
 
 position = Vector2( 960.176, 520.032 )
+
+[node name="PlayerController2" parent="." index="5"]
+
+editor/display_folded = true
 
 [node name="Player" parent="PlayerController2" index="0" instance=ExtResource( 3 )]
 
 modulate = Color( 0.628906, 0.6521, 1, 1 )
 position = Vector2( 292.424, 520.032 )
 _sections_unfolded = [ "Collision", "Visibility" ]
+
+[node name="PlayerController3" parent="." index="6"]
+
+editor/display_folded = true
 
 [node name="Player" parent="PlayerController3" index="0" instance=ExtResource( 3 )]
 

@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Minigames/Base/MinigameManager.gd" type="Script" id=1]
 [ext_resource path="res://Minigames/Base/PlayerController.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Minigames/Base/PlayerController.gd" type="Script" id=3]
 [ext_resource path="res://Minigames/Base/InputManager.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Minigames/Base/WinText.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Minigames/Base/WinText.gd" type="Script" id=6]
 
 [node name="MinigameManager" type="Node2D"]
 
@@ -32,10 +34,26 @@ script = ExtResource( 3 )
 
 [node name="InputManager" parent="." index="4" instance=ExtResource( 4 )]
 
+[node name="WinText" parent="." index="5" instance=ExtResource( 5 )]
+
+margin_top = 198.0
+margin_right = 1264.0
+margin_bottom = 447.0
+script = ExtResource( 6 )
+
+[node name="WinTimer" type="Timer" parent="." index="6"]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = false
+autostart = false
+
 [connection signal="on_button_hold" from="InputManager" to="." method="_on_InputManager_on_button_hold"]
 
 [connection signal="on_button_press" from="InputManager" to="." method="_on_InputManager_on_button_press"]
 
 [connection signal="on_button_release" from="InputManager" to="." method="_on_InputManager_on_button_release"]
+
+[connection signal="timeout" from="WinTimer" to="." method="_on_WinTimer_timeout"]
 
 

@@ -10,7 +10,7 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-rotation_speed = 0.06
+rotation_speed = 4.0
 movement_speed = 15000
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
