@@ -45,7 +45,6 @@ func _physics_process(delta):
 func _on_Button1_button_down():
 	button_states_is_held[0] = true
 	emit_signal("on_button_press", 0)
-	
 
 
 func _on_Button2_button_down():

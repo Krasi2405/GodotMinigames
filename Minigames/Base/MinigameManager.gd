@@ -27,6 +27,20 @@ func _ready():
 	
 	var players = get_player_nodes();
 	_create_player_map(players);
+	
+	_bind_signals()
+	
+
+func _bind_signals():
+	if use_press_signal:
+		Global.InputManager.connect("on_button_press", self, "_on_InputManager_on_button_press")
+		
+	if use_hold_signal:
+		Global.InputManager.connect("on_button_hold", self, "_on_InputManager_on_button_hold")
+	
+	if use_release_signal:
+		Global.InputManager.connect("on_button_release", self, "_on_InputManager_on_button_release")
+		
 
 
 func win(player_id_win_order):
@@ -81,6 +95,7 @@ func _remove_unused_players():
 
 
 func _on_InputManager_on_button_press(button_id):
+	print("Press ", button_id)
 	if not use_press_signal:
 		return
 
@@ -90,6 +105,7 @@ func _on_InputManager_on_button_press(button_id):
 
 
 func _on_InputManager_on_button_hold(button_id, delta):
+	print("Hold ", button_id)
 	if not use_press_signal:
 		return
 	
@@ -99,6 +115,7 @@ func _on_InputManager_on_button_hold(button_id, delta):
 
 
 func _on_InputManager_on_button_release(button_id):
+	print("Release ", button_id)
 	if not use_press_signal:
 		return
 	

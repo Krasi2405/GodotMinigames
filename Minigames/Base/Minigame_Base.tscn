@@ -48,12 +48,6 @@ wait_time = 0.1
 one_shot = false
 autostart = false
 
-[connection signal="on_button_hold" from="InputManager" to="." method="_on_InputManager_on_button_hold"]
-
-[connection signal="on_button_press" from="InputManager" to="." method="_on_InputManager_on_button_press"]
-
-[connection signal="on_button_release" from="InputManager" to="." method="_on_InputManager_on_button_release"]
-
 [connection signal="timeout" from="WinTimer" to="." method="_on_WinTimer_timeout"]
 
 
