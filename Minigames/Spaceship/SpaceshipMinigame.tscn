@@ -71,8 +71,6 @@ _sections_unfolded = [ "Color", "Emission Shape", "Flags", "Initial Velocity", "
 
 [node name="MinigameManager" index="0" instance=ExtResource( 1 )]
 
-use_press_signal = false
-
 [node name="ColorRect" type="ColorRect" parent="." index="0"]
 
 anchor_left = 0.5
