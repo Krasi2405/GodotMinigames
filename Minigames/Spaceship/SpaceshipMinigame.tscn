@@ -69,7 +69,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Emission Shape", "Flags", "Initial Velocity", "Scale" ]
 
-[node name="MinigameManager" index="0" instance=ExtResource( 1 )]
+[node name="MinigameManager" instance=ExtResource( 1 )]
 
 [node name="ColorRect" type="ColorRect" parent="." index="0"]
 
@@ -146,10 +146,6 @@ editor/display_folded = true
 modulate = Color( 0.628906, 0.6521, 1, 1 )
 position = Vector2( 292.424, 520.032 )
 _sections_unfolded = [ "Collision", "Visibility" ]
-
-[node name="PlayerController3" parent="." index="6"]
-
-editor/display_folded = true
 
 [node name="Player" parent="PlayerController3" index="0" instance=ExtResource( 3 )]
 

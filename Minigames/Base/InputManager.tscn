@@ -3,7 +3,7 @@
 [ext_resource path="res://Minigames/Base/InputManager.gd" type="Script" id=1]
 [ext_resource path="res://Minigames/Base/InputButton.tscn" type="PackedScene" id=2]
 
-[node name="InputManager" type="Node2D"]
+[node name="InputManager" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Offset", "Transform" ]
@@ -53,53 +53,41 @@ _sections_unfolded = [ "Rect" ]
 [node name="Button1" parent="GameCamera/GUI" index="0" instance=ExtResource( 2 )]
 
 modulate = Color( 0.96875, 1, 0, 1 )
-_sections_unfolded = [ "Rect", "Textures", "Visibility" ]
+position = Vector2( 1119.46, 556.171 )
+_sections_unfolded = [ "Rect", "Textures", "Transform", "Visibility" ]
 
 [node name="Button2" parent="GameCamera/GUI" index="1" instance=ExtResource( 2 )]
 
 modulate = Color( 1, 0, 0, 1 )
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -200.0
-margin_top = -200.0
-margin_right = 0.0
-margin_bottom = 0.0
-_sections_unfolded = [ "Rect", "Textures", "Visibility" ]
+position = Vector2( -5.01056, -3.34036 )
+_sections_unfolded = [ "Rect", "Textures", "Transform", "Visibility" ]
 
 [node name="Button3" parent="GameCamera/GUI" index="2" instance=ExtResource( 2 )]
 
 modulate = Color( 0, 0.414063, 1, 1 )
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_top = -200.0
-margin_bottom = 0.0
-_sections_unfolded = [ "Rect", "Textures", "Visibility" ]
+position = Vector2( 1119.02, 0 )
+_sections_unfolded = [ "Rect", "Textures", "Transform", "Visibility" ]
 
 [node name="Button4" parent="GameCamera/GUI" index="3" instance=ExtResource( 2 )]
 
 modulate = Color( 0.382813, 1, 0, 1 )
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -200.0
-margin_right = 0.0
-_sections_unfolded = [ "Rect", "Textures", "Visibility" ]
+position = Vector2( 3.34036, 559.511 )
+_sections_unfolded = [ "Rect", "Textures", "Transform", "Visibility" ]
 
-[connection signal="button_down" from="GameCamera/GUI/Button1" to="." method="_on_Button1_button_down"]
+[connection signal="pressed" from="GameCamera/GUI/Button1" to="." method="_on_Button1_pressed"]
 
-[connection signal="button_up" from="GameCamera/GUI/Button1" to="." method="_on_Button1_button_up"]
+[connection signal="released" from="GameCamera/GUI/Button1" to="." method="_on_Button1_released"]
 
-[connection signal="button_down" from="GameCamera/GUI/Button2" to="." method="_on_Button2_button_down"]
+[connection signal="pressed" from="GameCamera/GUI/Button2" to="." method="_on_Button2_pressed"]
 
-[connection signal="button_up" from="GameCamera/GUI/Button2" to="." method="_on_Button2_button_up"]
+[connection signal="released" from="GameCamera/GUI/Button2" to="." method="_on_Button2_released"]
 
-[connection signal="button_down" from="GameCamera/GUI/Button3" to="." method="_on_Button3_button_down"]
+[connection signal="pressed" from="GameCamera/GUI/Button3" to="." method="_on_Button3_pressed"]
 
-[connection signal="button_up" from="GameCamera/GUI/Button3" to="." method="_on_Button3_button_up"]
+[connection signal="released" from="GameCamera/GUI/Button3" to="." method="_on_Button3_released"]
 
-[connection signal="button_down" from="GameCamera/GUI/Button4" to="." method="_on_Button4_button_down"]
+[connection signal="pressed" from="GameCamera/GUI/Button4" to="." method="_on_Button4_pressed"]
 
-[connection signal="button_up" from="GameCamera/GUI/Button4" to="." method="_on_Button4_button_up"]
+[connection signal="released" from="GameCamera/GUI/Button4" to="." method="_on_Button4_released"]
 
 

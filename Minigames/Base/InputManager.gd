@@ -80,3 +80,43 @@ func _on_Button3_button_up():
 func _on_Button4_button_up():
 	button_states_is_held[3] = false
 	emit_signal("on_button_release", 3)
+
+
+func _on_Button1_pressed():
+	button_states_is_held[0] = true
+	emit_signal("on_button_press", 0)
+
+
+func _on_Button1_released():
+	button_states_is_held[0] = false
+	emit_signal("on_button_release", 0)
+
+
+func _on_Button2_pressed():
+	button_states_is_held[1] = true
+	emit_signal("on_button_press", 1)
+
+
+func _on_Button2_released():
+	button_states_is_held[1] = false
+	emit_signal("on_button_release", 1)
+
+
+func _on_Button3_pressed():
+	button_states_is_held[2] = true
+	emit_signal("on_button_press", 2)
+
+
+func _on_Button3_released():
+	button_states_is_held[2] = false
+	emit_signal("on_button_release", 2)
+
+
+func _on_Button4_pressed():
+	button_states_is_held[3] = true
+	emit_signal("on_button_press", 3)
+
+
+func _on_Button4_released():
+	button_states_is_held[3] = false
+	emit_signal("on_button_release", 3)
