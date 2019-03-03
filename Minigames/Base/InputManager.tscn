@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Minigames/Base/InputManager.gd" type="Script" id=1]
-[ext_resource path="res://Minigames/Base/InputButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Minigames/Base/MouseClickSimulator.gd" type="Script" id=2]
+[ext_resource path="res://Minigames/Base/InputButton.tscn" type="PackedScene" id=3]
 
 [node name="InputManager" type="Node2D" index="0"]
 
@@ -48,31 +49,33 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+script = ExtResource( 2 )
 _sections_unfolded = [ "Rect" ]
 
-[node name="Button1" parent="GameCamera/GUI" index="0" instance=ExtResource( 2 )]
+[node name="Button1" parent="GameCamera/GUI" index="0" instance=ExtResource( 3 )]
 
 modulate = Color( 0.96875, 1, 0, 1 )
-position = Vector2( 1119.46, 556.171 )
 _sections_unfolded = [ "Rect", "Textures", "Transform", "Visibility" ]
 
-[node name="Button2" parent="GameCamera/GUI" index="1" instance=ExtResource( 2 )]
+[node name="Button2" parent="GameCamera/GUI" index="1" instance=ExtResource( 3 )]
 
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( -5.01056, -3.34036 )
+position = Vector2( 1117.86, 558.93 )
 _sections_unfolded = [ "Rect", "Textures", "Transform", "Visibility" ]
 
-[node name="Button3" parent="GameCamera/GUI" index="2" instance=ExtResource( 2 )]
+[node name="Button3" parent="GameCamera/GUI" index="2" instance=ExtResource( 3 )]
 
 modulate = Color( 0, 0.414063, 1, 1 )
-position = Vector2( 1119.02, 0 )
+position = Vector2( 1120.13, 0 )
 _sections_unfolded = [ "Rect", "Textures", "Transform", "Visibility" ]
 
-[node name="Button4" parent="GameCamera/GUI" index="3" instance=ExtResource( 2 )]
+[node name="Button4" parent="GameCamera/GUI" index="3" instance=ExtResource( 3 )]
 
 modulate = Color( 0.382813, 1, 0, 1 )
-position = Vector2( 3.34036, 559.511 )
+position = Vector2( 6.10352e-005, 554.385 )
 _sections_unfolded = [ "Rect", "Textures", "Transform", "Visibility" ]
+
+[connection signal="gui_input" from="GameCamera/GUI" to="GameCamera/GUI" method="_on_GUI_gui_input"]
 
 [connection signal="pressed" from="GameCamera/GUI/Button1" to="." method="_on_Button1_pressed"]
 
