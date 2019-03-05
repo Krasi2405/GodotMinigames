@@ -5,8 +5,11 @@ var is_rotate_direction_positive = true
 
 export var rotation_speed = 0.06
 export var movement_speed = 5000
+export var lives = 3
+var start_position
 
 func _ready():
+	start_position = self.get_global_transform().get_origin()
 	pass
 	
 func press_action():
@@ -35,9 +38,11 @@ func _on_HitArea_body_entered(body):
 	if body == self:
 		return;
 	
+	lives-=1
+	self.position = start_position	
 	
 	# TODO: ONLY die when lives <= 0. else respawn at begin location.
-	if body.name == "Player":
+	if lives == 0:
 		destroy()
 		body.destroy()
 		
