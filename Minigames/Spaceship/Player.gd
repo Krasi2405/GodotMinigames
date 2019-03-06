@@ -6,6 +6,7 @@ var is_rotate_direction_positive = true
 export var rotation_speed = 0.06
 export var movement_speed = 5000
 export var lives = 3
+var invulnereble = false
 var start_position
 
 func _ready():
@@ -35,6 +36,9 @@ func _process(delta):
 
 
 func _on_HitArea_body_entered(body):
+	if invulnereble:
+		return;
+		
 	if body == self:
 		return;
 	
