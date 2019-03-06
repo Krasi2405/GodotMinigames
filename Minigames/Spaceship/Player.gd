@@ -44,7 +44,6 @@ func _on_HitArea_body_entered(body):
 	# TODO: ONLY die when lives <= 0. else respawn at begin location.
 	if lives == 0:
 		destroy()
-		body.destroy()
 		
 func destroy():
 	get_parent().die()
