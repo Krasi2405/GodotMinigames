@@ -123,24 +123,20 @@ boost_list = [ "res://Minigames/Spaceship/ShieldBoost.tscn" ]
 
 position = Vector2( 581.564, 381.83 )
 _sections_unfolded = [ "Collision", "Visibility" ]
-lives = 3
 
 [node name="Player" parent="PlayerController1" index="0" instance=ExtResource( 3 )]
 
 position = Vector2( 960.176, 520.032 )
 _sections_unfolded = [ "Visibility" ]
-lives = 3
 
 [node name="Player" parent="PlayerController2" index="0" instance=ExtResource( 3 )]
 
 position = Vector2( 292.424, 520.032 )
 _sections_unfolded = [ "Collision", "Visibility" ]
-lives = 3
 
 [node name="Player" parent="PlayerController3" index="0" instance=ExtResource( 3 )]
 
 position = Vector2( 896.867, 167.315 )
 _sections_unfolded = [ "Collision", "Transform", "Visibility" ]
-lives = 3
 
 

@@ -7,6 +7,7 @@ export var rotation_speed = 0.06
 export var movement_speed = 5000
 export var lives = 3
 var invulnereble = false
+var is_blinging = false
 var start_position
 
 func _ready():
@@ -43,11 +44,37 @@ func _on_HitArea_body_entered(body):
 		return;
 	
 	lives-=1
-	self.position = start_position	
 	
 	# TODO: ONLY die when lives <= 0. else respawn at begin location.
 	if lives == 0:
 		destroy()
 		
+	else:
+		respown()
+		
 func destroy():
 	get_parent().die()
+	
+func respown():
+	self.position = start_position
+	invulnereble = true
+	$InvulnerebleTime.start()
+	is_blinging = true
+	$BlingTimer.start()
+
+func _on_InvulnerebleTime_timeout():
+	invulnereble = false
+	is_blinging = false
+	$Sprite.modulate.a = 1
+	
+	
+func bling():
+	if $Sprite.modulate.a == 1:
+		$Sprite.modulate.a = 0.4
+	else:
+		$Sprite.modulate.a = 1
+
+func _on_BlingTimer_timeout():
+	if is_blinging:
+		bling()
+		$BlingTimer.start()

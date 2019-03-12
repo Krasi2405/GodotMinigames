@@ -12,15 +12,18 @@ collision/safe_margin = 0.08
 script = ExtResource( 1 )
 rotation_speed = 4.0
 movement_speed = 15000
+lives = 3
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 2 )
+_sections_unfolded = [ "Visibility" ]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
 
 build_mode = 0
 polygon = PoolVector2Array( -15.9529, 9.87817, 15.9003, 9.92922, 15.9514, 4.21197, 6.86343, -0.0746784, 3.98485, -11, -0.0261726, -16.0138, -3.84917, -10.8747, -6.83289, 0.000370026, -16.0076, 3.79063 )
+_sections_unfolded = [ "Visibility" ]
 
 [node name="HitArea" type="Area2D" parent="." index="2"]
 
@@ -38,6 +41,24 @@ _sections_unfolded = [ "Collision" ]
 build_mode = 0
 polygon = PoolVector2Array( -16.6395, 10.5131, 16.3458, 10.3742, 16.3458, 3.98547, 0.0267677, -17.264, -16.6395, 3.98547 )
 
+[node name="InvulnerebleTime" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = false
+autostart = false
+
+[node name="BlingTimer" type="Timer" parent="." index="4"]
+
+process_mode = 1
+wait_time = 0.5
+one_shot = false
+autostart = false
+
 [connection signal="body_entered" from="HitArea" to="." method="_on_HitArea_body_entered"]
+
+[connection signal="timeout" from="InvulnerebleTime" to="." method="_on_InvulnerebleTime_timeout"]
+
+[connection signal="timeout" from="BlingTimer" to="." method="_on_BlingTimer_timeout"]
 
 
