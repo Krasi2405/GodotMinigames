@@ -4,7 +4,7 @@
 [ext_resource path="res://Minigames/Base/MouseClickSimulator.gd" type="Script" id=2]
 [ext_resource path="res://Minigames/Base/InputButton.tscn" type="PackedScene" id=3]
 
-[node name="InputManager" type="Node2D" index="0"]
+[node name="InputManager" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Offset", "Transform" ]
@@ -55,24 +55,28 @@ _sections_unfolded = [ "Rect" ]
 [node name="Button1" parent="GameCamera/GUI" index="0" instance=ExtResource( 3 )]
 
 modulate = Color( 0.96875, 1, 0, 1 )
+scale = Vector2( 6, 6 )
 _sections_unfolded = [ "Rect", "Textures", "Transform", "Visibility" ]
 
 [node name="Button2" parent="GameCamera/GUI" index="1" instance=ExtResource( 3 )]
 
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 1117.86, 558.93 )
+position = Vector2( 1087.8, 528.867 )
+scale = Vector2( 6, 6 )
 _sections_unfolded = [ "Rect", "Textures", "Transform", "Visibility" ]
 
 [node name="Button3" parent="GameCamera/GUI" index="2" instance=ExtResource( 3 )]
 
 modulate = Color( 0, 0.414063, 1, 1 )
-position = Vector2( 1120.13, 0 )
+position = Vector2( 1086.73, 0 )
+scale = Vector2( 6, 6 )
 _sections_unfolded = [ "Rect", "Textures", "Transform", "Visibility" ]
 
 [node name="Button4" parent="GameCamera/GUI" index="3" instance=ExtResource( 3 )]
 
 modulate = Color( 0.382813, 1, 0, 1 )
-position = Vector2( 6.10352e-005, 554.385 )
+position = Vector2( 6.10352e-005, 529.332 )
+scale = Vector2( 6, 6 )
 _sections_unfolded = [ "Rect", "Textures", "Transform", "Visibility" ]
 
 [connection signal="gui_input" from="GameCamera/GUI" to="GameCamera/GUI" method="_on_GUI_gui_input"]

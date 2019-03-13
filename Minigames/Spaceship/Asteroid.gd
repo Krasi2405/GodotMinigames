@@ -18,9 +18,9 @@ func _process(delta):
 	if(collision != null):
 		var object = collision.collider
 		print("asteroid collided with ", object.name)
-		if(object.has_method("destroy")):
-			object.destroy()
-		queue_free()
+		if(object.has_method("hit")):
+			object.hit()
+		hit()
 
 func _on_ActivateCollisionTimer_timeout():
 	$CollisionShape2D.disabled = false
@@ -28,3 +28,7 @@ func _on_ActivateCollisionTimer_timeout():
 
 func set_direction(direction):
 	self.direction = direction
+
+
+func hit():
+	queue_free()

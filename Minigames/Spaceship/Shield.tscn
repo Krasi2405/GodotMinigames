@@ -33,13 +33,14 @@ _sections_unfolded = [ "Pause" ]
 
 [node name="Sprite" type="AnimatedSprite" parent="." index="1"]
 
+modulate = Color( 1, 1, 1, 0.490196 )
 position = Vector2( 0, 1 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 1 )
 animation = "default"
-frame = 7
+frame = 5
 playing = true
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 

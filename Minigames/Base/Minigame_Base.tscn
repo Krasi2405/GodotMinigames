@@ -41,13 +41,22 @@ margin_right = 1264.0
 margin_bottom = 447.0
 script = ExtResource( 6 )
 
-[node name="WinTimer" type="Timer" parent="." index="6"]
+[node name="OnVictoryRestartTimer" type="Timer" parent="." index="6"]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = false
+autostart = false
+
+[node name="OnWinDelayTimer" type="Timer" parent="." index="7"]
 
 process_mode = 1
 wait_time = 0.1
 one_shot = false
 autostart = false
 
-[connection signal="timeout" from="WinTimer" to="." method="_on_WinTimer_timeout"]
+[connection signal="timeout" from="OnVictoryRestartTimer" to="." method="_on_OnVictoryRestartTimer_timeout"]
+
+[connection signal="timeout" from="OnWinDelayTimer" to="." method="_on_WinTimer_timeout"]
 
 

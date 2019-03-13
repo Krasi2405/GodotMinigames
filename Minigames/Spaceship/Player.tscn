@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Minigames/Spaceship/Player.gd" type="Script" id=1]
-[ext_resource path="res://Minigames/Spaceship/Spaceship.png" type="Texture" id=2]
+[ext_resource path="res://Minigames/Spaceship/SpaceshipGrayscale.png" type="Texture" id=2]
+[ext_resource path="res://Minigames/Spaceship/ScreenwrapComponent.tscn" type="PackedScene" id=3]
 
 [node name="Player" type="KinematicBody2D"]
 
@@ -11,8 +12,9 @@ collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 rotation_speed = 4.0
-movement_speed = 15000
+movement_speed = 20000
 lives = 3
+texture = null
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -22,11 +24,12 @@ _sections_unfolded = [ "Visibility" ]
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
 
 build_mode = 0
-polygon = PoolVector2Array( -15.9529, 9.87817, 15.9003, 9.92922, 15.9514, 4.21197, 6.86343, -0.0746784, 3.98485, -11, -0.0261726, -16.0138, -3.84917, -10.8747, -6.83289, 0.000370026, -16.0076, 3.79063 )
+polygon = PoolVector2Array( -14.7587, 9.01051, 14.7802, 9.00254, 14.7802, 4.16517, 5.28972, 0.571704, 3.07542, -10.3457, -0.0582161, -14.3567, -3.0665, -9.96962, -4.93785, 0.571704, -14.7587, 4.23988 )
 _sections_unfolded = [ "Visibility" ]
 
 [node name="HitArea" type="Area2D" parent="." index="2"]
 
+editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -54,6 +57,8 @@ process_mode = 1
 wait_time = 0.5
 one_shot = false
 autostart = false
+
+[node name="ScreenwrapComponent" parent="." index="5" instance=ExtResource( 3 )]
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_HitArea_body_entered"]
 

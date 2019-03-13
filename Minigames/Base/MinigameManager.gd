@@ -46,26 +46,32 @@ func _bind_signals():
 func win(player_id_win_order):
 	print("Game over!", player_id_win_order)
 	$WinText.parse_winners(player_id_win_order)
-	
-
+	$OnVictoryRestartTimer.start()
 
 func get_player_count():
 	return player_count
 
 
 func remove_player(player_id):
-	if player_id in player_id_win_order:
+	if player_count <= 0 or player_id in player_id_win_order:
 		return
+
 	player_map.erase(player_id)
 	player_count -= 1
 	player_id_win_order.push_front(player_id)
 	if player_count <= 1:
-		$WinTimer.start()
+		$OnWinDelayTimer.start()
 		
 
 func _on_WinTimer_timeout():
 	win(player_id_win_order)
-	$WinTimer.queue_free()
+	$OnWinDelayTimer.queue_free()
+	
+	
+
+
+func _on_OnVictoryRestartTimer_timeout():
+	get_tree().reload_current_scene()
 
 
 func get_player_nodes():
@@ -119,5 +125,3 @@ func _on_InputManager_on_button_release(button_id):
 	if player_map.has(button_id):
 		var player = player_map[button_id]
 		player.release_action()
-
-
