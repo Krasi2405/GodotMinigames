@@ -62,6 +62,9 @@ func hit():
 
 
 func _take_damage():
+	if invulnereble:
+		return
+
 	lives-=1
 	if lives == 0:
 		_destroy()
