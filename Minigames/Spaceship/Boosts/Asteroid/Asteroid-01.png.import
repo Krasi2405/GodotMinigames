@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SpaceshipGreen.png-f06608f2a6ed2154fa0c91be37d469aa.stex"
+path="res://.import/Asteroid-01.png-3d2a3bd9a535b933f580994505b97bae.stex"
 
 [deps]
 
-source_file="res://Minigames/Spaceship/SpaceshipGreen.png"
-dest_files=[ "res://.import/SpaceshipGreen.png-f06608f2a6ed2154fa0c91be37d469aa.stex" ]
+source_file="res://Minigames/Spaceship/Boosts/Asteroid/Asteroid-01.png"
+dest_files=[ "res://.import/Asteroid-01.png-3d2a3bd9a535b933f580994505b97bae.stex" ]
 
 [params]
 

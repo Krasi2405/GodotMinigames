@@ -24,7 +24,27 @@ func press_action():
 
 func hold_action(delta):
 	log_rotate = false;
-	move_and_slide(-get_global_transform().y.normalized() * movement_speed * delta)
+	var collision = move_and_collide(
+		-get_global_transform().y.normalized() * movement_speed * delta
+	)
+	if collision != null:
+		var body = collision.collider
+		if invulnereble or is_hit:
+			return;
+		
+		print("player hit ", body)
+		var should_collide = false
+		for i in range(20):
+			var bit_mask = get_collision_mask_bit(i)
+			var bit_layer = body.get_collision_layer_bit(i)
+			if bit_mask == true and bit_layer == true:
+				should_collide = true
+				break
+
+		if should_collide:
+			if body.has_method("hit"):
+				body.hit()
+			hit()
 	
 
 
@@ -43,21 +63,11 @@ func _process(delta):
 			rotation = self.rotation + deg2rad(90 * rotation_speed * delta)
 		else:
 			rotation = self.rotation - deg2rad(90 * rotation_speed * delta)
-
-
-func _on_HitArea_body_entered(body):
-	if invulnereble or is_hit:
-		return;
-		
-	if body == self:
-		return;
-	
-	if body.has_method("hit"):
-		body.hit()
-	hit()
 	
 
 func hit():
+	if invulnereble:
+		return
 	is_hit = true
 
 

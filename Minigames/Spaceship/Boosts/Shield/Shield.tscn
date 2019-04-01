@@ -1,14 +1,16 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Minigames/Spaceship/Shield.gd" type="Script" id=1]
-[ext_resource path="res://Minigames/Spaceship/Shield.png" type="Texture" id=2]
-[ext_resource path="res://Minigames/Spaceship/Shield-02.png" type="Texture" id=3]
-[ext_resource path="res://Minigames/Spaceship/Shield-03.png" type="Texture" id=4]
-[ext_resource path="res://Minigames/Spaceship/Shield-04.png" type="Texture" id=5]
-[ext_resource path="res://Minigames/Spaceship/Shield-05.png" type="Texture" id=6]
-[ext_resource path="res://Minigames/Spaceship/Shield-06.png" type="Texture" id=7]
-[ext_resource path="res://Minigames/Spaceship/Shield-07.png" type="Texture" id=8]
-[ext_resource path="res://Minigames/Spaceship/Shield-08.png" type="Texture" id=9]
+[ext_resource path="res://Minigames/Spaceship/Boosts/Shield/Shield.gd" type="Script" id=1]
+[ext_resource path="res://Minigames/Spaceship/Boosts/Shield/Shield.png" type="Texture" id=2]
+[ext_resource path="res://Minigames/Spaceship/Boosts/Shield/Shield-02.png" type="Texture" id=3]
+[ext_resource path="res://Minigames/Spaceship/Boosts/Shield/Shield-03.png" type="Texture" id=4]
+[ext_resource path="res://Minigames/Spaceship/Boosts/Shield/Shield-04.png" type="Texture" id=5]
+[ext_resource path="res://Minigames/Spaceship/Boosts/Shield/Shield-05.png" type="Texture" id=6]
+[ext_resource path="res://Minigames/Spaceship/Boosts/Shield/Shield-06.png" type="Texture" id=7]
+[ext_resource path="res://Minigames/Spaceship/Boosts/Shield/Shield-07.png" type="Texture" id=8]
+[ext_resource path="res://Minigames/Spaceship/Boosts/Shield/Shield-08.png" type="Texture" id=9]
+
+
 
 [sub_resource type="SpriteFrames" id=1]
 

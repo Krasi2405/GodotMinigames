@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SpaceshipGrayscale.png-127edbd61c76c4ace8a0393169a3e31d.stex"
+path="res://.import/Boost.png-001a2cbbb3271d318a260ebe612d404d.stex"
 
 [deps]
 
-source_file="res://Minigames/Spaceship/SpaceshipGrayscale.png"
-dest_files=[ "res://.import/SpaceshipGrayscale.png-127edbd61c76c4ace8a0393169a3e31d.stex" ]
+source_file="res://Minigames/Spaceship/Boosts/Boost.png"
+dest_files=[ "res://.import/Boost.png-001a2cbbb3271d318a260ebe612d404d.stex" ]
 
 [params]
 

@@ -1,6 +1,6 @@
 extends Node2D
 
-var SHIELD_PREFAB_PATH = "res://Minigames/Spaceship/Shield.tscn"
+export(String, FILE) var SHIELD_PREFAB_PATH
 
 func apply_effect(player_ship):
 	var shield = load(SHIELD_PREFAB_PATH).instance()

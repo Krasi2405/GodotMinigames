@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Shield-03.png-0b96113f9bb151449f6acc551ae14233.stex"
+path="res://.import/Shield.png-63af2b40c78692c0431869120c7f2061.stex"
 
 [deps]
 
-source_file="res://Minigames/Spaceship/Shield-03.png"
-dest_files=[ "res://.import/Shield-03.png-0b96113f9bb151449f6acc551ae14233.stex" ]
+source_file="res://Minigames/Spaceship/Boosts/Shield/Shield.png"
+dest_files=[ "res://.import/Shield.png-63af2b40c78692c0431869120c7f2061.stex" ]
 
 [params]
 
