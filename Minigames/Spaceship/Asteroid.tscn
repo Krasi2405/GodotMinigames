@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Minigames/Spaceship/Asteroid.gd" type="Script" id=1]
+[ext_resource path="res://Minigames/Spaceship/ScreenwrapComponent.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Minigames/Spaceship/Boosts/Asteroid/Asteroid-01.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 15.252
+
+[node name="Asteroid" type="KinematicBody2D"]
+collision_layer = 2
+script = ExtResource( 1 )
+speed = 200
+
+[node name="ScreenwrapComponent" parent="." instance=ExtResource( 2 )]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="ActivateCollisionTimer" type="Timer" parent="."]
+wait_time = 0.3
+
+[connection signal="timeout" from="ActivateCollisionTimer" to="." method="_on_ActivateCollisionTimer_timeout"]

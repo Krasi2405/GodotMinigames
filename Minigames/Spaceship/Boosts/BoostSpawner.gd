@@ -7,8 +7,13 @@ export(int) var spawn_delay = 3
 
 export(Array, String, FILE) var boost_list
 
+var boost_instances = []
+
 
 func _ready():
+	for boost in boost_list:
+		boost_instances.push_back(load(boost))
+
 	$SpawnDelayTimer.wait_time = spawn_delay;
 	$SpawnDelayTimer.start()
 
@@ -20,7 +25,7 @@ func _on_SpawnDelayTimer_timeout():
 
 func _spawn_boost():
 	var boost_index = randi() % boost_list.size();
-	var boost = load(boost_list[boost_index]).instance()
+	var boost = boost_instances[boost_index].instance()
 	boost.position = _get_random_position()
 	Global.MinigameManager.add_child(boost)
 	

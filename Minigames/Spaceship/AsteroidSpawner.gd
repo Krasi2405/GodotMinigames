@@ -9,7 +9,13 @@ export(String, FILE) var ASTEROID_PREFAB_PATH
 export var x_direction_offset = 320
 export var y_direction_offset = 180
 
+var asteroid_instance
+
 var center;
+
+func _enter_tree():
+	asteroid_instance = load(ASTEROID_PREFAB_PATH)
+
 
 func _ready():
 	var size_x = get_viewport().size.x
@@ -51,7 +57,7 @@ func spawn():
 	var asteroid_direction = -get_transform().y.normalized()
 
 	
-	var asteroid = load(ASTEROID_PREFAB_PATH).instance()
+	var asteroid = asteroid_instance.instance()
 	asteroid.set_direction(asteroid_direction)
 	asteroid.position = spawn_position
 	Global.MinigameManager.add_child(asteroid)

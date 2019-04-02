@@ -5,47 +5,23 @@
 [ext_resource path="res://Minigames/Spaceship/ScreenwrapComponent.tscn" type="PackedScene" id=3]
 
 [node name="Player" type="KinematicBody2D"]
-
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision" ]
 rotation_speed = 4.0
 movement_speed = 350
-lives = 3
-texture = null
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
-
+[node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Visibility" ]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
-
-build_mode = 0
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -14.7587, 9.01051, 14.7802, 9.00254, 14.7802, 4.16517, 5.28972, 0.571704, 3.07542, -10.3457, -0.0582161, -14.3567, -3.0665, -9.96962, -4.93785, 0.571704, -14.7587, 4.23988 )
-_sections_unfolded = [ "Visibility" ]
 
-[node name="InvulnerebleTime" type="Timer" parent="." index="2"]
-
-process_mode = 1
+[node name="InvulnerebleTime" type="Timer" parent="."]
 wait_time = 3.0
-one_shot = false
-autostart = false
 
-[node name="BlingTimer" type="Timer" parent="." index="3"]
-
-process_mode = 1
+[node name="BlingTimer" type="Timer" parent="."]
 wait_time = 0.5
-one_shot = false
-autostart = false
 
-[node name="ScreenwrapComponent" parent="." index="4" instance=ExtResource( 3 )]
+[node name="ScreenwrapComponent" parent="." instance=ExtResource( 3 )]
 
 [connection signal="timeout" from="InvulnerebleTime" to="." method="_on_InvulnerebleTime_timeout"]
-
 [connection signal="timeout" from="BlingTimer" to="." method="_on_BlingTimer_timeout"]
-
-

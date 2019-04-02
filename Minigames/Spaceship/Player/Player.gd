@@ -40,7 +40,8 @@ func hold_action(delta):
 			if bit_mask == true and bit_layer == true:
 				should_collide = true
 				break
-
+		
+		should_collide = true
 		if should_collide:
 			if body.has_method("hit"):
 				body.hit()

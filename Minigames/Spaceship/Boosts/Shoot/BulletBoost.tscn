@@ -5,15 +5,11 @@
 [ext_resource path="res://Minigames/Spaceship/Boosts/Shoot/bullet.png" type="Texture" id=3]
 
 [node name="Boost" instance=ExtResource( 1 )]
-
 position = Vector2( -1, -1 )
 
 [node name="BoostController" type="Node2D" parent="." index="0"]
-
 script = ExtResource( 2 )
 
 [node name="BoostIcon" parent="." index="4"]
-
 texture = ExtResource( 3 )
-
 

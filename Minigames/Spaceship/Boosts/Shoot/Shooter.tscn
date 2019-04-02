@@ -3,18 +3,9 @@
 [ext_resource path="res://Minigames/Spaceship/Boosts/Shoot/Shooter.gd" type="Script" id=1]
 
 [node name="Shooter" type="Node2D"]
-
 script = ExtResource( 1 )
-shoot_delay = 1
-bullet_count = 5
+shoot_delay = 0.5
 
-[node name="ShootTimer" type="Timer" parent="." index="0"]
-
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
+[node name="ShootTimer" type="Timer" parent="."]
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
-
-
