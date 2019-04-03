@@ -1,0 +1,146 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Minigames/SkyRunner/Terrain/platform.png" type="Texture" id=1]
+[ext_resource path="res://Minigames/SkyRunner/Terrain/Ground_M.png" type="Texture" id=2]
+[ext_resource path="res://Minigames/SkyRunner/Terrain/Ground_R.png" type="Texture" id=3]
+[ext_resource path="res://Minigames/SkyRunner/Terrain/GroundToWall_R.png" type="Texture" id=4]
+[ext_resource path="res://Minigames/SkyRunner/Terrain/General.png" type="Texture" id=5]
+[ext_resource path="res://Minigames/SkyRunner/Terrain/General_R.png" type="Texture" id=6]
+[ext_resource path="res://Minigames/SkyRunner/Terrain/Ceiling_M.png" type="Texture" id=7]
+[ext_resource path="res://Minigames/SkyRunner/Terrain/Ceiling_R.png" type="Texture" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16.1213, 14.2721 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 14.0961, 16 )
+
+[node name="Platforms" type="Node2D"]
+
+[node name="Platform" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 150, 40 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Platform"]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platform/StaticBody2D"]
+polygon = PoolVector2Array( -16.0726, 2.65079, -15.9976, -1.73954, 16.048, -1.77706, 15.9306, 1.86349, 11.0805, 6.83202, -12.9724, 6.89748 )
+
+[node name="Ground_M" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 505.194, 367.223 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ground_M"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground_M/StaticBody2D"]
+position = Vector2( -0.0179214, 1.29919 )
+shape = SubResource( 1 )
+
+[node name="Ground_R" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 638.502, 362.928 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ground_R"]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground_R/StaticBody2D"]
+polygon = PoolVector2Array( -15.9645, 16.271, 12.3469, 16.1688, 12.2663, 0.13916, 16.0649, -12.8407, -15.9645, -12.9456 )
+
+[node name="GroundToWall_R" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 370.773, 368.043 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="GroundToWall_R"]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GroundToWall_R/StaticBody2D"]
+polygon = PoolVector2Array( -15.9645, 16.271, 15.9905, 16.0698, 15.9968, -12.9905, 12.0268, -12.9948, 12.0235, -15.9934, -15.9501, -16.0123 )
+
+[node name="General_M" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 503.54, 505.285 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="General_M"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="General_M/StaticBody2D"]
+position = Vector2( -0.0759354, 0.244385 )
+shape = SubResource( 2 )
+
+[node name="General_R" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 370.484, 231.498 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="General_R"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="General_R/StaticBody2D"]
+position = Vector2( -1.95872, -0.126419 )
+shape = SubResource( 3 )
+
+[node name="Ceiling_M" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 497.135, 77.4605 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ceiling_M"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling_M/StaticBody2D"]
+position = Vector2( -0.087822, -1.39794 )
+shape = SubResource( 1 )
+
+[node name="Ceiling_R" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 638.698, 81.0723 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ceiling_R"]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ceiling_R/StaticBody2D"]
+polygon = PoolVector2Array( -15.991, 12.9882, 16.0269, 12.984, 12.1362, -1.52452, 12.166, -16.0178, -16.0005, -15.9978 )
+

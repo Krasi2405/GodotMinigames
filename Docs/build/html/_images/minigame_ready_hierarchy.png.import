@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/input_events.png-d9e11df381d3a3ddac772bbf8949cc3e.stex"
+path="res://.import/minigame_ready_hierarchy.png-d062d94dd75802a12ba23122a6d62f6b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Docs/build/html/_static/input_events.png"
-dest_files=[ "res://.import/input_events.png-d9e11df381d3a3ddac772bbf8949cc3e.stex" ]
+source_file="res://Docs/build/html/_images/minigame_ready_hierarchy.png"
+dest_files=[ "res://.import/minigame_ready_hierarchy.png-d062d94dd75802a12ba23122a6d62f6b.stex" ]
 
 [params]
 
