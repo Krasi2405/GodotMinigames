@@ -7,4 +7,4 @@ Input Manager
 
 Emits button events depending on button action.
 
-.. image:: _static/input_events.png
+.. image:: /_static/input_events.png
