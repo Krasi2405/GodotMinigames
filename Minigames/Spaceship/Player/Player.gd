@@ -1,4 +1,4 @@
-extends  KinematicBody2D
+extends Player
 
 var log_rotate = true
 var is_rotate_direction_positive = true
@@ -35,18 +35,17 @@ func hold_action(delta):
 		print("player hit ", body)
 		var should_collide = false
 		for i in range(20):
-			var bit_mask = get_collision_mask_bit(i)
-			var bit_layer = body.get_collision_layer_bit(i)
-			if bit_mask == true and bit_layer == true:
+			var bit_mask : bool = get_collision_mask_bit(i)
+			var bit_layer : bool = body.get_collision_layer_bit(i)
+			if bit_mask and bit_layer:
 				should_collide = true
 				break
 		
-		should_collide = true
+		
 		if should_collide:
 			if body.has_method("hit"):
 				body.hit()
 			hit()
-	
 
 
 func release_action():

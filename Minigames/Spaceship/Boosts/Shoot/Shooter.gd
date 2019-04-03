@@ -32,7 +32,7 @@ func shoot():
 	var bullet = BULLET_RESOURCES.instance()
 	bullet.player = player
 	bullet.position = position
-	Global.MinigameManager.add_child(bullet)
+	Global.get_minigame_manager().add_child(bullet)
 	print("Instantiate bullet at ", bullet.position)
 	if bullet_count <= 0:
 		queue_free()

@@ -8,9 +8,50 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "InputManager",
+"language": "GDScript",
+"path": "res://Minigames/Base/InputManager.gd"
+}, {
+"base": "TextureButton",
+"class": "LevelChoice",
+"language": "GDScript",
+"path": "res://LevelPicker/LevelChoice.gd"
+}, {
+"base": "Control",
+"class": "LevelPicker",
+"language": "GDScript",
+"path": "res://LevelPicker/LevelPicker.gd"
+}, {
+"base": "Node2D",
+"class": "MinigameManager",
+"language": "GDScript",
+"path": "res://Minigames/Base/MinigameManager.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Minigames/Base/Player.gd"
+}, {
+"base": "Node2D",
+"class": "PlayerController",
+"language": "GDScript",
+"path": "res://Minigames/Base/PlayerController.gd"
+}, {
+"base": "HBoxContainer",
+"class": "WinText",
+"language": "GDScript",
+"path": "res://Minigames/Base/WinText.gd"
+} ]
 _global_script_class_icons={
-
+"InputManager": "",
+"LevelChoice": "",
+"LevelPicker": "",
+"MinigameManager": "",
+"Player": "",
+"PlayerController": "",
+"WinText": ""
 }
 
 [application]

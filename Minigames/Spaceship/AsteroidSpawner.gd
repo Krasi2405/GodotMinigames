@@ -60,7 +60,7 @@ func spawn():
 	var asteroid = asteroid_instance.instance()
 	asteroid.set_direction(asteroid_direction)
 	asteroid.position = spawn_position
-	Global.MinigameManager.add_child(asteroid)
+	Global.get_minigame_manager().call_deferred("add_child", asteroid)
 
 # Offset is Vector2
 func get_hypotenuse_length_by_offset(offset):

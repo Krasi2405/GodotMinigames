@@ -1,31 +1,31 @@
+"""
+Sends input down the chain to the player.
+"""
+
+
 extends Node2D
 
+class_name PlayerController
 
 var player_id = 0
+var player : Player
 
 func _ready():
 	assert($Player != null)
+	player = ($Player as Player)
+
 
 
 func press_action():
-	if $Player.has_method("press_action"):
-		$Player.press_action()
-	else:
-		print("Implement press_action() method in script for Player!")
+	player.press_action()
 
 
-func hold_action(delta):
-	if $Player.has_method("hold_action"):
-		$Player.hold_action(delta)
-	else:
-		print("Implement hold_action() method in script for Player!")
+func hold_action(delta : float):
+	player.hold_action(delta)
 
 
 func release_action():
-	if $Player.has_method("release_action"):
-		$Player.release_action()
-	else:
-		print("Implement release_action() method in script for Player!")
+	player.release_action()
 
 
 func die():

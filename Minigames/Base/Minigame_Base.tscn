@@ -1,62 +1,40 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Minigames/Base/MinigameManager.gd" type="Script" id=1]
 [ext_resource path="res://Minigames/Base/PlayerController.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Minigames/Base/PlayerController.gd" type="Script" id=3]
 [ext_resource path="res://Minigames/Base/InputManager.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Minigames/Base/WinText.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Minigames/Base/WinText.gd" type="Script" id=6]
 
 [node name="MinigameManager" type="Node2D"]
-
 script = ExtResource( 1 )
 player_count = 2
-use_press_signal = true
-use_hold_signal = true
-use_release_signal = true
 
-[node name="PlayerController0" parent="." index="0" instance=ExtResource( 2 )]
-
+[node name="PlayerController0" parent="." instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
-[node name="PlayerController1" parent="." index="1" instance=ExtResource( 2 )]
-
+[node name="PlayerController1" parent="." instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
-[node name="PlayerController2" parent="." index="2" instance=ExtResource( 2 )]
-
+[node name="PlayerController2" parent="." instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
-[node name="PlayerController3" parent="." index="3" instance=ExtResource( 2 )]
-
+[node name="PlayerController3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1.85071, -5.55185 )
 script = ExtResource( 3 )
 
-[node name="InputManager" parent="." index="4" instance=ExtResource( 4 )]
+[node name="InputManager" parent="." instance=ExtResource( 4 )]
 
-[node name="WinText" parent="." index="5" instance=ExtResource( 5 )]
-
+[node name="WinText" parent="." instance=ExtResource( 5 )]
 margin_top = 198.0
 margin_right = 1264.0
 margin_bottom = 447.0
-script = ExtResource( 6 )
 
-[node name="OnVictoryRestartTimer" type="Timer" parent="." index="6"]
-
-process_mode = 1
+[node name="OnVictoryRestartTimer" type="Timer" parent="."]
 wait_time = 3.0
-one_shot = false
-autostart = false
 
-[node name="OnWinDelayTimer" type="Timer" parent="." index="7"]
-
-process_mode = 1
+[node name="OnWinDelayTimer" type="Timer" parent="."]
 wait_time = 0.1
-one_shot = false
-autostart = false
 
 [connection signal="timeout" from="OnVictoryRestartTimer" to="." method="_on_OnVictoryRestartTimer_timeout"]
-
 [connection signal="timeout" from="OnWinDelayTimer" to="." method="_on_WinTimer_timeout"]
-
-

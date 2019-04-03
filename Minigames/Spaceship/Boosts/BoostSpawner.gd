@@ -27,7 +27,7 @@ func _spawn_boost():
 	var boost_index = randi() % boost_list.size();
 	var boost = boost_instances[boost_index].instance()
 	boost.position = _get_random_position()
-	Global.MinigameManager.add_child(boost)
+	Global.get_minigame_manager().add_child(boost)
 	
 
 func _get_random_position():

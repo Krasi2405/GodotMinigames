@@ -1,25 +1,31 @@
+"""
+Handles button input and sends it to minigame manager.
+"""
+
 extends Node2D
 
-var button_count = 4
+class_name InputManager
 
-var button_states_is_held = []
+var button_count := 4
+
+var button_states_is_held : Array = []
 
 signal on_button_press(button_id)
 signal on_button_hold(button_id, delta)
 signal on_button_release(button_id)
 
 func _enter_tree():
-	Global.InputManager = self
+	Global.set_input_manager(self)
 
 func _ready():
-	var minigame_manager = Global.MinigameManager
+	var minigame_manager : MinigameManager = Global.get_minigame_manager()
 	
 	if minigame_manager:
 		button_count = minigame_manager.get_player_count()
 	else:
 		print("No minigame manager!")
 	
-	remove_unused_buttons();
+	_remove_unused_buttons();
 	
 	if button_count <= 1:
 		print("Minigame developer is debil!!!")
@@ -28,7 +34,7 @@ func _ready():
 	for i in range (0, button_count):
 		button_states_is_held.append(false)
 		
-func remove_unused_buttons():
+func _remove_unused_buttons():
 	if button_count <= 3:
 		$GameCamera/GUI/Button4.queue_free()
 	

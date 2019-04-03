@@ -1,4 +1,4 @@
-extends Node2D
+extends Player
 
 var player_controller
 

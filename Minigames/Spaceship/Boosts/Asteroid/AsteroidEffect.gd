@@ -11,4 +11,4 @@ func apply_effect(player_ship):
 	asteroid.set_direction(direction)
 	asteroid.position = get_global_transform().get_origin()
 	print("set position to ", position)
-	Global.MinigameManager.add_child(asteroid)
+	Global.get_minigame_manager().add_child(asteroid)
