@@ -16,7 +16,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Official Documentation" href="documentation.html" />
+    <link rel="next" title="Base Documentation" href="documentation/index.html" />
     <link rel="prev" title="Minigames docs!" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -59,6 +59,10 @@
 <img alt="_images/minigame_ready_hierarchy.png" src="_images/minigame_ready_hierarchy.png" />
 <div class="warning docutils container">
 Players have to be named ‘Player’. Otherwise it will not work!</div>
+<p>All players have to derive from base Player</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extends</span> <span class="n">Player</span>
+</pre></div>
+</div>
 <p>Depending on the signals chosen you have to implement these functions in your player script:</p>
 <div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">func</span> <span class="n">press_action</span><span class="p">():</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Press!&quot;</span><span class="p">)</span>
@@ -99,7 +103,8 @@ Players have to be named ‘Player’. Otherwise it will not work!</div>
 <li class="toctree-l2"><a class="reference internal" href="#setup-the-minigame">2. Setup the minigame</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html">Official Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/index.html">Base Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minigames/index.html">Minigames Docs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="help.html">Help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
@@ -109,7 +114,7 @@ Players have to be named ‘Player’. Otherwise it will not work!</div>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="index.html" title="previous chapter">Minigames docs!</a></li>
-      <li>Next: <a href="documentation.html" title="next chapter">Official Documentation</a></li>
+      <li>Next: <a href="documentation/index.html" title="next chapter">Base Documentation</a></li>
   </ul></li>
 </ul>
 </div>

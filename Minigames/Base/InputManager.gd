@@ -17,6 +17,7 @@ signal on_button_release(button_id)
 func _enter_tree():
 	Global.set_input_manager(self)
 
+
 func _ready():
 	var minigame_manager : MinigameManager = Global.get_minigame_manager()
 	
@@ -33,14 +34,16 @@ func _ready():
 	
 	for i in range (0, button_count):
 		button_states_is_held.append(false)
-		
+
+
 func _remove_unused_buttons():
 	if button_count <= 3:
 		$GameCamera/GUI/Button4.queue_free()
 	
 	if button_count <= 2:
 		$GameCamera/GUI/Button3.queue_free()
-		
+
+
 func _physics_process(delta):
 	for i in range(0, button_count):
 		var button_is_held = button_states_is_held[i]

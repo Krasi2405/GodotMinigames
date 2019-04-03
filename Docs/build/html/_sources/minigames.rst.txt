@@ -1,9 +1,0 @@
-Minigames List
-==============
-
-
-.. toctree::
-	:maxdepth: 1
-   	:caption: Contents:
-   	
-	

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/minigame_manager.png-f0c5a6a90ba27da8e53eecca0102f4dc.stex"
+path="res://.import/minigame_manager.png-2badfb09710386f0f36d61ade1d23180.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Docs/build/html/_static/minigame_manager.png"
-dest_files=[ "res://.import/minigame_manager.png-f0c5a6a90ba27da8e53eecca0102f4dc.stex" ]
+source_file="res://Docs/source/_static/minigame_manager.png"
+dest_files=[ "res://.import/minigame_manager.png-2badfb09710386f0f36d61ade1d23180.stex" ]
 
 [params]
 
