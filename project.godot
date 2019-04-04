@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Minigames/Base/MinigameManager.gd"
 }, {
+"base": "Node2D",
+"class": "ObjectTileset",
+"language": "GDScript",
+"path": "res://addons/CustomTileset/ObjectTileset.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -38,6 +43,21 @@ _global_script_classes=[ {
 "class": "PlayerController",
 "language": "GDScript",
 "path": "res://Minigames/Base/PlayerController.gd"
+}, {
+"base": "Panel",
+"class": "TileItem",
+"language": "GDScript",
+"path": "res://addons/CustomTileset/TileItem.gd"
+}, {
+"base": "Control",
+"class": "TilesetDock",
+"language": "GDScript",
+"path": "res://addons/CustomTileset/TilesetDock.gd"
+}, {
+"base": "EditorPlugin",
+"class": "TilesetPlugin",
+"language": "GDScript",
+"path": "res://addons/CustomTileset/TilesetPlugin.gd"
 }, {
 "base": "HBoxContainer",
 "class": "WinText",
@@ -49,15 +69,19 @@ _global_script_class_icons={
 "LevelChoice": "",
 "LevelPicker": "",
 "MinigameManager": "",
+"ObjectTileset": "",
 "Player": "",
 "PlayerController": "",
+"TileItem": "",
+"TilesetDock": "",
+"TilesetPlugin": "",
 "WinText": ""
 }
 
 [application]
 
 config/name="GodotMinigames"
-run/main_scene="res://Minigames/Spaceship/SpaceshipMinigame.tscn"
+run/main_scene="res://Minigames/SkyRunner/RunnerGame.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -69,9 +93,12 @@ Global="*res://Minigames/Base/Global.gd"
 window/size/width=1280
 window/size/height=720
 window/stretch/mode="2d"
-window/stretch/aspect="expand"
 window/handheld/emulate_mouse_from_touch=false
 "window/Use Vsync"=true
+
+[editor_plugins]
+
+enabled=PoolStringArray( "CustomTileset" )
 
 [importer_defaults]
 

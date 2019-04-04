@@ -5,6 +5,7 @@
 [ext_resource path="res://Minigames/Spaceship/ScreenwrapComponent.tscn" type="PackedScene" id=3]
 
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( 7.18617, 5.74315 )
 script = ExtResource( 1 )
 rotation_speed = 4.0
 movement_speed = 350

@@ -14,7 +14,9 @@ var is_blinging = false
 var start_position
 
 func _ready():
-	$Sprite.texture = texture
+	if texture != null:
+		print("Add texture")
+		$Sprite.texture = texture
 	start_position = self.get_global_transform().get_origin()
 
 
@@ -112,6 +114,7 @@ func _on_BlingTimer_timeout():
 		$BlingTimer.start()
 		
 func _destroy():
+	print("Destroy")
 	get_parent().die()
 
 
