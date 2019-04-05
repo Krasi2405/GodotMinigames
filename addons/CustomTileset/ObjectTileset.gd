@@ -5,9 +5,8 @@ extends Node2D
 class_name ObjectTileset
 
 export(Array, PackedScene) var objects
-export(Array, Texture) var images
 
-export var grid_size := 32
+export var grid_size : int = 32
 
 func _ready():
 	if not Engine.is_editor_hint():

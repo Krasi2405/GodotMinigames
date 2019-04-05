@@ -12,13 +12,12 @@
 player_count = 4
 
 [node name="ObjectTileset" type="Node2D" parent="." index="0"]
-position = Vector2( 519.954, -121.666 )
 script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
 objects = [ ExtResource( 4 ), ExtResource( 5 ) ]
-images = [ null, null ]
+grid_size = 64
 
 [node name="TileMap" type="TileMap" parent="." index="1"]
 scale = Vector2( 2, 2 )

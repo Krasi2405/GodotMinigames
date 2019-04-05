@@ -18,4 +18,3 @@ func set_tiles(tiles : Array) -> void:
 		var item_instance := item_prefab.instance() as TileItem
 		item_instance.set_object(tile)
 		container.add_child(item_instance)
-		
