@@ -54,12 +54,11 @@ func draw_grid(overlay : Control, offset : Vector2, scale : float):
 	
 	var grid_size : float = tileset.grid_size * scale
 	
-	var visible_size := tileset.get_viewport().get_visible_rect().size / scale
+	var visible_size := get_editor_interface().get_editor_viewport().rect_size / scale
 	
 	var grid_offset = offset
 	grid_offset.x = fmod(offset.x, grid_size)
 	grid_offset.y = fmod(offset.y, grid_size)
-	
 	var x_grid_size := (visible_size.x / grid_size * scale) + 1
 	var y_grid_size := (visible_size.y / grid_size * scale) + 1
 	for x in range(-1, x_grid_size):
