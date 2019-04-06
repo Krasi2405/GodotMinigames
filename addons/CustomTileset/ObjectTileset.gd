@@ -12,7 +12,8 @@ var objects_dict : Dictionary = {}
 
 func _ready():
 	print("Custom tileset instantiated!")
-	
+	if Engine.is_editor_hint():
+		update_objects_dict()
 	
 	
 func get_objects() -> Array:
