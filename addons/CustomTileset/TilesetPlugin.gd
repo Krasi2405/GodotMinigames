@@ -21,14 +21,21 @@ func _enter_tree():
 			preload("ObjectTileset.gd"), 
 			preload("tilemap_icon.png")
 	)
+	
+	connect("main_screen_changed", self, "screen_changed")
 
 
 func edit(object : Object):
+	print("edit called!")
 	tileset = object as ObjectTileset
 
 
 func handles(obj : Object):
 	return obj is ObjectTileset
+
+
+func clear() -> void:
+	print("clear")
 
 
 func forward_canvas_draw_over_viewport(overlay : Control):
@@ -43,18 +50,15 @@ func forward_canvas_draw_over_viewport(overlay : Control):
 	draw_grid(overlay, offset, scale)
 	
 	if selected_item:
-		var grid_location = selected_placeholder_position * scale
-		grid_location.x = fmod(grid_location.x, tileset.grid_size * scale)
-		grid_location.y = fmod(grid_location.y, tileset.grid_size * scale)
-		if grid_location.x < 0:
-			grid_location.x += tileset.grid_size * scale
-		if grid_location.y < 0:
-			grid_location.y += tileset.grid_size * scale
-	
+		
+		var snapped_location = get_snap_to_grid_position(
+			selected_placeholder_position, 
+			tileset.grid_size
+		)
 		overlay.draw_texture_rect(
 			selected_texture,
 			Rect2(
-				selected_placeholder_position * scale + offset - grid_location,
+				snapped_location * scale + offset,
 				selected_texture.get_size() * scale),
 			false
 		)
@@ -71,24 +75,61 @@ func set_input_event_forwarding_always_enabled():
 	pass
 
 
-func _process(delta):
-	print("update?")
+func screen_changed(node_name : String):
+	print("change main screen")
+	if dock_instance and tileset:
+		if node_name != "2D":
+			dock_instance.hide()
+		else:
+			dock_instance.show()
+			
 
 
 func forward_canvas_gui_input(event : InputEvent) -> bool:
 	
 	if not tileset or not tileset.is_inside_tree():
 		return false
+
+	var event_is_used = false
+	
+	if event is InputEventMouseButton:
+		var mouse_event := (event as InputEventMouseButton)
+		
+		if mouse_event.is_pressed():
+			
+			var offset : Vector2 = tileset.get_viewport_transform().get_origin()
+			var scale : float = tileset.get_viewport_transform().get_scale().x
+			
+			var snapped_position = get_snap_to_grid_position(
+				mouse_event.position - offset, 
+				tileset.grid_size * scale
+			)
+
+			var grid_position = snapped_position / tileset.grid_size / scale
+
+			
+			var undo := get_undo_redo()
+			if mouse_event.get_button_index() == BUTTON_LEFT:
+				print("add object")
+				event_is_used = true
+				tileset.instantiate(selected_item, grid_position, selected_texture.get_size() / 2)
+				
+			if mouse_event.get_button_index() == BUTTON_RIGHT:
+				print("remove object")
+				event_is_used = true
+				tileset.remove_instance(grid_position)
+		
 	
 	if event is InputEventMouseMotion:
+		var motion_event := (event as InputEventMouseMotion)
 		var viewport_transform_invert := tileset.get_viewport_transform().affine_inverse()
-		var mouse_position = viewport_transform_invert.xform(event.position)
+		var mouse_position = viewport_transform_invert.xform(motion_event.position)
 		
 		selected_placeholder_position = mouse_position
 		
 		update_overlays()
 		
-	return false
+	return event_is_used
 
 
 func draw_grid(overlay : Control, offset : Vector2, scale : float):
@@ -150,6 +191,8 @@ func make_visible(visible) -> void:
 		
 		get_editor_interface().get_editor_viewport().add_child(dock_instance)
 		dock_instance.set_tiles(tileset.get_objects())
+		
+		update_overlays()
 	else:
 		for child in get_editor_interface().get_editor_viewport().get_children():
 			if child is TilesetDock:
@@ -157,6 +200,20 @@ func make_visible(visible) -> void:
 
 		if dock_instance:
 			dock_instance.queue_free()
+
+
+func get_snap_to_grid_position(position : Vector2, grid_size : float) -> Vector2:
+	var grid_location := Vector2(
+		fmod(position.x, grid_size), 
+		fmod(position.y, grid_size)
+	)
+	
+	if grid_location.x < 0:
+		grid_location.x += grid_size
+	if grid_location.y < 0:
+		grid_location.y += grid_size
+
+	return position - grid_location
 
 
 func set_selection(object : PackedScene, image : Image) -> void:
