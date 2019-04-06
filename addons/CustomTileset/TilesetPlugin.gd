@@ -8,8 +8,11 @@ var dock = preload("res://addons/CustomTileset/TilesetDock.tscn")
 var dock_instance : TilesetDock
 var tileset : ObjectTileset
 
-var last_scale : float = 1
-var last_offset : Vector2 = Vector2(0, 0)
+var selected_item : PackedScene
+
+var selected_texture : Texture
+
+var selected_placeholder_position : Vector2 = Vector2(0, 0)
 
 func _enter_tree():
 	add_custom_type(
@@ -37,18 +40,58 @@ func forward_canvas_draw_over_viewport(overlay : Control):
 	# Assume that vector scale x and y will always be equal
 	var scale : float = tileset.get_viewport_transform().get_scale().x
 	
+	print(scale)
+	
 	draw_grid(overlay, offset, scale)
+	
+	if selected_item:
+		var grid_location = selected_placeholder_position * scale
+		grid_location.x = fmod(grid_location.x, tileset.grid_size * scale)
+		grid_location.y = fmod(grid_location.y, tileset.grid_size * scale)
+		if grid_location.x < 0:
+			grid_location.x += tileset.grid_size * scale
+		if grid_location.y < 0:
+			grid_location.y += tileset.grid_size * scale
+	
+		overlay.draw_texture_rect(
+			selected_texture,
+			Rect2(
+				selected_placeholder_position * scale + offset - grid_location,
+				selected_texture.get_size() * scale),
+			false
+		)
+		#
+		#overlay.draw_texture(
+		#	selected_texture, 
+		#	selected_placeholder_position * scale + offset - grid_location
+		#)
+		
+func forward_canvas_force_draw_over_viewport(overlay : Control):
+	print("force draw")
+
+func set_input_event_forwarding_always_enabled():
+	pass
+
+
+func _process(delta):
+	print("update?")
 
 
 func forward_canvas_gui_input(event : InputEvent) -> bool:
 	
-	#if event is InputEventMouse:
-		#var viewport_transform_invert := tileset.get_viewport_transform().affine_inverse()
-		#var mouse_position = viewport_transform_invert.xform(event.position)
-		# print("Update position to ", viewport_position)
-
-
+	if not tileset or not tileset.is_inside_tree():
+		return false
+	
+	if event is InputEventMouseMotion:
+		var viewport_transform_invert := tileset.get_viewport_transform().affine_inverse()
+		var mouse_position = viewport_transform_invert.xform(event.position)
+		
+		selected_placeholder_position = mouse_position
+		
+		update_overlays()
+		
 	return false
+
 
 func draw_grid(overlay : Control, offset : Vector2, scale : float):
 	
@@ -99,15 +142,14 @@ func draw_square(overlay : Control, position : Vector2, grid_size: float) -> voi
 	"""
 
 
-func forward_input_event(event):
-	print("Forward input")
-	print(event)
-
-
 func make_visible(visible) -> void:
 	print("make_visible(", visible, ")")
 	if visible:
 		dock_instance = dock.instance() as TilesetDock
+		var height = get_editor_interface().get_editor_viewport().rect_size.y
+		dock_instance.set_height(height)
+		dock_instance.connect("selection", self, "set_selection")
+		
 		get_editor_interface().get_editor_viewport().add_child(dock_instance)
 		dock_instance.set_tiles(tileset.get_objects())
 	else:
@@ -117,6 +159,14 @@ func make_visible(visible) -> void:
 
 		if dock_instance:
 			dock_instance.queue_free()
+
+
+func set_selection(object : PackedScene, image : Image) -> void:
+	selected_item = object
+	
+	var texture := ImageTexture.new()
+	texture.create_from_image(image)
+	selected_texture = texture
 
 
 func get_plugin_name():

@@ -44,7 +44,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Minigames/Base/PlayerController.gd"
 }, {
-"base": "Panel",
+"base": "Button",
 "class": "TileItem",
 "language": "GDScript",
 "path": "res://addons/CustomTileset/TileItem.gd"

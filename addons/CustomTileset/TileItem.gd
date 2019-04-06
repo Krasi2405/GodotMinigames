@@ -1,6 +1,6 @@
 tool
 
-extends Panel
+extends Button
 
 class_name TileItem
 
@@ -9,6 +9,10 @@ export var test_path : String
 var object : PackedScene
 
 var instance : Node
+
+var parent
+
+signal selected(selected_object, selected_image)
 
 func _ready():
 	"""
@@ -28,11 +32,21 @@ func _ready():
 	pass
 
 
+func _on_TileItem_pressed():
+	emit_signal("selected", self.object, _get_object_representation_by_first_sprite(self.object))
+
+
 func set_object(object : PackedScene) -> void:
 	self.object = object
 	_set_image_by_first_object_sprite(object)
 	_set_name(object.instance().name)
 
+
+func set_parent(parent) -> void:
+	self.parent = parent
+
+func get_image() -> Image:
+	return _get_object_representation_by_first_sprite(self.object)
 
 func get_object() -> PackedScene:
 	return self.object
@@ -131,4 +145,3 @@ func _get_object_sprite_recursion(object : Node2D, image : Image) -> Image:
 		image = _get_object_sprite_recursion(child_node, image)
 		
 	return image
-

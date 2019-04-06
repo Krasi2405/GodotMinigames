@@ -2,12 +2,12 @@
 
 [ext_resource path="res://addons/CustomTileset/TileItem.gd" type="Script" id=1]
 
-[node name="TileItem" type="Panel"]
+[node name="TileItem" type="Button"]
 margin_right = 245.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 245, 100 )
 script = ExtResource( 1 )
-test_path = "res://Minigames/Spaceship/Player/Player.tscn"
+test_path = ""
 
 [node name="Image" type="TextureRect" parent="."]
 margin_left = 5.0
@@ -23,3 +23,4 @@ margin_right = 234.0
 margin_bottom = 77.0
 text = "asdasdsad"
 
+[connection signal="pressed" from="." to="." method="_on_TileItem_pressed"]
