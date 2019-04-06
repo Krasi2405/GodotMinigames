@@ -23,7 +23,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_editor_icon": ExtResource( 4 )
 }
-objects = [ ExtResource( 5 ), ExtResource( 6 ) ]
+objects = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
 grid_size = 64
 
 [node name="Player" parent="PlayerController0" index="0" instance=ExtResource( 7 )]

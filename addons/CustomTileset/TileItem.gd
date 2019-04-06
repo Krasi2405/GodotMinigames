@@ -14,23 +14,6 @@ var parent
 
 signal selected(selected_object, selected_image)
 
-func _ready():
-	"""
-	var image := get_object_representation_by_first_sprite(load(test_path))
-	object = load(test_path)
-	var texture := ImageTexture.new()
-	texture.create_from_image(image)
-	_set_image(texture)
-	"""
-	
-	"""
-	instance = (load(test_path).instance(0) as Node)
-	instance.position = $Image.rect_global_position + ($Image.rect_size / 2)
-	instance.set_script(null)
-	add_child(instance)
-	"""
-	pass
-
 
 func _on_TileItem_pressed():
 	emit_signal("selected", self.object, _get_object_representation_by_first_sprite(self.object))
@@ -45,8 +28,10 @@ func set_object(object : PackedScene) -> void:
 func set_parent(parent) -> void:
 	self.parent = parent
 
+
 func get_image() -> Image:
 	return _get_object_representation_by_first_sprite(self.object)
+
 
 func get_object() -> PackedScene:
 	return self.object
@@ -95,6 +80,15 @@ func _get_first_object_sprite(object : Node2D) -> Image:
 			var image : Image = sprite.texture.get_data()
 			image.resize(image.get_width() * scale.x, image.get_height() * scale.y)
 			return image
+		
+		if child is AnimatedSprite:
+			var animated_sprite := child as AnimatedSprite
+			var current_animation := animated_sprite.animation
+			var texture : Texture = animated_sprite.get_sprite_frames().get_frame(current_animation, 0)
+			var image = texture.get_data()
+			image.resize(image.get_width() * scale.x, image.get_height() * scale.y)
+			return image
+			
 
 		var child_node := child as Node2D
 		var child_sprite := _get_first_object_sprite(child_node)

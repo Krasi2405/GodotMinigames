@@ -10,11 +10,12 @@ script = ExtResource( 1 )
 test_path = ""
 
 [node name="Image" type="TextureRect" parent="."]
-margin_left = 5.0
-margin_top = 4.0
-margin_right = 107.0
-margin_bottom = 96.0
+margin_left = 20.0
+margin_top = 17.0
+margin_right = 93.0
+margin_bottom = 83.0
 expand = true
+stretch_mode = 5
 
 [node name="Name" type="RichTextLabel" parent="."]
 margin_left = 107.0
