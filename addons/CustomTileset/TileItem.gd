@@ -87,10 +87,14 @@ func _get_object_representation_by_first_sprite(object : PackedScene) -> Image:
 
 
 func _get_first_object_sprite(object : Node2D) -> Image:
+	var scale := object.get_transform().get_scale()
+
 	for child in object.get_children():
 		if child is Sprite:
 			var sprite := child as Sprite
-			return sprite.texture.get_data()
+			var image : Image = sprite.texture.get_data()
+			image.resize(image.get_width() * scale.x, image.get_height() * scale.y)
+			return image
 
 		var child_node := child as Node2D
 		var child_sprite := _get_first_object_sprite(child_node)

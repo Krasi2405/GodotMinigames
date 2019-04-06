@@ -40,8 +40,6 @@ func forward_canvas_draw_over_viewport(overlay : Control):
 	# Assume that vector scale x and y will always be equal
 	var scale : float = tileset.get_viewport_transform().get_scale().x
 	
-	print(scale)
-	
 	draw_grid(overlay, offset, scale)
 	
 	if selected_item:
@@ -167,6 +165,8 @@ func set_selection(object : PackedScene, image : Image) -> void:
 	var texture := ImageTexture.new()
 	texture.create_from_image(image)
 	selected_texture = texture
+	
+	update_overlays()
 
 
 func get_plugin_name():
