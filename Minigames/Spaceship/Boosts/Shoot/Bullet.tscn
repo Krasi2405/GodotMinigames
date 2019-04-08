@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Minigames/Spaceship/Boosts/Shoot/Bullet.gd" type="Script" id=1]
+[ext_resource path="res://Minigames/Spaceship/Boosts/Shoot/bullet.png" type="Texture" id=2]
+[ext_resource path="res://Minigames/Spaceship/ScreenwrapComponent.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="Bullet" type="Area2D" index="0"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 2
+collision_mask = 3
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Transform" ]
+speed = 500
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+scale = Vector2( 1.434, 0.605059 )
+shape = SubResource( 1 )
+
+[node name="DestructionTimer" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 5.0
+one_shot = false
+autostart = false
+
+[node name="ScreenwrapComponent" parent="." index="3" instance=ExtResource( 3 )]
+
+[connection signal="area_entered" from="." to="." method="_on_Bullet_area_entered"]
+
+[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
+
+[connection signal="timeout" from="DestructionTimer" to="." method="_on_DestructionTimer_timeout"]
+
+

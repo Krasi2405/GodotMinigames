@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/CustomTileset/TileItem.gd" type="Script" id=1]
+
+[node name="TileItem" type="Button"]
+margin_right = 245.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 245, 100 )
+script = ExtResource( 1 )
+test_path = ""
+
+[node name="Image" type="TextureRect" parent="."]
+margin_left = 20.0
+margin_top = 17.0
+margin_right = 93.0
+margin_bottom = 83.0
+expand = true
+stretch_mode = 5
+
+[node name="Name" type="RichTextLabel" parent="."]
+margin_left = 107.0
+margin_top = 21.0
+margin_right = 234.0
+margin_bottom = 77.0
+text = "asdasdsad"
+
+[connection signal="pressed" from="." to="." method="_on_TileItem_pressed"]

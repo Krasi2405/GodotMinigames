@@ -49,6 +49,12 @@ Create a new scene for the player and add it under all the player controllers.
 
 	Players have to be named 'Player'. Otherwise it will not work!
 
+All players have to derive from base Player
+
+.. code::
+
+	extends Player
+
 
 Depending on the signals chosen you have to implement these functions in your player script:
 

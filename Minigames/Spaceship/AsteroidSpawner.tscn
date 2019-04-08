@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Minigames/Spaceship/AsteroidSpawner.gd" type="Script" id=1]
+
+[node name="AsteroidSpawner" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Pause", "Transform" ]
+spawn_timer = 4
+lower_time_per_spawn = 0.05
+min_timer = 2.0
+ASTEROID_PREFAB_PATH = "res://Minigames/Spaceship/Boosts/Asteroid/Asteroid.tscn"
+x_direction_offset = 320
+y_direction_offset = 180
+
+[node name="SpawnTimer" type="Timer" parent="." index="0"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+
+

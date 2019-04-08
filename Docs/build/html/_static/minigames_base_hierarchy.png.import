@@ -2,18 +2,22 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/minigames_base_hierarchy.png-b5ddd1ddac99e2c1b5a6793d1c1a455a.stex"
+path="res://.import/minigames_base_hierarchy.png-c877cef607e3a4833c70c244ad4f8303.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://Docs/build/html/_static/minigames_base_hierarchy.png"
-dest_files=[ "res://.import/minigames_base_hierarchy.png-b5ddd1ddac99e2c1b5a6793d1c1a455a.stex" ]
+source_file="res://Docs/source/_static/minigames_base_hierarchy.png"
+dest_files=[ "res://.import/minigames_base_hierarchy.png-c877cef607e3a4833c70c244ad4f8303.stex" ]
 
 [params]
 
 compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
+compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
@@ -23,6 +27,7 @@ flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
+process/invert_color=false
 stream=false
 size_limit=0
 detect_3d=true

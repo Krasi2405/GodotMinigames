@@ -1,34 +1,50 @@
+"""
+Load all the minigames.
+"""
+
+
 extends Control
 
-export(String, DIR) var search_dir
+class_name LevelPicker
 
-const LEVEL_CHOICE_PREFAB_PATH = "res://LevelPicker/LevelChoice.tscn"
 
-func _ready():
-	var filenames = get_dir_filenames(search_dir)
-	for filepath in filenames:
-		var extension = filepath.get_extension()
-		if extension == "tscn":
-			var icon_path = filepath.get_basename() + ".png"
-			var level_choice = load(LEVEL_CHOICE_PREFAB_PATH).instance()
-			level_choice.level = filepath
-			if File.new().file_exists(icon_path):
-				var texture = load(icon_path)
-				level_choice.texture_normal = texture
-			else:
-				print("Icon not found for %s using default icon" % filepath)
-			
-			$HBoxContainer.add_child(level_choice)
-		
-		
-func get_dir_filenames(var search_dir):
-	var files = []
+export(String, DIR) var search_dir : String
+
+const LEVEL_CHOICE_PREFAB_PATH : String = "res://LevelPicker/LevelChoice.tscn"
+
+var level_choice_prefab : Resource
+
+func _enter_tree():
+	level_choice_prefab = load(LEVEL_CHOICE_PREFAB_PATH)
 	
-	var dir = Directory.new()
+	var filenames := get_dir_filenames(search_dir)
+	for file_array_item in filenames:
+		var filepath : String = file_array_item
+		var extension : String = filepath.get_extension()
+		if extension == "tscn":
+			var level_choice := (level_choice_prefab.instance() as LevelChoice)
+			level_choice.set_level(filepath)
+			
+			var icon_path := filepath.get_basename() + ".png"
+			if File.new().file_exists(icon_path):
+				level_choice.set_icon(icon_path)
+			else:
+				print("Icon not found for %s! Using default icon." % filepath)
+			
+			($HBoxContainer as HBoxContainer).add_child(level_choice)
+	
+	
+
+func get_dir_filenames(var search_dir : String) -> Array:
+	var files := []
+	
+	var dir := Directory.new()
 	dir.open(search_dir)
 	dir.list_dir_begin()
 	while true:
-		var file_name = dir.get_next()
+		var file_name : String = dir.get_next()
+		
+		# Gives empty file_name at end of dir iterator.
 		if file_name == "":
 			break
 		

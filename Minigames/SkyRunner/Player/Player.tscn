@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Minigames/SkyRunner/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Minigames/SkyRunner/Player/player_static.png" type="Texture" id=2]
+[ext_resource path="res://Minigames/SkyRunner/Player/walk1.png" type="Texture" id=3]
+[ext_resource path="res://Minigames/SkyRunner/Player/walk2.png" type="Texture" id=4]
+[ext_resource path="res://Minigames/SkyRunner/Player/jump.png" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+} ]
+
+[node name="Player" type="KinematicBody2D"]
+scale = Vector2( 4, 4 )
+script = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -4.06354, 7.99692, -5.00231, 6.91907, -4.98786, -5.01932, -2.9911, -6.98295, 3.01478, -6.99336, 4.99384, -4.95461, 5.0082, 7.05768, 4.12037, 8.01276 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+
