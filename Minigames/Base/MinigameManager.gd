@@ -13,6 +13,8 @@ export var player_count := 4
 
 var player_map : Dictionary = {}
 
+var player_id_lose_order : Array = []
+
 var player_id_win_order : Array = []
 
 var active_player_count : int
@@ -50,13 +52,24 @@ func win(player_id_win_order) -> void:
 
 
 func remove_player(player_id : int) -> void:
-	if active_player_count <= 0 or player_id in player_id_win_order:
+	_add_player_to_list(player_id, player_id_lose_order, true)
+
+
+func add_winner(player_id : int) -> void:
+	_add_player_to_list(player_id,  player_id_win_order, false)
+	
+
+func _add_player_to_list(player_id : int, list : Array, should_push_front : bool) -> void:
+	if active_player_count <= 0 or not player_map.has(player_id):
 		return
 
-	#warning-ignore:return_value_discarded
 	player_map.erase(player_id)
 	active_player_count -= 1
-	player_id_win_order.push_front(player_id)
+	if should_push_front:
+		list.push_front(player_id)
+	else:
+		list.push_back(player_id)
+
 	if $OnWinDelayTimer && active_player_count <= 1:
 		($OnWinDelayTimer as Timer).start()
 
@@ -88,12 +101,24 @@ func _bind_signals() -> void:
 
 
 func _on_WinTimer_timeout() -> void:
-	win(player_id_win_order)
+	var ranking_list := []
+	for player_id in player_id_win_order:
+		ranking_list.append(player_id)
+	
+	print("win order: ", player_id_win_order)
+	for player_id in player_id_lose_order:
+		ranking_list.append(player_id)
+	print("lose order: ", player_id_lose_order)
+
+	# Cleanup player_map. Scraps everything together but really ugly
+	for player_id in player_map.keys():
+		ranking_list.push_front(player_id)
+
+	win(ranking_list)
 	$OnWinDelayTimer.queue_free()
 
 
 func _on_OnVictoryRestartTimer_timeout() -> void:
-	#warning-ignore:return_value_discarded
 	get_tree().reload_current_scene()
 
 	
@@ -134,7 +159,7 @@ func _on_InputManager_on_button_hold(button_id : int, delta : float) -> void:
 func _on_InputManager_on_button_release(button_id : int) -> void:
 	if not use_press_signal:
 		return
-	
+
 	if player_map.has(button_id):
 		var player : PlayerController = player_map[button_id]
 		player.release_action()

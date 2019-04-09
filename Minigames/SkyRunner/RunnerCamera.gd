@@ -12,6 +12,8 @@ func _ready():
 	for player_controller in Global.get_minigame_manager().get_player_nodes():
 		var player : Player = (player_controller as PlayerController).get_player_child()
 		players.append(player)
+	
+	limit_right = $"../VictoryArea".position.x + 100
 
 func _process(delta):
 	for player in players:
