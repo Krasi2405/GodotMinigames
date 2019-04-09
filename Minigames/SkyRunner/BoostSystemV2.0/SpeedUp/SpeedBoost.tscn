@@ -4,7 +4,7 @@
 [ext_resource path="res://Minigames/SkyRunner/BoostSystemV2.0/SpeedUp/SpeedUp.gd" type="Script" id=2]
 [ext_resource path="res://Minigames/SkyRunner/BoostSystemV2.0/SpeedUp/SpeedBoostAnimation.tres" type="SpriteFrames" id=3]
 
-[node name="SpeedBoost" instance=ExtResource( 1 )]
+[node name="SpeedBoost" index="0" instance=ExtResource( 1 )]
 effect_script = "res://Minigames/SkyRunner/BoostSystemV2.0/SpeedUp/SpeedUp.gd"
 boost_graphic = "D:/GodotMinigames/Minigames/SkyRunner/BoostSystemV2.0/SpeedUp/SpeedBoostAnimation.tres"
 
@@ -14,6 +14,9 @@ script = ExtResource( 2 )
 [node name="Animation" parent="." index="1"]
 scale = Vector2( 2, 2 )
 frames = ExtResource( 3 )
-frame = 12
+frame = 14
 playing = true
 
+[node name="BoostTime" type="Timer" parent="." index="4"]
+
+[connection signal="timeout" from="BoostTime" to="BoostEffect" method="_on_BoostTime_timeout"]

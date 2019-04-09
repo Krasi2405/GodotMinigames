@@ -31,6 +31,7 @@ func set_effect_script(effect_script_path : String) -> void:
 		if boost_effect_node.has_method("apply_effect"):
 			effect_script = effect_script_path
 		else:
+			print("Script doesn't have apply_effect method")
 			clear_script()
 
 
