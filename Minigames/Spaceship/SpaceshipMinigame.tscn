@@ -15,7 +15,7 @@ _data = [ Vector2( 0, 0.467773 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.886719 ), 0.0, 0
 [sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 1, 1, 1, 0.232039, 0.975368, 0.975368, 0.975368, 0.845294 )
 
-[node name="MinigameManager" index="0" instance=ExtResource( 1 )]
+[node name="MinigameManager" instance=ExtResource( 1 )]
 
 [node name="Background" type="ColorRect" parent="." index="0"]
 margin_right = 1292.0
@@ -66,6 +66,6 @@ position = Vector2( 335.033, 574.067 )
 rotation = 1.02343
 texture = ExtResource( 8 )
 
-[node name="OnVictoryRestartTimer" parent="." index="11"]
+[node name="OnVictoryRestartTimer" parent="." index="10"]
 wait_time = 2.0
 
