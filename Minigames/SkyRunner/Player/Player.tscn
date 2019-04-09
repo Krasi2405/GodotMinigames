@@ -38,3 +38,5 @@ polygon = PoolVector2Array( -4.06354, 7.99692, -5.00231, 6.91907, -4.98786, -5.0
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+

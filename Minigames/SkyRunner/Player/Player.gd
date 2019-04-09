@@ -39,6 +39,9 @@ func _process(delta):
 		snap.y = 0
 	"""
 	move_and_slide(motion, UP)
+	
+	if !$VisibilityNotifier2D.is_on_screen():
+		get_parent().die() 
 
 func press_action():
 	
