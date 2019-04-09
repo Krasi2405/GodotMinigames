@@ -40,9 +40,12 @@ func _ready() -> void:
 	_bind_signals()
 
 
+
+
+
 func win(player_id_win_order) -> void:
 	print("Game over!", player_id_win_order)
-	($WinText as WinText).parse_winners(player_id_win_order)
+	($CanvasLayer/WinText as WinText).parse_winners(player_id_win_order)
 	($OnVictoryRestartTimer as Timer).start()
 
 
@@ -54,7 +57,7 @@ func remove_player(player_id : int) -> void:
 	player_map.erase(player_id)
 	active_player_count -= 1
 	player_id_win_order.push_front(player_id)
-	if active_player_count <= 1:
+	if $OnWinDelayTimer && active_player_count <= 1:
 		($OnWinDelayTimer as Timer).start()
 
 
