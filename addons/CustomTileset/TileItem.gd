@@ -86,7 +86,10 @@ func _get_first_object_sprite(object : Node2D) -> Image:
 			var current_animation := animated_sprite.animation
 			var texture : Texture = animated_sprite.get_sprite_frames().get_frame(current_animation, 0)
 			var image = texture.get_data()
-			image.resize(image.get_width() * scale.x, image.get_height() * scale.y)
+			image.resize(
+				image.get_width() * scale.x * animated_sprite.scale.y, 
+				image.get_height() * scale.y * animated_sprite.scale.y
+			)
 			return image
 			
 
