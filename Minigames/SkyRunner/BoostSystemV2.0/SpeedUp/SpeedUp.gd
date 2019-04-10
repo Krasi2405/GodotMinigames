@@ -12,12 +12,15 @@ func _ready():
 
 
 func apply_effect(player : Player) -> void:
-	default_player_speed = player.speed
-	player.speed *= speed_boost_multiply
+	default_player_speed = player.movement_speed
+	player.motion.x *= speed_boost_multiply
 	self.player = player
+	
 	($BoostTime as Timer).start()
-	print("Apply speed boost!")
+	$"../Animation".modulate.a = 0.5
 
 
 func _on_BoostTime_timeout():
-	self.player.speed = default_player_speed
+	if weakref(player).get_ref():
+		self.player.motion.x = default_player_speed
+	$"../Animation".modulate.a = 1

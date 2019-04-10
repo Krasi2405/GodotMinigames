@@ -38,10 +38,10 @@ func _ready():
 
 func _remove_unused_buttons():
 	if button_count <= 3:
-		$GameCamera/GUI/Button4.queue_free()
+		$GUI/Button4.queue_free()
 	
 	if button_count <= 2:
-		$GameCamera/GUI/Button3.queue_free()
+		$GUI/Button3.queue_free()
 
 
 func _physics_process(delta):

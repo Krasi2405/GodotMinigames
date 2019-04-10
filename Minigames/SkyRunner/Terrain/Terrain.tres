@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=20 format=2]
+[gd_resource type="TileSet" load_steps=18 format=2]
 
 [ext_resource path="res://Minigames/SkyRunner/Terrain/platform.png" type="Texture" id=1]
 [ext_resource path="res://Minigames/SkyRunner/Terrain/Ground_M.png" type="Texture" id=2]
@@ -15,32 +15,26 @@ points = PoolVector2Array( -16.0726, 2.65079, -15.9976, -1.73954, 16.048, -1.777
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.1213, 14.2721 )
 
-[sub_resource type="ConvexPolygonShape2D" id=5]
-points = PoolVector2Array( -15.9645, -12.9456, 16.0649, -12.8407, 12.2663, 0.13916, -15.9645, 16.271 )
+[sub_resource type="ConvexPolygonShape2D" id=9]
+points = PoolVector2Array( -15.9645, -12.9456, 16.0649, -12.8407, 16.0662, 16.4826, -15.9645, 16.271 )
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
-points = PoolVector2Array( -15.9645, 16.271, 12.2663, 0.13916, 12.3469, 16.1688 )
-
-[sub_resource type="ConvexPolygonShape2D" id=7]
 points = PoolVector2Array( 15.9905, 16.0698, -15.9645, 16.271, -15.9501, -16.0123, 12.0268, -12.9948 )
 
-[sub_resource type="ConvexPolygonShape2D" id=8]
+[sub_resource type="ConvexPolygonShape2D" id=7]
 points = PoolVector2Array( 12.0268, -12.9948, 15.9968, -12.9905, 15.9905, 16.0698 )
 
-[sub_resource type="ConvexPolygonShape2D" id=9]
+[sub_resource type="ConvexPolygonShape2D" id=8]
 points = PoolVector2Array( 12.0268, -12.9948, -15.9501, -16.0123, 12.0235, -15.9934 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 14.0961, 16 )
+extents = Vector2( 16.2476, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=10]
-points = PoolVector2Array( 12.1362, -1.52452, 16.0269, 12.984, -15.991, 12.9882, -16.0005, -15.9978 )
-
-[sub_resource type="ConvexPolygonShape2D" id=11]
-points = PoolVector2Array( 12.1362, -1.52452, -16.0005, -15.9978, 12.166, -16.0178 )
+points = PoolVector2Array( -16.0005, -15.9978, 15.8728, -15.9111, 16.0269, 12.984, -15.991, 12.9882 )
 
 [resource]
 0/name = "Platform"
@@ -87,13 +81,7 @@ points = PoolVector2Array( 12.1362, -1.52452, -16.0005, -15.9978, 12.166, -16.01
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
-}, {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 6 ),
+"shape": SubResource( 9 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
 } ]
 2/z_index = 0
@@ -109,6 +97,12 @@ points = PoolVector2Array( 12.1362, -1.52452, -16.0005, -15.9978, 12.166, -16.01
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
 "shape": SubResource( 7 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
 }, {
@@ -116,12 +110,6 @@ points = PoolVector2Array( 12.1362, -1.52452, -16.0005, -15.9978, 12.166, -16.01
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 8 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
-}, {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 9 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
 } ]
 3/z_index = 0
@@ -154,7 +142,7 @@ points = PoolVector2Array( 12.1362, -1.52452, -16.0005, -15.9978, 12.166, -16.01
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 3 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 14.0413, 15.8736 )
+"shape_transform": Transform2D( 1, 0, 0, 1, 15.7096, 16.0019 )
 } ]
 5/z_index = 0
 6/name = "Ceiling_M"
@@ -186,12 +174,6 @@ points = PoolVector2Array( 12.1362, -1.52452, -16.0005, -15.9978, 12.166, -16.01
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 10 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
-}, {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 11 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
 } ]
 7/z_index = 0

@@ -16,7 +16,7 @@ extents = Vector2( 16.1213, 14.2721 )
 extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 14.0961, 16 )
+extents = Vector2( 16.2476, 16 )
 
 [node name="Platforms" type="Node2D"]
 
@@ -53,7 +53,7 @@ shape = SubResource( 1 )
 
 [node name="Ground_R" type="Sprite" parent="."]
 editor/display_folded = true
-position = Vector2( 638.502, 362.928 )
+position = Vector2( 370.268, 102.477 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
 __meta__ = {
@@ -64,11 +64,11 @@ __meta__ = {
 collision_layer = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground_R/StaticBody2D"]
-polygon = PoolVector2Array( -15.9645, 16.271, 12.3469, 16.1688, 12.2663, 0.13916, 16.0649, -12.8407, -15.9645, -12.9456 )
+polygon = PoolVector2Array( -15.9645, 16.271, 16.0662, 16.4826, 16.0649, -12.8407, -15.9645, -12.9456 )
 
 [node name="GroundToWall_R" type="Sprite" parent="."]
 editor/display_folded = true
-position = Vector2( 370.773, 368.043 )
+position = Vector2( 736.771, 259.714 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 4 )
 __meta__ = {
@@ -110,7 +110,7 @@ __meta__ = {
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="General_R/StaticBody2D"]
-position = Vector2( -1.95872, -0.126419 )
+position = Vector2( -0.290354, 0.00191887 )
 shape = SubResource( 3 )
 
 [node name="Ceiling_M" type="Sprite" parent="."]
@@ -131,7 +131,7 @@ shape = SubResource( 1 )
 
 [node name="Ceiling_R" type="Sprite" parent="."]
 editor/display_folded = true
-position = Vector2( 638.698, 81.0723 )
+position = Vector2( 370.591, 359.831 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 8 )
 __meta__ = {
@@ -142,5 +142,5 @@ __meta__ = {
 collision_layer = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ceiling_R/StaticBody2D"]
-polygon = PoolVector2Array( -15.991, 12.9882, 16.0269, 12.984, 12.1362, -1.52452, 12.166, -16.0178, -16.0005, -15.9978 )
+polygon = PoolVector2Array( -15.991, 12.9882, 16.0269, 12.984, 15.8728, -15.9111, -16.0005, -15.9978 )
 

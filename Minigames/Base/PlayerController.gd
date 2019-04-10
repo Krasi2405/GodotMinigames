@@ -40,5 +40,9 @@ func die() -> void:
 	queue_free()
 
 
+func win() -> void:
+	get_parent().add_winner(player_id)
+
+
 func get_player_child() -> Player:
 	return ($Player as Player)
