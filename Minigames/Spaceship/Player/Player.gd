@@ -29,9 +29,10 @@ func hold_action(delta):
 	var collision = move_and_collide(
 		-get_global_transform().y.normalized() * movement_speed * delta
 	)
+
 	if collision != null:
 		var body = collision.collider
-		if invulnereble or is_hit:
+		if is_hit:
 			return;
 		
 		print("player hit ", body)
@@ -43,11 +44,12 @@ func hold_action(delta):
 				should_collide = true
 				break
 		
-		
 		if should_collide:
+			if not invulnereble:
+				hit()
 			if body.has_method("hit"):
 				body.hit()
-			hit()
+			
 
 
 func release_action():
