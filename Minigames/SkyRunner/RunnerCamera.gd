@@ -1,5 +1,6 @@
 extends Camera2D
 
+class_name GameCamera
 
 onready var players : Array
 onready var camera_width : float = get_viewport().get_visible_rect().size.x

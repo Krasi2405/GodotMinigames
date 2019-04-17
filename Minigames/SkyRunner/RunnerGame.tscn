@@ -144,9 +144,6 @@ limit_top = 0
 limit_bottom = 600
 script = ExtResource( 8 )
 
-[node name="CanvasLayer" parent="." index="4"]
-editor/display_folded = true
-
 [node name="PlayerController0" parent="." index="5"]
 editor/display_folded = true
 

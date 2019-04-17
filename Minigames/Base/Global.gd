@@ -8,6 +8,9 @@ extends Node2D
 
 var minigame_manager : MinigameManager
 var input_manager : InputManager
+var camera : Camera
+
+
 
 func get_minigame_manager() -> MinigameManager:
 	return minigame_manager
@@ -15,6 +18,7 @@ func get_minigame_manager() -> MinigameManager:
 
 func set_minigame_manager(minigame_manager : MinigameManager) -> void:
 	self.minigame_manager = minigame_manager
+	camera = (minigame_manager as Node2D).get_node("Camera")
 
 
 func get_input_manager() -> InputManager:
