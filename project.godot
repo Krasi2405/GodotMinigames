@@ -29,6 +29,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://LevelPicker/LevelPicker.gd"
 }, {
+"base": "Control",
+"class": "LobbyUser",
+"language": "GDScript",
+"path": "res://Lobby/LobbyUser.gd"
+}, {
+"base": "Node",
+"class": "LocalUser",
+"language": "GDScript",
+"path": "res://Lobby/LocalUser.gd"
+}, {
 "base": "Node2D",
 "class": "MinigameManager",
 "language": "GDScript",
@@ -74,6 +84,8 @@ _global_script_class_icons={
 "InputManager": "",
 "LevelChoice": "",
 "LevelPicker": "",
+"LobbyUser": "",
+"LocalUser": "",
 "MinigameManager": "",
 "ObjectTileset": "",
 "Player": "",
