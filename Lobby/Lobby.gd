@@ -12,9 +12,19 @@ var client_icon = preload("res://Lobby/ClientIcon.png")
 var local_user : LobbyUser
 var users : Dictionary
 
+var thread : Thread
+var mutex : Mutex
+var should_exit_thread = false
+
+var server_ip : String
+
+const DHCP_GET_PORT = 4245
+const DHCP_SEND_PORT = 4244
+
 
 func _ready():
 	assert(colors.size() >= 4)
+	mutex = Mutex.new()
 	
 	# Everybody gets it including server
 	get_tree().connect("network_peer_connected", self, "_player_connected")
@@ -65,27 +75,84 @@ func _on_HostBTN_button_down():
 	if result != OK:
 		print("Cannot create server")
 	else:
+		thread = Thread.new()
+		thread.start(self, "handle_dhcp_requests")
+
 		add_lobby_host().set_disconnect_btn_active(true)
 		get_tree().set_network_peer(peer)
 		get_tree().set_meta("network_peer", peer)
 	
 	$Debug.send_debug("Create server\n")
 
+
+func handle_dhcp_requests(userdata):
+	print(userdata)
+	print("handle_dhcp_requests")
+	var socket = PacketPeerUDP.new()
+	if socket.listen(DHCP_SEND_PORT) != OK:
+		print("Cannot listen for ip requests")
+		return
+	else:
+		print("Listening for ip requests")
+
+	while true:
+		if socket.get_available_packet_count() > 0:
+			var data = socket.get_packet().get_string_from_ascii()
+			
+			print("Data received: " + data)
+			socket.set_dest_address(socket.get_packet_ip(), DHCP_GET_PORT)
+			socket.put_packet("123".to_ascii())
+			print("Send data to " + socket.get_packet_ip() + ":" + str(DHCP_GET_PORT))
+			
+			mutex.lock()
+			if(should_exit_thread):
+				mutex.unlock()
+				break
+			mutex.unlock()
+
+
 func _on_JoinBTN_button_down():
 	remove_join_btns()
-	
+
 	print("Create client")
+	
+	thread = Thread.new()
+	thread.start(self, "setup_client")
+
+	$Debug.send_debug("Looking for connections\n")
+
+
+func setup_client(userdata):
+	var socket = PacketPeerUDP.new()
+	socket.set_dest_address("255.255.255.255", DHCP_SEND_PORT)
+	socket.put_packet("ip".to_ascii())
+	socket.close()
+	
+	socket = PacketPeerUDP.new()
+	if(socket.listen(DHCP_GET_PORT) != OK):
+		print("Error listening on port for ip")
+		return
+	else:
+		print("Listening on port for server's ip")
+
+	var ip : String
+	while true:
+		if socket.get_available_packet_count() > 0:
+			var data = socket.get_packet()
+			ip = socket.get_packet_ip()
+			print("Got ip data with ip " + ip)
+			break
+
 	var peer = NetworkedMultiplayerENet.new()
-	var result = peer.create_client("127.0.0.1", 4242)
+	var result = peer.create_client(ip, 4242)
 	if result != OK:
 		print("Cannot create client")
+		return
 	else:
 		get_tree().set_network_peer(peer)
 		get_tree().set_meta("network_peer", peer)
 		
 	$Debug.send_debug("Join\n")
-
-
 
 
 func add_lobby_host() -> LobbyUser:
@@ -140,3 +207,9 @@ func reset_local_state():
 	
 	for child in $CenterContainer/Users.get_children():
 		$CenterContainer/Users.remove_child(child)
+		
+func _exit_tree():
+	mutex.lock()
+	should_exit_thread = true
+	mutex.unlock()
+	thread.wait_to_finish()
