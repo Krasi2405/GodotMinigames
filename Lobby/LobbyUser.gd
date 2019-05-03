@@ -5,13 +5,15 @@ class_name LobbyUser
 signal leave_button_pressed(index)
 
 var id := 0
-var is_host := false
 
-func initalize(username : String, color : Color, icon : Texture, is_host : bool) -> void:
+func initalize(
+	username : String, 
+	color : Color, 
+	icon : Texture) -> void:
+
 	_set_name(username)
 	_set_color(color)
 	_set_icon(icon)
-	self.is_host = is_host
 
 
 func set_id(id : int) -> void:
@@ -31,11 +33,7 @@ func _on_LeaveButton_button_down() -> void:
 
 func set_disconnect_btn_active(is_active : bool) -> void:
 	$TextureRect/LeaveButton.set_visible(is_active)
-
-
-func check_is_host() -> bool:
-	return is_host
-
+	
 
 func _set_name(username : String):
 	$Name.text = username
