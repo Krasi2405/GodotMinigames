@@ -16,8 +16,6 @@ var thread : Thread
 var mutex : Mutex
 var should_exit_thread = false
 
-var server_ip : String
-
 const DHCP_GET_PORT = 4245
 const DHCP_SEND_PORT = 4244
 
@@ -39,31 +37,33 @@ func _ready():
 
 
 func _player_connected(id):
-	$Debug.send_debug("Connect player with id " + str(id))
+	$Debug.print_d("Connect player with id " + str(id))
 	# id == 1 is server
 	if(id == 1):
 		add_lobby_host()
 	else:
-		add_lobby_client()
+		add_lobby_client(id)
 	remove_join_btns()
 
 
 func _player_disconnected(id):
-	$Debug.send_debug("Connect player with id " + str(id))
+	$Debug.print_d("Disonnect player with id " + str(id))
 
 
 func _connected_client():
-	var client := add_lobby_client()
+	var id := get_network_peer().get_unique_id()
+	var client := add_lobby_client(id)
 	client.set_disconnect_btn_active(true)
-	$Debug.send_debug("connected")
+	$Debug.print_d("connected")
 
 
 func _connection_failed():
-	$Debug.send_debug("connection failed")
+	$Debug.print_d("connection failed")
 
 
 func _server_disconnected():
-	$Debug.send_debug("disconnected")
+	$Debug.print_d("disconnected by server")
+	reset_local_state()
 
 
 func _on_HostBTN_button_down():
@@ -81,16 +81,18 @@ func _on_HostBTN_button_down():
 		add_lobby_host().set_disconnect_btn_active(true)
 		get_tree().set_network_peer(peer)
 		get_tree().set_meta("network_peer", peer)
+		print(peer.get_unique_id())
 	
-	$Debug.send_debug("Create server\n")
+	$Debug.print_d("Create server\n")
 
 
 func handle_dhcp_requests(userdata):
-	print(userdata)
 	print("handle_dhcp_requests")
-	var socket = PacketPeerUDP.new()
+	var socket := PacketPeerUDP.new()
+
 	if socket.listen(DHCP_SEND_PORT) != OK:
 		print("Cannot listen for ip requests")
+		reset_local_state()
 		return
 	else:
 		print("Listening for ip requests")
@@ -104,11 +106,11 @@ func handle_dhcp_requests(userdata):
 			socket.put_packet("123".to_ascii())
 			print("Send data to " + socket.get_packet_ip() + ":" + str(DHCP_GET_PORT))
 			
-			mutex.lock()
-			if(should_exit_thread):
-				mutex.unlock()
-				break
+		mutex.lock()
+		if(should_exit_thread):
 			mutex.unlock()
+			break
+		mutex.unlock()
 
 
 func _on_JoinBTN_button_down():
@@ -119,7 +121,7 @@ func _on_JoinBTN_button_down():
 	thread = Thread.new()
 	thread.start(self, "setup_client")
 
-	$Debug.send_debug("Looking for connections\n")
+	$Debug.print_d("Looking for connections\n")
 
 
 func setup_client(userdata):
@@ -131,17 +133,24 @@ func setup_client(userdata):
 	socket = PacketPeerUDP.new()
 	if(socket.listen(DHCP_GET_PORT) != OK):
 		print("Error listening on port for ip")
+		reset_local_state()
 		return
 	else:
 		print("Listening on port for server's ip")
 
 	var ip : String
+	$SearchTimer.start()
 	while true:
 		if socket.get_available_packet_count() > 0:
 			var data = socket.get_packet()
 			ip = socket.get_packet_ip()
 			print("Got ip data with ip " + ip)
 			break
+
+		if $SearchTimer.get_time_left() == 0:
+			$Debug.print_d("Could not find a server in time!")
+			reset_local_state()
+			return
 
 	var peer = NetworkedMultiplayerENet.new()
 	var result = peer.create_client(ip, 4242)
@@ -152,7 +161,7 @@ func setup_client(userdata):
 		get_tree().set_network_peer(peer)
 		get_tree().set_meta("network_peer", peer)
 		
-	$Debug.send_debug("Join\n")
+	$Debug.print_d("Join\n")
 
 
 func add_lobby_host() -> LobbyUser:
@@ -160,8 +169,8 @@ func add_lobby_host() -> LobbyUser:
 	return lobby_user
 
 
-func add_lobby_client() -> LobbyUser:
-	var client := add_user(1, "Client", client_icon)
+func add_lobby_client(id : int) -> LobbyUser:
+	var client := add_user(id, "Client", client_icon)
 	if(get_tree().is_network_server()):
 		client.set_disconnect_btn_active(true)
 	return client
@@ -174,42 +183,70 @@ func add_user(id : int, username : String, icon : Texture) -> LobbyUser:
 	var user := lobby_user_resource.instance() as LobbyUser
 	user.initalize(username, colors[user_count], icon)
 	user.set_disconnect_btn_active(false)
+	user.set_id(id)
 	user_count += 1
 
-	user.connect("leave_button_pressed", self, "disconnect_user")	
+	user.connect("leave_button_pressed", self, "disconnect_local")
+	print("add user with id ", id)
 	users[id] = user
 	$CenterContainer/Users.add_child(user)
 	return user
 
+func disconnect_local(id : int) -> void:
+	rpc("disconnect_user", id)
 
-func disconnect_user(id : int):
-	var local_user_id = local_user.get_id()
-	if id == local_user_id:
-		reset_local_state()
-	else:
-		$CenterContainer/Users.remove_child(users[id])
-		users.erase(id)
-		user_count -= 1
+
+remotesync func disconnect_user(id : int) -> void:
+	print("disconnected: ", id)
+	if get_tree().is_network_server():
+		if id == get_network_peer().get_unique_id():
+			$Debug.print_d("Stop server")
+			get_network_peer().close_connection()
+			reset_local_state()
+		else:
+			get_network_peer().disconnect_peer(id)
+			$CenterContainer/Users.remove_child(users[id])
+			users.erase(id)
+			user_count -= 1
+	
+	
+
+	
 
 
 func remove_join_btns() -> void:
-	$JoinBTN.visible = false
-	$HostBTN.visible = false
+	$JoinBTN.hide()
+	$HostBTN.hide()
 
 
 func reset_local_state():
-	$JoinBTN.show()
-	$HostBTN.show()
-	
 	user_count = 0
 	users = {}
 	local_user = null
 	
+	get_tree().set_network_peer(null)
+	
 	for child in $CenterContainer/Users.get_children():
 		$CenterContainer/Users.remove_child(child)
-		
+	
+	$JoinBTN.show()
+	$HostBTN.show()
+	
+	exit_thread()
+	
+
+
 func _exit_tree():
+	exit_thread()
+	
+
+
+func exit_thread():
 	mutex.lock()
 	should_exit_thread = true
 	mutex.unlock()
 	thread.wait_to_finish()
+
+
+func get_network_peer() -> NetworkedMultiplayerENet:
+	return get_tree().get_meta("network_peer") as NetworkedMultiplayerENet
