@@ -59,7 +59,7 @@ func forward_canvas_draw_over_viewport(overlay : Control):
 			selected_texture,
 			Rect2(
 				snapped_location * scale + offset,
-				selected_texture.get_size() * scale),
+				(selected_texture.get_size() + Vector2(0, tileset.y_offset)) * scale ),
 			false
 		)
 		#

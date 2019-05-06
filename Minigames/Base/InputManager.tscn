@@ -7,42 +7,38 @@
 [node name="InputManager" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="GameCamera" type="Camera2D" parent="."]
-anchor_mode = 0
-current = true
-
-[node name="GUI" type="Control" parent="GameCamera"]
+[node name="GUI" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 1216.0
 margin_bottom = 656.0
 script = ExtResource( 2 )
 
-[node name="Button1" parent="GameCamera/GUI" instance=ExtResource( 3 )]
+[node name="Button1" parent="GUI" instance=ExtResource( 3 )]
 modulate = Color( 0.96875, 1, 0, 1 )
 scale = Vector2( 6, 6 )
 
-[node name="Button2" parent="GameCamera/GUI" instance=ExtResource( 3 )]
+[node name="Button2" parent="GUI" instance=ExtResource( 3 )]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 1087.8, 528.867 )
 scale = Vector2( 6, 6 )
 
-[node name="Button3" parent="GameCamera/GUI" instance=ExtResource( 3 )]
+[node name="Button3" parent="GUI" instance=ExtResource( 3 )]
 modulate = Color( 0, 0.414063, 1, 1 )
 position = Vector2( 1086.73, 0 )
 scale = Vector2( 6, 6 )
 
-[node name="Button4" parent="GameCamera/GUI" instance=ExtResource( 3 )]
+[node name="Button4" parent="GUI" instance=ExtResource( 3 )]
 modulate = Color( 0.382813, 1, 0, 1 )
 position = Vector2( 6.10352e-005, 529.332 )
 scale = Vector2( 6, 6 )
 
-[connection signal="gui_input" from="GameCamera/GUI" to="GameCamera/GUI" method="_on_GUI_gui_input"]
-[connection signal="pressed" from="GameCamera/GUI/Button1" to="." method="_on_Button1_pressed"]
-[connection signal="released" from="GameCamera/GUI/Button1" to="." method="_on_Button1_released"]
-[connection signal="pressed" from="GameCamera/GUI/Button2" to="." method="_on_Button2_pressed"]
-[connection signal="released" from="GameCamera/GUI/Button2" to="." method="_on_Button2_released"]
-[connection signal="pressed" from="GameCamera/GUI/Button3" to="." method="_on_Button3_pressed"]
-[connection signal="released" from="GameCamera/GUI/Button3" to="." method="_on_Button3_released"]
-[connection signal="pressed" from="GameCamera/GUI/Button4" to="." method="_on_Button4_pressed"]
-[connection signal="released" from="GameCamera/GUI/Button4" to="." method="_on_Button4_released"]
+[connection signal="gui_input" from="GUI" to="GUI" method="_on_GUI_gui_input"]
+[connection signal="pressed" from="GUI/Button1" to="." method="_on_Button1_pressed"]
+[connection signal="released" from="GUI/Button1" to="." method="_on_Button1_released"]
+[connection signal="pressed" from="GUI/Button2" to="." method="_on_Button2_pressed"]
+[connection signal="released" from="GUI/Button2" to="." method="_on_Button2_released"]
+[connection signal="pressed" from="GUI/Button3" to="." method="_on_Button3_pressed"]
+[connection signal="released" from="GUI/Button3" to="." method="_on_Button3_released"]
+[connection signal="pressed" from="GUI/Button4" to="." method="_on_Button4_pressed"]
+[connection signal="released" from="GUI/Button4" to="." method="_on_Button4_released"]

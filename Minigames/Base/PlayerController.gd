@@ -41,7 +41,7 @@ func die() -> void:
 
 
 func win() -> void:
-	print("Player with id ", player_id + " has won!")
+	get_parent().add_winner(player_id)
 
 
 func get_player_child() -> Player:

@@ -28,15 +28,17 @@ animations = [ {
 scale = Vector2( 4, 4 )
 script = ExtResource( 1 )
 movement_speed = 300
-jumping_height = -300
-GRAVITY = 600
-terminal_velocity = 700
+jumping_height = -400
+GRAVITY = 800
+terminal_velocity = 600
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -4.06354, 7.99692, -5.00231, 6.91907, -4.98786, -5.01932, -2.9911, -6.98295, 3.01478, -6.99336, 4.99384, -4.95461, 5.0082, 7.05768, 4.12037, 8.01276 )
+polygon = PoolVector2Array( -1.99128, 7.98674, -5.03719, 4.75119, -4.9821, -4.42154, -3.02635, -6.3222, -0.064949, -6.98802, 2.97862, -6.29465, 4.96192, -4.06344, 5.01701, 4.83383, 2.12111, 7.98674 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="JumpStopTimer" type="Timer" parent="."]
 

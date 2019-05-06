@@ -22,28 +22,38 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	motion.y += GRAVITY * delta;
+	if not player.is_on_floor():
+		motion.y += GRAVITY * delta;
 
 	if motion.y >= terminal_velocity:
 		motion.y = terminal_velocity
 	
+	
+	
 	if(is_jumbing): 
 		motion.y = jumping_height
 		is_jumbing = false
-	
-	if player.is_on_ceiling():
+
+
+	if player.is_on_ceiling() and not player.is_on_floor():
 		motion.y = 0
-	"""
-	var snap := Vector2(0, 1)
-	if motion.y > 0:
-		snap.y = 0
-	"""
-	move_and_slide(motion, UP)
+	
+	
+	move_and_slide(motion, UP, false, 4, deg2rad(80))
 	
 	if !$VisibilityNotifier2D.is_on_screen():
-		get_parent().die() 
+		die()
+
 
 func press_action():
-	
 	if player.is_on_floor():
 		is_jumbing = true
+		
+		
+func die():
+	get_parent().die()
+
+
+func win():
+	$CollisionPolygon2D.disabled = true
+	get_parent().win()

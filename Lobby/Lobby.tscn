@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Lobby/Lobby.gd" type="Script" id=1]
+
+[node name="Lobby" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_bottom = 2.0
+script = ExtResource( 1 )
+colors = [ Color( 0.921569, 0.905882, 0, 1 ), Color( 0.803922, 0, 0, 1 ), Color( 0.0470588, 0, 0.831373, 1 ), Color( 0.00392157, 0.713726, 0, 1 ) ]
+
+[node name="LeaveBTN" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -268.0
+margin_bottom = 118.0
+text = "Leave"
+
+[node name="JoinBTN" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 47.7137
+margin_top = -170.429
+margin_right = 231.714
+margin_bottom = -78.4288
+text = "Join"
+
+[node name="HostBTN" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -239.361
+margin_top = -170.429
+margin_right = -55.3611
+margin_bottom = -78.4288
+text = "Host"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+
+[node name="Users" type="HBoxContainer" parent="CenterContainer"]
+margin_left = 560.0
+margin_right = 720.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 160, 160 )
+
+[node name="InfoText" type="RichTextLabel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -72.649
+margin_right = 124.0
+margin_bottom = -12.649
+
+[connection signal="button_down" from="LeaveBTN" to="." method="_on_LeaveBTN_button_down"]
+[connection signal="button_down" from="JoinBTN" to="." method="_on_JoinBTN_button_down"]
+[connection signal="button_down" from="HostBTN" to="." method="_on_HostBTN_button_down"]

@@ -8,6 +8,8 @@ export(Array, PackedScene) var objects
 
 export var grid_size : int = 32
 
+export var y_offset : int = 0
+
 var objects_dict : Dictionary = {}
 
 func _ready():
@@ -33,7 +35,7 @@ func update_objects_dict() -> void:
 
 func instantiate(object: PackedScene, grid_position : Vector2, offset_position : Vector2) -> void: 
 	var instance := (object.instance() as Node2D)
-	instance.global_position = (grid_position * grid_size) + offset_position
+	instance.global_position = (grid_position * grid_size) + offset_position + Vector2(0, y_offset)
 	
 	if objects_dict.has(grid_position):
 		remove_instance(grid_position)
@@ -42,7 +44,8 @@ func instantiate(object: PackedScene, grid_position : Vector2, offset_position :
 	objects_dict[grid_position] = instance
 	add_child(instance)
 	instance.set_owner(get_tree().get_edited_scene_root())
-	
+
+
 func remove_instance(grid_position : Vector2) -> void:
 	if objects_dict.has(grid_position):
 		var instance : Node2D = objects_dict.get(grid_position)
