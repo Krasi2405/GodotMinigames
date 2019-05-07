@@ -53,9 +53,5 @@ margin_bottom = -532.451
 align = 1
 valign = 1
 script = ExtResource( 2 )
-
-[node name="SearchTimer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
 [connection signal="button_down" from="JoinBTN" to="." method="_on_JoinBTN_button_down"]
 [connection signal="button_down" from="HostBTN" to="." method="_on_HostBTN_button_down"]

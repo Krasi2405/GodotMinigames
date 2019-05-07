@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Client",
+"language": "GDScript",
+"path": "res://Lobby/Client.gd"
+}, {
 "base": "Camera2D",
 "class": "GameCamera",
 "language": "GDScript",
 "path": "res://Minigames/SkyRunner/RunnerCamera.gd"
+}, {
+"base": "Node",
+"class": "Host",
+"language": "GDScript",
+"path": "res://Lobby/Host.gd"
 }, {
 "base": "Node2D",
 "class": "InputManager",
@@ -28,6 +38,11 @@ _global_script_classes=[ {
 "class": "LevelPicker",
 "language": "GDScript",
 "path": "res://LevelPicker/LevelPicker.gd"
+}, {
+"base": "Control",
+"class": "Lobby",
+"language": "GDScript",
+"path": "res://Lobby/Lobby.gd"
 }, {
 "base": "Control",
 "class": "LobbyUser",
@@ -80,10 +95,13 @@ _global_script_classes=[ {
 "path": "res://Minigames/Base/WinText.gd"
 } ]
 _global_script_class_icons={
+"Client": "",
 "GameCamera": "",
+"Host": "",
 "InputManager": "",
 "LevelChoice": "",
 "LevelPicker": "",
+"Lobby": "",
 "LobbyUser": "",
 "LocalUser": "",
 "MinigameManager": "",
