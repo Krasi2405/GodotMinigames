@@ -52,7 +52,6 @@ margin_bottom = 442.0
 rect_pivot_offset = Vector2( 153, 90 )
 texture_normal = ExtResource( 4 )
 expand = true
-
 [connection signal="button_down" from="Btns/2P" to="." method="_on_2P_button_down"]
 [connection signal="button_down" from="Btns/3P" to="." method="_on_3P_button_down"]
 [connection signal="button_down" from="Btns/4P" to="." method="_on_4P_button_down"]

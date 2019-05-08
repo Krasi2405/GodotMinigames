@@ -8,8 +8,9 @@ extends Control
 class_name LevelPicker
 
 
-export(String, DIR) var search_dir : String
+signal choose_level(level)
 
+export(String, DIR) var search_dir : String
 const LEVEL_CHOICE_PREFAB_PATH : String = "res://LevelPicker/LevelChoice.tscn"
 
 var level_choice_prefab : Resource
@@ -24,6 +25,7 @@ func _enter_tree():
 		if extension == "tscn":
 			var level_choice := (level_choice_prefab.instance() as LevelChoice)
 			level_choice.set_level(filepath)
+			level_choice.connect("chosen", self, "choose_level")
 			
 			var icon_path := filepath.get_basename() + ".png"
 			if File.new().file_exists(icon_path):
@@ -31,9 +33,15 @@ func _enter_tree():
 			else:
 				print("Icon not found for %s! Using default icon." % filepath)
 			
-			($HBoxContainer as HBoxContainer).add_child(level_choice)
-	
-	
+			add_child(level_choice)
+
+
+func choose_level(level : String):
+	if get_signal_connection_list("choose_level").size() == 0:
+		get_tree().change_scene(level)
+	else:
+		emit_signal("choose_level", level)
+
 
 func get_dir_filenames(var search_dir : String) -> Array:
 	var files := []

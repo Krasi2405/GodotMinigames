@@ -2,11 +2,13 @@ extends TextureButton
 
 class_name LevelChoice
 
+signal chosen(level)
+
 
 var _levelPath : String
 
 func _on_TextureButton_button_down():
-	get_tree().change_scene(_levelPath)
+	emit_signal("chosen", _levelPath)
 	
 	
 func set_level(level : String):

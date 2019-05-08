@@ -13,6 +13,12 @@ func _ready():
 	lobby = Global.get_lobby()
 	start_server()
 	
+	get_tree().connect("network_peer_connected", self, "_update_level_picker")
+	get_tree().connect("network_peer_disconnected", self, "_update_level_picker")
+	
+func _update_level_picker(id : int):
+	lobby.call_deferred("load_level_picker", lobby.get_user_count())
+
 
 func start_server() -> void:
 	var peer = NetworkedMultiplayerENet.new()

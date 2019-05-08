@@ -11,6 +11,36 @@ margin_bottom = 3.29236
 script = ExtResource( 1 )
 colors = [ Color( 0.921569, 0.905882, 0, 1 ), Color( 0.803922, 0, 0, 1 ), Color( 0.0470588, 0, 0.831373, 1 ), Color( 0.00392157, 0.713726, 0, 1 ) ]
 
+[node name="LevelPickerContainer" type="CenterContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -192.618
+margin_bottom = -72.6176
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 1.29233
+margin_bottom = 161.292
+
+[node name="Users" type="HBoxContainer" parent="CenterContainer"]
+margin_left = 560.0
+margin_right = 720.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 160, 160 )
+
+[node name="Debug" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -669.451
+margin_bottom = -532.451
+align = 1
+valign = 1
+script = ExtResource( 2 )
+
 [node name="JoinBTN" type="Button" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -32,26 +62,5 @@ margin_top = -170.429
 margin_right = -55.3611
 margin_bottom = -78.4288
 text = "Host"
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-
-[node name="Users" type="HBoxContainer" parent="CenterContainer"]
-margin_left = 560.0
-margin_right = 720.0
-margin_bottom = 160.0
-rect_min_size = Vector2( 160, 160 )
-
-[node name="Debug" type="Label" parent="."]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -669.451
-margin_bottom = -532.451
-align = 1
-valign = 1
-script = ExtResource( 2 )
 [connection signal="button_down" from="JoinBTN" to="." method="_on_JoinBTN_button_down"]
 [connection signal="button_down" from="HostBTN" to="." method="_on_HostBTN_button_down"]

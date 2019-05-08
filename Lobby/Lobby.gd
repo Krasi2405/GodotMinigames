@@ -161,3 +161,30 @@ func get_network_peer() -> NetworkedMultiplayerENet:
 func set_network_peer(peer : NetworkedMultiplayerENet) -> void:
 	get_tree().set_network_peer(peer)
 	get_tree().call_deferred("set_meta", "network_peer", peer)
+
+
+func get_user_count() -> int:
+	return user_count;
+
+
+func load_level_picker(player_count : int) -> void:
+	print("Load level picker with " + str(player_count))
+	if player_count >= 2 and player_count <= 4:
+		var level_picker = load(
+			"res://LevelPicker/" + str(player_count) + "PLevelPicker.tscn"
+		).instance()
+		level_picker.connect("choose_level", self, "load_level_signal")
+		
+		for child in $LevelPickerContainer.get_children():
+			$LevelPickerContainer.remove_child(child)
+
+		$LevelPickerContainer.add_child(level_picker)
+
+
+func load_level_signal(level : String):
+	rpc("load_level", level)
+	
+
+remotesync func load_level(level : String):
+	var level_instance = load(level).instance()
+	add_child(level_instance)
