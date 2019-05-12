@@ -56,7 +56,7 @@ func _player_connected(id):
 
 func _player_disconnected(id):
 	$Debug.print_d("Disconnect player with id " + str(id))
-	var user = find_user_by_id(id)
+	var user := get_user_by_id(id)
 	$CenterContainer/Users.remove_child(user)
 	users.erase(user)
 	user_count -= 1
@@ -195,11 +195,21 @@ func load_level_signal(level : String):
 
 remotesync func load_level(level : String):
 	var level_instance = load(level).instance()
+	level_instance.activate_multiplayer()
 	add_child(level_instance)
 
 
-func find_user_by_id(id : int) -> LobbyUser:
+func get_user_by_id(id : int) -> LobbyUser:
 	for user in users:
 		if user.get_network_id() == id:
 			return user
 	return null
+
+
+func get_user_order_by_id(id : int) -> int:
+	var order := 0
+	for user in users:
+		if user.get_network_id() == id:
+			return order
+		order += 1
+	return -1

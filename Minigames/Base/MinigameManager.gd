@@ -14,12 +14,12 @@ export var player_count := 4
 var player_map : Dictionary = {}
 
 var player_id_lose_order : Array = []
-
 var player_id_win_order : Array = []
 
 var active_player_count : int
 
-
+var is_multiplayer_active := false
+var lobby : Lobby
 
 export var use_press_signal := true
 export var use_hold_signal := true
@@ -33,16 +33,19 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	
-	
 	_remove_unused_players()
 	
 	var players = get_player_nodes();
 	_create_player_map(players);
 	
 	_bind_signals()
-
-
-
+	
+	lobby = Global.lobby
+	if is_multiplayer_active:
+		var order = lobby.get_user_order_by_id(lobby.get_network_peer().get_unique_id())
+		for x in range(player_count):
+			if x != order:
+				Global.input_manager.remove_button(x)
 
 
 func win(player_id_win_order) -> void:
@@ -163,3 +166,7 @@ func _on_InputManager_on_button_release(button_id : int) -> void:
 	if player_map.has(button_id):
 		var player : PlayerController = player_map[button_id]
 		player.release_action()
+
+
+func activate_multiplayer() -> void:
+	is_multiplayer_active = true

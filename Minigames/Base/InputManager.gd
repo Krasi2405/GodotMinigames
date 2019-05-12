@@ -6,7 +6,7 @@ extends Node2D
 
 class_name InputManager
 
-var button_count := 4
+var player_count := 4
 
 var button_states_is_held : Array = []
 
@@ -22,30 +22,34 @@ func _ready():
 	var minigame_manager : MinigameManager = Global.get_minigame_manager()
 	
 	if minigame_manager:
-		button_count = minigame_manager.get_player_count()
+		player_count = minigame_manager.get_player_count()
 	else:
 		print("No minigame manager!")
 	
 	_remove_unused_buttons();
 	
-	if button_count <= 1:
+	if player_count <= 1:
 		print("Minigame developer is debil!!!")
 		queue_free()
 	
-	for i in range (0, button_count):
+	for i in range (0, player_count):
 		button_states_is_held.append(false)
 
 
 func _remove_unused_buttons():
-	if button_count <= 3:
-		$GUI/Button4.queue_free()
+	if player_count <= 3:
+		remove_button(3)
 	
-	if button_count <= 2:
-		$GUI/Button3.queue_free()
+	if player_count <= 2:
+		remove_button(2)
+
+
+func remove_button(button_id : int) -> void:
+	get_node("GUI/Button" + str(button_id)).queue_free()
 
 
 func _physics_process(delta):
-	for i in range(0, button_count):
+	for i in range(0, player_count):
 		var button_is_held = button_states_is_held[i]
 		if button_is_held:
 			emit_signal("on_button_hold", i, delta)
