@@ -12,7 +12,7 @@ var host_prefab = preload("res://Lobby/Host.tscn")
 var client_prefab = preload("res://Lobby/Client.tscn")
 
 
-var users : Dictionary
+var users : Array
 
 var thread : Thread
 var mutex : Mutex
@@ -56,8 +56,9 @@ func _player_connected(id):
 
 func _player_disconnected(id):
 	$Debug.print_d("Disconnect player with id " + str(id))
-	$CenterContainer/Users.remove_child(users[id])
-	users.erase(id)
+	var user = find_user_by_id(id)
+	$CenterContainer/Users.remove_child(user)
+	users.erase(user)
 	user_count -= 1
 
 
@@ -86,18 +87,18 @@ func add_lobby_client(id : int) -> LobbyUser:
 
 
 func add_lobby_user(id : int, username : String, icon : Texture) -> LobbyUser:
-	if(user_count >= 4):
+	if user_count >= 4:
 		return null
 	
 	var user := lobby_user_resource.instance() as LobbyUser
 	user.initalize(username, colors[user_count], icon)
 	user.set_disconnect_btn_active(false)
-	user.set_id(id)
+	user.set_network_id(id)
 	user_count += 1
 
 	user.connect("leave_button_pressed", self, "give_disconnect_signal")
 	print("add user with id ", id)
-	users[id] = user
+	users.append(user)
 	$CenterContainer/Users.add_child(user)
 	return user
 
@@ -131,20 +132,24 @@ func reset_local_state():
 	_reset_GUI()
 	
 	user_count = 0
-	users = {}
+	users = []
 
 
 func _close_network():
-	if get_tree().is_network_server():
+	if host:
 		host.queue_free()
-	else:
-		client.queue_free()
-
-	if get_network_peer().get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTED:
-		print("close connection")
-		get_network_peer().call_deferred("close_connection")
 	
-	set_network_peer(null)
+	if client:
+		client.queue_free()
+	
+	var peer := get_network_peer()
+	if peer == null:
+		return
+
+	if peer.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTED:
+		peer.call_deferred("close_connection")
+	
+	call_deferred("set_network_peer", null)
 
 
 func _reset_GUI():
@@ -155,7 +160,10 @@ func _reset_GUI():
 
 
 func get_network_peer() -> NetworkedMultiplayerENet:
-	return get_tree().get_meta("network_peer") as NetworkedMultiplayerENet
+	if get_tree().has_meta("network_peer"):
+		return get_tree().get_meta("network_peer") as NetworkedMultiplayerENet
+	else:
+		return null
 
 
 func set_network_peer(peer : NetworkedMultiplayerENet) -> void:
@@ -188,3 +196,10 @@ func load_level_signal(level : String):
 remotesync func load_level(level : String):
 	var level_instance = load(level).instance()
 	add_child(level_instance)
+
+
+func find_user_by_id(id : int) -> LobbyUser:
+	for user in users:
+		if user.get_network_id() == id:
+			return user
+	return null

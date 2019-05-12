@@ -41,11 +41,6 @@ func _server_disconnected():
 
 func setup_client(userdata):
 	var socket = PacketPeerUDP.new()
-	socket.set_dest_address("255.255.255.255", lobby.get_dhcp_send_port())
-	socket.put_packet("ip".to_ascii())
-	socket.close()
-	
-	socket = PacketPeerUDP.new()
 	if(socket.listen(lobby.get_dchp_get_port()) != OK):
 		print("Error listening on port for ip")
 		lobby.reset_local_state()
@@ -55,6 +50,7 @@ func setup_client(userdata):
 
 	var ip : String
 	$SearchTimer.start()
+	$RebroadcastIpRequestTimer.start()
 	while true:
 		if socket.get_available_packet_count() > 0:
 			var data = socket.get_packet()
@@ -64,20 +60,33 @@ func setup_client(userdata):
 
 		if $SearchTimer.get_time_left() == 0:
 			$"../Debug".print_d("Could not find a server in time!")
+			socket.close()
 			lobby.reset_local_state()
 			return
+		
+		
+		if $RebroadcastIpRequestTimer.get_time_left() == 0:
+			print("broadcast ip request")
+			socket.set_dest_address("255.255.255.255", lobby.get_dhcp_send_port())
+			socket.put_packet("ip".to_ascii())
+			$RebroadcastIpRequestTimer.start()
 
+	socket.close()
+	
+	create_client(ip)
+	
 
+func create_client(ip : String) -> void:
 	var peer = NetworkedMultiplayerENet.new()
 	var result = peer.create_client(ip, 4242)
 	if result != OK:
-		print("Cannot create client")
 		lobby.reset_local_state()
 		return
 	else:
 		lobby.set_network_peer(peer)
 		
 	$"../Debug".print_d("Join\n")
+
 
 
 func _exit_tree():

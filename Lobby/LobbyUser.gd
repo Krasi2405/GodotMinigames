@@ -4,11 +4,11 @@ class_name LobbyUser
 
 signal leave_button_pressed(index)
 
-var id := 0
+var network_id := -1
 
 func initalize(
 	username : String, 
-	color : Color, 
+	color : Color,
 	icon : Texture) -> void:
 
 	_set_name(username)
@@ -16,19 +16,20 @@ func initalize(
 	_set_icon(icon)
 
 
-func set_id(id : int) -> void:
-	self.id = id
+func set_network_id(network_id : int) -> void:
+	self.network_id = network_id
 
 
-func get_id() -> int:
-	return id
+func get_network_id() -> int:
+	return network_id
 
 
 func is_initialized() -> bool:
-	return id != -1
+	return network_id != -1
+
 
 func _on_LeaveButton_button_down() -> void:
-	emit_signal("leave_button_pressed", id)
+	emit_signal("leave_button_pressed", network_id)
 
 
 func set_disconnect_btn_active(is_active : bool) -> void:
