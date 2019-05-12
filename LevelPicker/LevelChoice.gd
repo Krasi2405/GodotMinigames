@@ -1,11 +1,12 @@
 extends TextureButton
 
+tool
 class_name LevelChoice
 
 signal chosen(level)
 
 
-var _levelPath : String
+export var _levelPath : String setget set_level
 
 func _on_TextureButton_button_down():
 	emit_signal("chosen", _levelPath)

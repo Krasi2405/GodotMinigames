@@ -1,7 +1,20 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://LevelPicker/LevelPicker.tscn" type="PackedScene" id=1]
+[ext_resource path="res://LevelPicker/LevelChoice.tscn" type="PackedScene" id=2]
+[ext_resource path="res://LevelPicker/icon.png" type="Texture" id=3]
+[ext_resource path="res://LevelPicker/LevelChoice.gd" type="Script" id=4]
 
 [node name="LevelPicker" instance=ExtResource( 1 )]
 search_dir = "res://Minigames/4P"
 
+[node name="LevelChoice" type="TextureButton" parent="." index="0" instance=ExtResource( 2 )]
+margin_left = 540.0
+margin_right = 740.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+texture_normal = ExtResource( 3 )
+expand = true
+script = ExtResource( 4 )
+_levelPath = "res://Minigames/4P/4PTestMinigame.tscn"
+[connection signal="button_down" from="LevelChoice" to="LevelChoice" method="_on_TextureButton_button_down"]

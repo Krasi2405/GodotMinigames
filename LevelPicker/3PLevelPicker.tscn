@@ -4,4 +4,3 @@
 
 [node name="LevelPicker" instance=ExtResource( 1 )]
 search_dir = "res://Minigames/3P"
-
