@@ -27,6 +27,7 @@ const DHCP_GET_PORT = 4244
 
 func _ready():
 	assert(colors.size() >= 4)
+	
 	Global.set_lobby(self)
 
 	mutex = Mutex.new()
@@ -34,6 +35,10 @@ func _ready():
 	# Everybody gets it including server
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
+
+
+
+		
 
 
 func get_dhcp_send_port() -> int:

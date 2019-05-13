@@ -66,15 +66,42 @@ func setup_client(userdata):
 		
 		
 		if $RebroadcastIpRequestTimer.get_time_left() == 0:
-			print("broadcast ip request")
-			socket.set_dest_address("255.255.255.255", lobby.get_dhcp_send_port())
-			socket.put_packet("ip".to_ascii())
+			for broadcast in get_local_ip_broadcast_addresses():
+				print("broadcast ip request " + broadcast)
+				socket.set_dest_address(broadcast, lobby.get_dhcp_send_port())
+				socket.put_packet("ip".to_ascii())
 			$RebroadcastIpRequestTimer.start()
 
 	socket.close()
 	
 	create_client(ip)
+
+
+func get_local_ip_addresses() -> Array:
+	var local_ips : Array = []
+	var local_ip_regex = RegEx.new()
+	local_ip_regex.compile(
+	"^192\\.168\\.(([0-1]?[0-9]?[0-9])|([2][0-5][0-5]))\\.(([0-1]?[0-9]?[0-9])|([2][0-5][0-5]))$"
+	)
 	
+	var ips = IP.get_local_addresses()
+	for ip in ips:
+		if local_ip_regex.search(ip):
+			local_ips.append(ip)
+	
+	return local_ips
+
+
+func get_local_ip_broadcast_addresses() -> Array:
+	var broadcast_addresses : Array = []
+	var broadcast_regex = RegEx.new()
+	broadcast_regex.compile("\\d+$")
+	
+	for network_address in get_local_ip_addresses():
+		var broadcast = broadcast_regex.sub(network_address, "255")
+		broadcast_addresses.append(broadcast)
+		
+	return broadcast_addresses
 
 func create_client(ip : String) -> void:
 	var peer = NetworkedMultiplayerENet.new()
@@ -86,6 +113,8 @@ func create_client(ip : String) -> void:
 		lobby.set_network_peer(peer)
 		
 	$"../Debug".print_d("Join\n")
+
+
 
 
 
