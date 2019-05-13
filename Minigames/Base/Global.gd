@@ -8,7 +8,7 @@ extends Node2D
 
 var minigame_manager : MinigameManager
 var input_manager : InputManager
-var lobby : Lobby
+var lobby
 var camera : Camera
 
 
@@ -30,10 +30,10 @@ func set_input_manager(input_manager : InputManager) -> void:
 	self.input_manager = input_manager
 
 
-func set_lobby(lobby : Lobby) -> void:
+func set_lobby(lobby) -> void:
 	self.lobby = lobby
 
 
-func get_lobby() -> Lobby:
+func get_lobby():
 	return lobby;
 

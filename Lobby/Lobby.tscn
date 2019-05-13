@@ -62,5 +62,6 @@ margin_top = -170.429
 margin_right = -55.3611
 margin_bottom = -78.4288
 text = "Host"
+
 [connection signal="button_down" from="JoinBTN" to="." method="_on_JoinBTN_button_down"]
 [connection signal="button_down" from="HostBTN" to="." method="_on_HostBTN_button_down"]
