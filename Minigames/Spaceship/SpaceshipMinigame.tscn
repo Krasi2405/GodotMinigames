@@ -68,4 +68,3 @@ texture = ExtResource( 8 )
 
 [node name="OnVictoryRestartTimer" parent="." index="10"]
 wait_time = 2.0
-

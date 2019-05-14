@@ -4,8 +4,9 @@
 [ext_resource path="res://Minigames/Pong/Ball.png" type="Texture" id=2]
 
 [sub_resource type="PhysicsMaterial" id=1]
-friction = 0.0
-bounce = 1e+007
+friction = -1.0
+bounce = 1.0
+absorbent = true
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 16.4633
@@ -20,4 +21,3 @@ shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-
