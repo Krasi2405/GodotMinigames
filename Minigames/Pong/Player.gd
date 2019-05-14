@@ -7,10 +7,10 @@ func press_action():
 		direction *= -1
 		
 func hold_action(delta):
-        print("Hold with delta %s!" % delta)
+    pass
 		
 func release_action():
-        print("Release!")
+    pass
 		
 func _process(delta):
 	var collision : KinematicCollision2D = move_and_collide(direction * speed * delta)

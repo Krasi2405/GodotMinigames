@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://MainMenu/2p.png" type="Texture" id=2]
 [ext_resource path="res://MainMenu/3p.png" type="Texture" id=3]
 [ext_resource path="res://MainMenu/4p.png" type="Texture" id=4]
+[ext_resource path="res://MainMenu/MultiplayerButton.png" type="Texture" id=5]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -52,6 +53,21 @@ margin_bottom = 442.0
 rect_pivot_offset = Vector2( 153, 90 )
 texture_normal = ExtResource( 4 )
 expand = true
+
+[node name="MP Button" type="TextureButton" parent="Btns"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 920.228
+margin_top = 250.0
+margin_right = 1112.23
+margin_bottom = 442.0
+rect_pivot_offset = Vector2( 153, 90 )
+texture_normal = ExtResource( 5 )
+expand = true
+
 [connection signal="button_down" from="Btns/2P" to="." method="_on_2P_button_down"]
 [connection signal="button_down" from="Btns/3P" to="." method="_on_3P_button_down"]
 [connection signal="button_down" from="Btns/4P" to="." method="_on_4P_button_down"]
+[connection signal="button_down" from="Btns/MP Button" to="." method="_on_MP_Button_button_down"]
