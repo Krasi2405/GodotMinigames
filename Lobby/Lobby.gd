@@ -37,10 +37,6 @@ func _ready():
 	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
 
 
-
-		
-
-
 func get_dhcp_send_port() -> int:
 	return DHCP_SEND_PORT
 
@@ -161,6 +157,7 @@ func _reset_GUI():
 	for child in $CenterContainer/Users.get_children():
 		$CenterContainer/Users.remove_child(child)
 	
+	_remove_level_picker()
 	_show_join_btns()
 
 
@@ -188,10 +185,14 @@ func load_level_picker(player_count : int) -> void:
 		).instance()
 		level_picker.connect("choose_level", self, "load_level_signal")
 		
-		for child in $LevelPickerContainer.get_children():
-			$LevelPickerContainer.remove_child(child)
+		_remove_level_picker()
 
 		$LevelPickerContainer.add_child(level_picker)
+
+
+func _remove_level_picker():
+	for child in $LevelPickerContainer.get_children():
+		child.queue_free()
 
 
 func load_level_signal(level : String):
