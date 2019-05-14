@@ -108,33 +108,43 @@ grid_size = 64
 
 [node name="SpeedBoost" parent="SpeedBoostTileset" index="0" instance=ExtResource( 6 )]
 position = Vector2( 544, 160 )
+boost_graphic = ""
 
 [node name="SpeedBoost3" parent="SpeedBoostTileset" index="1" instance=ExtResource( 6 )]
 position = Vector2( 2912, 416 )
+boost_graphic = ""
 
 [node name="SpeedBoost4" parent="SpeedBoostTileset" index="2" instance=ExtResource( 6 )]
 position = Vector2( 2912, 544 )
+boost_graphic = ""
 
 [node name="SpeedBoost5" parent="SpeedBoostTileset" index="3" instance=ExtResource( 6 )]
 position = Vector2( 3424, 416 )
+boost_graphic = ""
 
 [node name="SpeedBoost6" parent="SpeedBoostTileset" index="4" instance=ExtResource( 6 )]
 position = Vector2( 3872, 416 )
+boost_graphic = ""
 
 [node name="SpeedBoost7" parent="SpeedBoostTileset" index="5" instance=ExtResource( 6 )]
 position = Vector2( 4128, 160 )
+boost_graphic = ""
 
 [node name="SpeedBoost8" parent="SpeedBoostTileset" index="6" instance=ExtResource( 6 )]
 position = Vector2( 544, 288 )
+boost_graphic = ""
 
 [node name="SpeedBoost9" parent="SpeedBoostTileset" index="7" instance=ExtResource( 6 )]
 position = Vector2( 544, 416 )
+boost_graphic = ""
 
 [node name="SpeedBoost10" parent="SpeedBoostTileset" index="8" instance=ExtResource( 6 )]
 position = Vector2( 544, 544 )
+boost_graphic = ""
 
 [node name="SpeedBoost2" parent="SpeedBoostTileset" index="9" instance=ExtResource( 6 )]
 position = Vector2( 1632, 608 )
+boost_graphic = ""
 
 [node name="Camera" parent="." index="3"]
 position = Vector2( 786.931, 431.767 )

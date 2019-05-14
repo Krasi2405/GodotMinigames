@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "Ball",
+"language": "GDScript",
+"path": "res://Minigames/Pong/Ball.gd"
+}, {
 "base": "Node",
 "class": "Client",
 "language": "GDScript",
@@ -95,6 +100,7 @@ _global_script_classes=[ {
 "path": "res://Minigames/Base/WinText.gd"
 } ]
 _global_script_class_icons={
+"Ball": "",
 "Client": "",
 "GameCamera": "",
 "Host": "",
@@ -117,7 +123,7 @@ _global_script_class_icons={
 [application]
 
 config/name="GodotMinigames"
-run/main_scene="res://Lobby/Lobby.tscn"
+run/main_scene="res://Minigames/SkyRunner/RunnerGame.tscn"
 config/icon="res://icon.png"
 
 [autoload]
