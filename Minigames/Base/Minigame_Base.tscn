@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Minigames/Base/MinigameManager.gd" type="Script" id=1]
 [ext_resource path="res://Minigames/Base/InputManager.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Minigames/Base/WinText.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Minigames/Base/PlayerController.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Minigames/Base/PlayerController.gd" type="Script" id=5]
+[ext_resource path="res://Minigames/Base/ShowButtonMenu.gd" type="Script" id=4]
+[ext_resource path="res://exit_btn.png" type="Texture" id=5]
+[ext_resource path="res://GoToSceneBtn.gd" type="Script" id=6]
+[ext_resource path="res://Minigames/Base/PlayerController.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Minigames/Base/PlayerController.gd" type="Script" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 206.399, 79.5535 )
 
 [node name="MinigameManager" type="Node2D"]
 script = ExtResource( 1 )
@@ -22,18 +28,40 @@ current = true
 margin_top = -120.0
 margin_bottom = 120.0
 
-[node name="PlayerController0" parent="." instance=ExtResource( 4 )]
-script = ExtResource( 5 )
+[node name="ShowButtonMenu" type="Area2D" parent="CanvasLayer"]
+editor/display_folded = true
+position = Vector2( 625.314, 85.4852 )
+script = ExtResource( 4 )
 
-[node name="PlayerController1" parent="." instance=ExtResource( 4 )]
-script = ExtResource( 5 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/ShowButtonMenu"]
+position = Vector2( 0, -6.46178 )
+shape = SubResource( 1 )
 
-[node name="PlayerController2" parent="." instance=ExtResource( 4 )]
-script = ExtResource( 5 )
+[node name="ExitButton" type="TextureButton" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -51.2545
+margin_top = 2.5847
+margin_right = -11.2545
+margin_bottom = 42.5847
+rect_scale = Vector2( 2.08508, 2.08508 )
+texture_normal = ExtResource( 5 )
+expand = true
+script = ExtResource( 6 )
+scene = "res://MainMenu.tscn"
 
-[node name="PlayerController3" parent="." instance=ExtResource( 4 )]
+[node name="PlayerController0" parent="." instance=ExtResource( 7 )]
+script = ExtResource( 8 )
+
+[node name="PlayerController1" parent="." instance=ExtResource( 7 )]
+script = ExtResource( 8 )
+
+[node name="PlayerController2" parent="." instance=ExtResource( 7 )]
+script = ExtResource( 8 )
+
+[node name="PlayerController3" parent="." instance=ExtResource( 7 )]
 position = Vector2( 1.85071, -5.55185 )
-script = ExtResource( 5 )
+script = ExtResource( 8 )
 
 [node name="OnVictoryRestartTimer" type="Timer" parent="."]
 wait_time = 3.0
