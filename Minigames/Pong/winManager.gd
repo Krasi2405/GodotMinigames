@@ -16,8 +16,8 @@ func _on_LeftSideCollision_body_entered(body : Ball):
 		print("Left collider")
 		leftTeamLives-=1
 		if(leftTeamLives < 1):
-			var timer : SceneTreeTimer = get_tree().create_timer(3)
-			timer.connect("timeout", self, "reset")
+			Global.minigame_manager.win([1, 0])
+			queue_free()
 			print("Right team wins!")
 	
 			
@@ -27,6 +27,6 @@ func _on_RightSideCollision_body_entered(body : Ball):
 		print("right collider")
 		rightTeamLives-=1
 		if(rightTeamLives < 1):
-			var timer : SceneTreeTimer = get_tree().create_timer(3)
-			timer.connect("timeout", self, "reset")
+			Global.minigame_manager.win([0, 1])
 			print("Left team wins!")
+			queue_free()
