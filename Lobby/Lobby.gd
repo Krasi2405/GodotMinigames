@@ -14,10 +14,6 @@ var client_prefab = preload("res://Lobby/Client.tscn")
 
 var users : Array
 
-var thread : Thread
-var mutex : Mutex
-var should_exit_thread = false
-
 var host
 var client
 
@@ -29,8 +25,6 @@ func _ready():
 	assert(colors.size() >= 4)
 	
 	Global.set_lobby(self)
-
-	mutex = Mutex.new()
 	
 	# Everybody gets it including server
 	get_tree().connect("network_peer_connected", self, "_player_connected")
@@ -219,3 +213,6 @@ func get_user_order_by_id(id : int) -> int:
 			return order
 		order += 1
 	return -1
+
+func _exit_tree():
+	Global.lobby = null;
