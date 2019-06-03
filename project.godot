@@ -94,7 +94,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/CustomTileset/TilesetPlugin.gd"
 }, {
-"base": "HBoxContainer",
+"base": "Control",
 "class": "WinText",
 "language": "GDScript",
 "path": "res://Minigames/Base/WinText.gd"
@@ -123,7 +123,7 @@ _global_script_class_icons={
 [application]
 
 config/name="GodotMinigames"
-run/main_scene="res://Lobby/Lobby.tscn"
+run/main_scene="res://Minigames/SkyRunner/RunnerGame.tscn"
 config/icon="res://icon.png"
 
 [autoload]

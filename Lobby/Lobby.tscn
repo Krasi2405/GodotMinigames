@@ -74,5 +74,6 @@ texture_normal = ExtResource( 3 )
 expand = true
 script = ExtResource( 4 )
 scene = "res://MainMenu.tscn"
+
 [connection signal="button_down" from="JoinBTN" to="." method="_on_JoinBTN_button_down"]
 [connection signal="button_down" from="HostBTN" to="." method="_on_HostBTN_button_down"]
