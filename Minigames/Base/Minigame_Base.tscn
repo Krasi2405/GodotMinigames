@@ -68,5 +68,6 @@ wait_time = 3.0
 
 [node name="OnWinDelayTimer" type="Timer" parent="."]
 wait_time = 0.1
+
 [connection signal="timeout" from="OnVictoryRestartTimer" to="." method="_on_OnVictoryRestartTimer_timeout"]
 [connection signal="timeout" from="OnWinDelayTimer" to="." method="_on_WinTimer_timeout"]
