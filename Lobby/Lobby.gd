@@ -58,6 +58,7 @@ func _player_disconnected(id):
 
 
 func _on_HostBTN_button_down():
+	print("host button down")
 	_hide_join_btns()
 	host = host_prefab.instance()
 	add_child(host)
@@ -86,7 +87,7 @@ func add_lobby_user(id : int, username : String, icon : Texture) -> LobbyUser:
 		return null
 	
 	var user := lobby_user_resource.instance() as LobbyUser
-	user.initalize(username, colors[user_count], icon)
+	user.initalize(str(id), colors[user_count], icon)
 	user.set_disconnect_btn_active(false)
 	user.set_network_id(id)
 	user_count += 1

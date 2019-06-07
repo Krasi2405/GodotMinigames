@@ -19,7 +19,7 @@ var player_id_win_order : Array = []
 var active_player_count : int
 
 var is_multiplayer_active := false
-var lobby : Lobby
+var lobby
 
 export var use_press_signal := true
 export var use_hold_signal := true
