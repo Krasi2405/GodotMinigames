@@ -19,11 +19,16 @@ var player_id_win_order : Array = []
 var active_player_count : int
 
 var is_multiplayer_active := false
-var lobby
+var lobby : Lobby
 
 export var use_press_signal := true
 export var use_hold_signal := true
 export var use_release_signal := true
+
+
+var synchronized_player_count = 0
+var start_game_time : float
+var peer : NetworkedMultiplayerENet
 
 
 func _enter_tree() -> void:
@@ -32,7 +37,6 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	
 	_remove_unused_players()
 	
 	var players = get_player_nodes();
@@ -42,10 +46,31 @@ func _ready() -> void:
 	
 	lobby = Global.lobby
 	if is_multiplayer_active:
-		var order = lobby.get_user_order_by_id(lobby.get_network_peer().get_unique_id())
+		peer = lobby.get_network_peer()
+		
+		var order = lobby.get_user_order_by_id(peer.get_unique_id())
 		for x in range(player_count):
 			if x != order:
 				Global.input_manager.remove_button(x)
+
+		get_tree().set_pause(true)
+		print("rpc synchronize!")
+		rpc_id(1, "_synchronize")
+
+
+remotesync func _synchronize():
+	if is_network_master():
+		synchronized_player_count += 1
+		if synchronized_player_count == player_count:
+			var game_time = OS.get_ticks_msec()
+			rpc("_start_game", game_time)
+
+
+remotesync func _start_game(start_time):
+	start_game_time = start_time
+	get_tree().set_pause(false)
+
+	print("Start game at " + str(start_game_time))
 
 
 func win(player_id_win_order) -> void:
