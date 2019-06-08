@@ -196,7 +196,6 @@ func load_level_signal(level : String):
 
 remotesync func load_level(level : String):
 	var level_instance = load(level).instance()
-	level_instance.activate_multiplayer()
 	add_child(level_instance)
 
 
@@ -214,6 +213,7 @@ func get_user_order_by_id(id : int) -> int:
 			return order
 		order += 1
 	return -1
+
 
 func _exit_tree():
 	Global.lobby = null;

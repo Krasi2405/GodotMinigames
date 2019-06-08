@@ -15,6 +15,7 @@ var thropies = [FIRST_PLACE_PNG,SECOND_PLACE_PNG,THIRD_PLACE_PNG,FORTH_PLACE_PNG
 
 
 func parse_winners(player_id_win_order : Array):
+	show()
 	for index in player_id_win_order.size():
 		var thropy = thropies[index]
 		var player_id = player_id_win_order[index]

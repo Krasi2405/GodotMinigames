@@ -29,6 +29,7 @@ export var use_release_signal := true
 var synchronized_player_count = 0
 var start_game_time : float
 var peer : NetworkedMultiplayerENet
+var current_player : Player
 
 
 func _enter_tree() -> void:
@@ -50,9 +51,13 @@ func _ready() -> void:
 		peer = lobby.get_network_peer()
 		
 		var order = lobby.get_user_order_by_id(peer.get_unique_id())
+		print("Got order: " + str(order))
 		for x in range(player_count):
 			if x != order:
 				Global.input_manager.remove_button(x)
+		
+		current_player = get_node("PlayerController" + str(order) + "/Player")
+		current_player.set_network_master(peer.get_unique_id())
 
 		get_tree().set_pause(true)
 		print("rpc synchronize!")
@@ -178,29 +183,46 @@ func _remove_unused_players() -> void:
 func _on_InputManager_on_button_press(button_id : int) -> void:
 	if not use_press_signal:
 		return
+	
+	if is_multiplayer_active:
+		rpc("press_button", button_id)
+	else:
+		press_button(button_id)
 
+
+func _on_InputManager_on_button_hold(button_id : int, delta : float) -> void:
+	if not use_hold_signal:
+		return
+	
+	if is_multiplayer_active:
+		rpc("hold_button", button_id, delta)
+	else:
+		hold_button(button_id, delta)
+
+
+func _on_InputManager_on_button_release(button_id : int) -> void:
+	if not use_release_signal:
+		return
+
+	if is_multiplayer_active:
+		rpc("release_button", button_id)
+	else:
+		release_button(button_id)
+
+
+remotesync func press_button(button_id : int) -> void:
 	if player_map.has(button_id):
 		var player : PlayerController = player_map[button_id]
 		player.press_action()
 
 
-func _on_InputManager_on_button_hold(button_id : int, delta : float) -> void:
-	if not use_press_signal:
-		return
-	
+remotesync func hold_button(button_id : int, delta : float) -> void:
 	if player_map.has(button_id):
 		var player : PlayerController = player_map[button_id]
 		player.hold_action(delta)
 
 
-func _on_InputManager_on_button_release(button_id : int) -> void:
-	if not use_press_signal:
-		return
-
+remotesync func release_button(button_id : int) -> void:
 	if player_map.has(button_id):
 		var player : PlayerController = player_map[button_id]
 		player.release_action()
-
-
-func activate_multiplayer() -> void:
-	is_multiplayer_active = true
