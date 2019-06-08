@@ -25,7 +25,7 @@ export var use_press_signal := true
 export var use_hold_signal := true
 export var use_release_signal := true
 
-
+# Multiplayer variables
 var synchronized_player_count = 0
 var start_game_time : float
 var peer : NetworkedMultiplayerENet
@@ -45,7 +45,8 @@ func _ready() -> void:
 	_bind_signals()
 	
 	lobby = Global.lobby
-	if is_multiplayer_active:
+	if lobby:
+		is_multiplayer_active = true
 		peer = lobby.get_network_peer()
 		
 		var order = lobby.get_user_order_by_id(peer.get_unique_id())
@@ -71,36 +72,7 @@ remotesync func _start_game(start_time):
 	get_tree().set_pause(false)
 
 	print("Start game at " + str(start_game_time))
-
-
-func win(player_id_win_order) -> void:
-	print("Game over!", player_id_win_order)
-	($CanvasLayer/WinText as WinText).parse_winners(player_id_win_order)
-	($OnVictoryRestartTimer as Timer).start()
-
-
-func remove_player(player_id : int) -> void:
-	_add_player_to_list(player_id, player_id_lose_order, true)
-
-
-func add_winner(player_id : int) -> void:
-	_add_player_to_list(player_id,  player_id_win_order, false)
 	
-
-func _add_player_to_list(player_id : int, list : Array, should_push_front : bool) -> void:
-	if active_player_count <= 0 or not player_map.has(player_id):
-		return
-
-	player_map.erase(player_id)
-	active_player_count -= 1
-	if should_push_front:
-		list.push_front(player_id)
-	else:
-		list.push_back(player_id)
-
-	if $OnWinDelayTimer && active_player_count <= 1:
-		($OnWinDelayTimer as Timer).start()
-
 
 func get_player_nodes() -> Array:
 	var players : = []
@@ -128,6 +100,30 @@ func _bind_signals() -> void:
 		Global.get_input_manager().connect("on_button_release", self, "_on_InputManager_on_button_release")
 
 
+master func remove_player(player_id : int) -> void:
+	_add_player_to_list(player_id, player_id_lose_order, true)
+
+
+master func add_winner(player_id : int) -> void:
+	print("Add winner called!")
+	_add_player_to_list(player_id,  player_id_win_order, false)
+
+
+func _add_player_to_list(player_id : int, list : Array, should_push_front : bool) -> void:
+	if active_player_count <= 0 or not player_map.has(player_id):
+		return
+
+	player_map.erase(player_id)
+	active_player_count -= 1
+	if should_push_front:
+		list.push_front(player_id)
+	else:
+		list.push_back(player_id)
+
+	if $OnWinDelayTimer && active_player_count <= 0:
+		($OnWinDelayTimer as Timer).start()
+
+
 func _on_WinTimer_timeout() -> void:
 	var ranking_list := []
 	for player_id in player_id_win_order:
@@ -141,15 +137,28 @@ func _on_WinTimer_timeout() -> void:
 	# Cleanup player_map. Scraps everything together but really ugly
 	for player_id in player_map.keys():
 		ranking_list.push_front(player_id)
-
-	win(ranking_list)
+	
+	if is_multiplayer_active:
+		rpc("win", ranking_list)
+	else:
+		win(ranking_list)
+	
 	$OnWinDelayTimer.queue_free()
 
 
-func _on_OnVictoryRestartTimer_timeout() -> void:
-	get_tree().reload_current_scene()
+remotesync func win(player_id_win_order) -> void:
+	print("Game over!", player_id_win_order)
+	($CanvasLayer/WinText as WinText).parse_winners(player_id_win_order)
+	($CanvasLayer/InputManager).queue_free()
+	($OnVictoryRestartTimer as Timer).start()
 
-	
+
+func _on_OnVictoryRestartTimer_timeout() -> void:
+	if is_multiplayer_active:
+		queue_free()
+	else:
+		get_tree().reload_current_scene()
+
 
 func _create_player_map(var players : Array) -> void:
 	var id = 0

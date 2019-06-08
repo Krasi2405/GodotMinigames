@@ -27,6 +27,10 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 color = Color( 0, 0, 0, 1 )
 
+[node name="WinText" parent="CanvasLayer" index="1"]
+margin_top = 0.0
+margin_bottom = 0.0
+
 [node name="ShowButtonMenu" parent="CanvasLayer" index="2"]
 position = Vector2( 623.367, 38.9604 )
 
@@ -100,6 +104,5 @@ scale = Vector2( 97.3083, 4.35798 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightSideCollision" index="0"]
 shape = SubResource( 3 )
-
 [connection signal="body_entered" from="LeftSideCollision" to="winManager" method="_on_LeftSideCollision_body_entered"]
 [connection signal="body_entered" from="RightSideCollision" to="winManager" method="_on_RightSideCollision_body_entered"]

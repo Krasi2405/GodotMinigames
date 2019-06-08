@@ -15,18 +15,18 @@ expand = true
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -128.0
-margin_bottom = 128.0
-expand = true
-
-[node name="TextureRect3" type="TextureRect" parent="."]
-anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -128.0
 margin_top = -128.0
+expand = true
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -128.0
+margin_bottom = 128.0
 expand = true
 
 [node name="TextureRect4" type="TextureRect" parent="."]
@@ -35,4 +35,3 @@ anchor_bottom = 1.0
 margin_top = -128.0
 margin_right = 128.0
 expand = true
-
