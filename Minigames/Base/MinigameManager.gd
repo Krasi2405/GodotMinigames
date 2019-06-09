@@ -203,7 +203,7 @@ func _on_InputManager_on_button_hold(button_id : int, delta : float) -> void:
 func _on_InputManager_on_button_release(button_id : int) -> void:
 	if not use_release_signal:
 		return
-
+	
 	if is_multiplayer_active:
 		rpc("release_button", button_id)
 	else:
@@ -226,3 +226,7 @@ remotesync func release_button(button_id : int) -> void:
 	if player_map.has(button_id):
 		var player : PlayerController = player_map[button_id]
 		player.release_action()
+
+
+func _get_button_player(button_id : int) -> PlayerController:
+	return player_map[button_id]

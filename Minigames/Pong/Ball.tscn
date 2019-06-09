@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Minigames/Pong/Ball.gd" type="Script" id=1]
 [ext_resource path="res://Minigames/Pong/Ball.png" type="Texture" id=2]
+[ext_resource path="res://Minigames/Base/Networking/Node2DSynchronizationComponent.tscn" type="PackedScene" id=3]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = -1.0
@@ -21,3 +22,5 @@ shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+
+[node name="Node2DSynchronizationComponent" parent="." instance=ExtResource( 3 )]

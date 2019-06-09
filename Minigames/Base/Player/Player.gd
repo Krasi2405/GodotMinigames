@@ -14,9 +14,21 @@ func press_action():
 	assert(false)
 
 
+func press_action_synchronize():
+	assert(false)
+
+
 func hold_action(delta : float):
 	assert(false)
 
 
+func hold_action_synchronize():
+	assert(false)
+
+
 func release_action():
+	assert(false)
+
+
+func release_action_synchronize():
 	assert(false)

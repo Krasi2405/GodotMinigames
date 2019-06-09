@@ -192,7 +192,7 @@ func _remove_level_picker():
 
 func load_level_signal(level : String):
 	rpc("load_level", level)
-	
+
 
 remotesync func load_level(level : String):
 	var level_instance = load(level).instance()
