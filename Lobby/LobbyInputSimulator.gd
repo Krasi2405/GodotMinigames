@@ -2,6 +2,7 @@ extends Control
 
 export var desired_player_count := 2
 export var level_to_load = "res://Minigames/Pong/Pong.tscn"
+export var is_active = true
 
 var is_loading := false
 var is_host := false
@@ -9,6 +10,9 @@ var lock_file : File
 const file_name := "user://lobby_lock"
 
 func _ready():
+	if not is_active:
+		queue_free()
+	
 	# Add delay to action
 	var timer := get_tree().create_timer(0.033)
 	timer.connect("timeout", self, "simulate")

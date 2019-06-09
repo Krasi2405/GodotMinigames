@@ -1,23 +1,49 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://LevelPicker/LevelPicker.tscn" type="PackedScene" id=1]
 [ext_resource path="res://LevelPicker/LevelChoice.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Minigames/2P/MinigameTest2P.png" type="Texture" id=3]
+[ext_resource path="res://Minigames/2P/1RunnerGame2P.png" type="Texture" id=3]
+[ext_resource path="res://LevelPicker/LevelChoice.gd" type="Script" id=4]
+[ext_resource path="res://Minigames/2P/Pong2P.png" type="Texture" id=5]
+[ext_resource path="res://Minigames/2P/SpaceshipMinigame2P.png" type="Texture" id=6]
 
 [node name="LevelPicker" index="0" instance=ExtResource( 1 )]
 margin_top = 284.0
 margin_bottom = -237.0
 search_dir = "res://Minigames/2P"
 
-[node name="LevelChoice" parent="." index="0" instance=ExtResource( 2 )]
-margin_left = 438.0
-margin_right = 638.0
+[node name="LevelChoice" type="TextureButton" parent="." index="0" instance=ExtResource( 2 )]
+margin_left = 336.0
+margin_right = 536.0
 margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
 texture_normal = ExtResource( 3 )
-_levelPath = "res://Minigames/2P/MinigameTest2P.tscn"
+expand = true
+stretch_mode = 5
+script = ExtResource( 4 )
+_levelPath = "res://Minigames/2P/1RunnerGame2P.tscn"
 
-[node name="LevelChoice2" parent="." index="1" instance=ExtResource( 2 )]
-margin_left = 642.0
-margin_right = 842.0
+[node name="LevelChoice2" type="TextureButton" parent="." index="1" instance=ExtResource( 2 )]
+margin_left = 540.0
+margin_right = 740.0
 margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+texture_normal = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+script = ExtResource( 4 )
+_levelPath = "res://Minigames/2P/Pong2P.tscn"
+
+[node name="LevelChoice5" type="TextureButton" parent="." index="2" instance=ExtResource( 2 )]
+margin_left = 744.0
+margin_right = 944.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+script = ExtResource( 4 )
 _levelPath = "res://Minigames/2P/SpaceshipMinigame2P.tscn"
+[connection signal="button_down" from="LevelChoice" to="LevelChoice" method="_on_TextureButton_button_down"]
+[connection signal="button_down" from="LevelChoice2" to="LevelChoice2" method="_on_TextureButton_button_down"]
+[connection signal="button_down" from="LevelChoice5" to="LevelChoice5" method="_on_TextureButton_button_down"]

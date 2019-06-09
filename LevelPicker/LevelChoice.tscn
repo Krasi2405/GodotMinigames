@@ -9,6 +9,7 @@ margin_bottom = 128.0
 rect_min_size = Vector2( 200, 200 )
 texture_normal = ExtResource( 1 )
 expand = true
+stretch_mode = 5
 script = ExtResource( 2 )
-
+_levelPath = ""
 [connection signal="button_down" from="." to="." method="_on_TextureButton_button_down"]
