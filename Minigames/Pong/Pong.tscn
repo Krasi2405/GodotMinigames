@@ -19,6 +19,8 @@ friction = 0.0
 bounce = 1.41007e+009
 
 [node name="MinigameManager" index="0" instance=ExtResource( 1 )]
+use_hold_signal = false
+use_release_signal = false
 
 [node name="ColorRect" type="ColorRect" parent="." index="0"]
 anchor_right = 1.0
@@ -61,6 +63,7 @@ rotation = 1.5708
 
 [node name="Ball" parent="." index="9" instance=ExtResource( 3 )]
 position = Vector2( 605.811, 358.541 )
+speed_increase_per_second = 600
 
 [node name="winManager" type="Node2D" parent="." index="10"]
 script = ExtResource( 4 )

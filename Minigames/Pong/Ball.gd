@@ -9,13 +9,17 @@ onready var synchronization_component := (
 	$Node2DSynchronizationComponent as Node2DSynchronizationComponent
 )
 
-export var speed = 300
+export var start_speed = 300
+export var speed_increase_per_second = 300
 export var direction := Vector2(1, -1)
+
+var speed
 
 const normal_hit_register_threshold = 0.5
 var start_position : Vector2
 
 func _ready():
+	speed = start_speed
 	start_position = position
 
 
@@ -33,6 +37,9 @@ func _process(delta):
 		
 		if is_network_master():
 			rpc("synchronize_direction", position, direction)
+	
+	speed += speed_increase_per_second * delta / 60
+	print(speed)
 
 
 remotesync func synchronize_direction(position : Vector2, direction : Vector2):
@@ -41,6 +48,8 @@ remotesync func synchronize_direction(position : Vector2, direction : Vector2):
 
 
 func reset():
+	speed = start_speed
 	position = start_position
+	direction *= -1
 	if is_network_master():
 		rpc("synchronize_direction", position, direction)
