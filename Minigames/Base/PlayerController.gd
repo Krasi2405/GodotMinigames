@@ -23,25 +23,26 @@ func _ready() -> void:
 func press_action() -> void:
 	player.press_action()
 	emit_signal("press_action")
-	if Global.lobby:
+	if Global.lobby and is_network_master():
 		player.press_action_synchronize()
 
 
 func hold_action(delta : float) -> void:
 	player.hold_action(delta)
 	emit_signal("hold_action", delta)
-	if Global.lobby:
+	if Global.lobby and is_network_master():
 		player.hold_action_synchronize()
+
 
 func release_action() -> void:
 	player.release_action()
 	emit_signal("release_action")
-	if Global.lobby:
+	if Global.lobby and is_network_master():
 		player.release_action_synchronize()
 
 
 func die() -> void:
-	get_parent().remove_player(player_id)
+	get_parent().add_loser(player_id)
 	queue_free()
 
 

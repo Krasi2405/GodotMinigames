@@ -105,7 +105,7 @@ func _bind_signals() -> void:
 		Global.get_input_manager().connect("on_button_release", self, "_on_InputManager_on_button_release")
 
 
-master func remove_player(player_id : int) -> void:
+master func add_loser(player_id : int) -> void:
 	_add_player_to_list(player_id, player_id_lose_order, true)
 
 
@@ -125,7 +125,7 @@ func _add_player_to_list(player_id : int, list : Array, should_push_front : bool
 	else:
 		list.push_back(player_id)
 
-	if $OnWinDelayTimer && active_player_count <= 0:
+	if $OnWinDelayTimer && active_player_count <= 1:
 		($OnWinDelayTimer as Timer).start()
 
 
@@ -154,7 +154,9 @@ func _on_WinTimer_timeout() -> void:
 remotesync func win(player_id_win_order) -> void:
 	print("Game over!", player_id_win_order)
 	($CanvasLayer/WinText as WinText).parse_winners(player_id_win_order)
-	($CanvasLayer/InputManager).queue_free()
+	# Nz zashto obache inache ne raboti.
+	if $CanvasLayer/InputManager:
+		($CanvasLayer/InputManager).queue_free()
 	($OnVictoryRestartTimer as Timer).start()
 
 

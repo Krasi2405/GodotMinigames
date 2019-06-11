@@ -25,7 +25,8 @@ func press_action():
 
 
 func press_action_synchronize():
-	pass
+	print("press action synchronize")
+	synchronize_movement()
 
 
 func hold_action(delta):
@@ -125,9 +126,17 @@ func _on_BlingTimer_timeout():
 	if is_blinging:
 		_bling()
 		$BlingTimer.start()
-		
+
+
 func _destroy():
 	print("Destroy")
 	get_parent().die()
 
 
+func synchronize_movement():
+	rpc("synchronize_movement_rpc", position, rotation)
+
+
+remote func synchronize_movement_rpc(position : Vector2, rotation : float):
+	self.position = position
+	self.rotation = rotation
