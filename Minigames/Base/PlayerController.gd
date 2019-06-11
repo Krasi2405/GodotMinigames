@@ -42,12 +42,30 @@ func release_action() -> void:
 
 
 func die() -> void:
-	get_parent().add_loser(player_id)
+	print("Die")
+	if Global.lobby:
+		if is_network_master():
+			rpc("_die")
+	else:
+		_die()
+
+remotesync func _die():
+	if is_network_master():
+		get_parent().add_loser(player_id)
 	queue_free()
 
 
 func win() -> void:
-	get_parent().add_winner(player_id)
+	if Global.lobby:
+		if is_network_master():
+			rpc("_win")
+	else:
+		_win()
+
+
+remotesync func _win() -> void:
+	if is_network_master():
+		get_parent().add_winner(player_id)
 
 
 func get_player_child() -> Player:

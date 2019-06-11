@@ -107,6 +107,9 @@ func _respown():
 	is_blinging = true
 	_bling()
 	$BlingTimer.start()
+	
+	if Global.lobby:
+		rpc("synchronize_movement")
 
 
 func _on_InvulnerebleTime_timeout():
@@ -129,7 +132,7 @@ func _on_BlingTimer_timeout():
 
 
 func _destroy():
-	print("Destroy")
+	print("Spaceship " + str(get_parent().player_id) + " is dead!")
 	get_parent().die()
 
 
@@ -137,6 +140,6 @@ func synchronize_movement():
 	rpc("synchronize_movement_rpc", position, rotation)
 
 
-remote func synchronize_movement_rpc(position : Vector2, rotation : float):
+puppet func synchronize_movement_rpc(position : Vector2, rotation : float):
 	self.position = position
 	self.rotation = rotation
