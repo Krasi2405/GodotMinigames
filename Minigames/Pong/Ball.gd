@@ -31,9 +31,16 @@ func _process(delta):
 		if abs(normal.x) > normal_hit_register_threshold:
 			direction.x *= -1
 		
-	
-	synchronization_component.synchronize_position_unreliable(position)
+		if is_network_master():
+			rpc("synchronize_direction", position, direction)
+
+
+remotesync func synchronize_direction(position : Vector2, direction : Vector2):
+	self.direction = direction
+	self.position = position
 
 
 func reset():
 	position = start_position
+	if is_network_master():
+		rpc("synchronize_direction", position, direction)

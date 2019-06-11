@@ -81,6 +81,5 @@ margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 5 )
 level_to_load = "res://Minigames/2P/Pong2P.tscn"
-is_active = false
 [connection signal="button_down" from="JoinBTN" to="." method="_on_JoinBTN_button_down"]
 [connection signal="button_down" from="HostBTN" to="." method="_on_HostBTN_button_down"]

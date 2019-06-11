@@ -8,7 +8,8 @@ onready var synchronization_component := (
 export var speed = 500
 
 master func press_action():
-	direction *= -1
+	change_direction()
+
 
 func hold_action(delta):
     pass
@@ -20,6 +21,15 @@ func release_action():
 master func _process(delta):
 	var collision : KinematicCollision2D = move_and_collide(direction * speed * delta)
 	if(collision != null and not collision.collider is Ball):
-		direction *= -1
+		change_direction()
 
-	synchronization_component.synchronize_position_unreliable(position)
+
+func change_direction():
+	direction *= -1
+	if Global.lobby:
+		rpc("synchronize_direction", direction, position)
+
+
+puppet func synchronize_direction(direction : Vector2, position : Vector2):
+	self.direction = direction
+	self.position = position
