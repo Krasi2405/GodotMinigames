@@ -23,16 +23,21 @@ func _ready() -> void:
 func press_action() -> void:
 	player.press_action()
 	emit_signal("press_action")
+	if Global.lobby:
+		player.press_action_synchronize()
 
 
 func hold_action(delta : float) -> void:
 	player.hold_action(delta)
 	emit_signal("hold_action", delta)
-
+	if Global.lobby:
+		player.hold_action_synchronize()
 
 func release_action() -> void:
 	player.release_action()
 	emit_signal("release_action")
+	if Global.lobby:
+		player.release_action_synchronize()
 
 
 func die() -> void:

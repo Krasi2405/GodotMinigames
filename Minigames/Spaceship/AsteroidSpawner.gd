@@ -17,28 +17,34 @@ func _enter_tree():
 	asteroid_instance = load(ASTEROID_PREFAB_PATH)
 
 
-func _ready():
+master func _ready():
+	print("Is network master!")
 	var size_x = get_viewport().size.x
 	var size_y = get_viewport().size.y
 	center = Vector2(size_x / 2, size_y / 2)
 	
 	$SpawnTimer.wait_time = spawn_timer
 	$SpawnTimer.start()
-	spawn()
 
-func _on_SpawnTimer_timeout():
+
+master func _on_SpawnTimer_timeout():
 	if spawn_timer > min_timer:
 		spawn_timer -= lower_time_per_spawn
 		$SpawnTimer.wait_time = spawn_timer
 	
-	spawn()
+	
+	var spawn_position = get_random_spawn_position()
+	var rand_direction = get_random_direction_position()
+	
+	if Global.lobby:
+		rpc("spawn", spawn_position, rand_direction)
+	else:
+		spawn(spawn_position, rand_direction)
 	$SpawnTimer.start()
 
 
-
-# WTF SE SLUCHVA TUKA!?!?!?!?!?!?
-# TUI STANA PULNO LAINO.
-func spawn():
+# Rotate around center of screen and spawn asteroid around the edges
+func get_random_spawn_position() -> Vector2:
 	randomize()
 	var rand_angle = rand_range(0, 360) * PI / 180
 	rotation = rand_angle
@@ -47,9 +53,10 @@ func spawn():
 	var forward = -get_transform().y.normalized()
 	
 	var spawn_position = center + forward * hypotenuse
-	
-	var rand_direction = get_random_direction_position()
-	
+	return spawn_position
+
+
+remotesync func spawn(spawn_position : Vector2, rand_direction : Vector2):
 	var direction_vector = Vector2(spawn_position.x - rand_direction.x,
 									spawn_position.y - rand_direction.y)
 	rotation = -atan2(direction_vector.x, 
@@ -62,33 +69,14 @@ func spawn():
 	asteroid.position = spawn_position
 	Global.get_minigame_manager().call_deferred("add_child", asteroid)
 
-# Offset is Vector2
-func get_hypotenuse_length_by_offset(offset):
+
+func get_hypotenuse_length_by_offset(offset : Vector2):
 	return sqrt(offset.x * offset.x + offset.y * offset.y)
 	
-func get_random_direction_position():
+
+func get_random_direction_position() -> Vector2:
 	randomize()
 	var random_x = center.x + rand_range(-x_direction_offset, x_direction_offset)
 	var random_y = center.y + rand_range(-y_direction_offset, y_direction_offset)
 	
 	return Vector2(random_x, random_y)
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	

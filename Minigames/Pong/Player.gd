@@ -11,6 +11,10 @@ master func press_action():
 	change_direction()
 
 
+func press_action_synchronize():
+	pass
+
+
 master func _process(delta):
 	var collision : KinematicCollision2D = move_and_collide(direction * speed * delta)
 	if(collision != null and not collision.collider is Ball):

@@ -24,6 +24,10 @@ func press_action():
 	log_rotate = false
 
 
+func press_action_synchronize():
+	pass
+
+
 func hold_action(delta):
 	log_rotate = false;
 	var collision = move_and_collide(
@@ -49,12 +53,19 @@ func hold_action(delta):
 				hit()
 			if body.has_method("hit"):
 				body.hit()
-			
+
+
+func hold_action_synchronize():
+	pass
 
 
 func release_action():
 	log_rotate = true
 	is_rotate_direction_positive = not is_rotate_direction_positive
+
+
+func release_action_synchronize():
+	pass
 
 
 func _process(delta):
