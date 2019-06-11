@@ -50,7 +50,7 @@ func die() -> void:
 		_die()
 
 remotesync func _die():
-	if is_network_master():
+	if not Global.lobby or is_network_master():
 		get_parent().add_loser(player_id)
 	queue_free()
 
@@ -64,7 +64,7 @@ func win() -> void:
 
 
 remotesync func _win() -> void:
-	if is_network_master():
+	if not Global.lobby or is_network_master():
 		get_parent().add_winner(player_id)
 
 

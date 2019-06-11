@@ -216,19 +216,22 @@ func _on_InputManager_on_button_release(button_id : int) -> void:
 remotesync func press_button(button_id : int) -> void:
 	if player_map.has(button_id):
 		var player : PlayerController = player_map[button_id]
-		player.press_action()
+		if player:
+			player.press_action()
 
 
 remotesync func hold_button(button_id : int, delta : float) -> void:
 	if player_map.has(button_id):
 		var player : PlayerController = player_map[button_id]
-		player.hold_action(delta)
+		if player:
+			player.hold_action(delta)
 
 
 remotesync func release_button(button_id : int) -> void:
 	if player_map.has(button_id):
 		var player : PlayerController = player_map[button_id]
-		player.release_action()
+		if player:
+			player.release_action()
 
 
 func _get_button_player(button_id : int) -> PlayerController:

@@ -13,8 +13,8 @@ var boost_instances = []
 func _ready():
 	for boost in boost_list:
 		boost_instances.push_back(load(boost))
-
-	if is_network_master():
+	
+	if not Global.lobby or is_network_master():
 		$SpawnDelayTimer.wait_time = spawn_delay;
 		$SpawnDelayTimer.start()
 
