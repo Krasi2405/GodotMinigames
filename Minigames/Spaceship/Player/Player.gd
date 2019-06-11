@@ -66,7 +66,7 @@ func release_action():
 
 
 func release_action_synchronize():
-	pass
+	synchronize_movement()
 
 
 func _process(delta):
@@ -109,7 +109,7 @@ func _respown():
 	$BlingTimer.start()
 	
 	if Global.lobby:
-		rpc("synchronize_movement")
+		synchronize_movement()
 
 
 func _on_InvulnerebleTime_timeout():

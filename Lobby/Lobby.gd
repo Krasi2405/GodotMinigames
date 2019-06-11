@@ -19,15 +19,6 @@ var client
 const DHCP_SEND_PORT = 4243
 const DHCP_GET_PORT = 4244
 
-var lobby_ui_elements : Array = [
-	$LevelPickerContainer,
-	$CenterContainer,
-	$Debug,
-	$JoinBTN,
-	$HostBTN,
-	$Back
-]
-
 
 func _ready():
 	assert(colors.size() >= 4)
