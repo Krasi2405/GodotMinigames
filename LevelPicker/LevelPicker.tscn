@@ -3,8 +3,9 @@
 [ext_resource path="res://LevelPicker/LevelPicker.gd" type="Script" id=1]
 
 [node name="LevelPicker" type="HBoxContainer"]
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = -558.0
+anchor_bottom = 0.5
+grow_vertical = 2
 alignment = 1
 script = ExtResource( 1 )

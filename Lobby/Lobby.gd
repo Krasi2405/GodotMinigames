@@ -11,12 +11,7 @@ var client_icon = preload("res://Lobby/ClientIcon.png")
 var host_prefab = preload("res://Lobby/Host.tscn")
 var client_prefab = preload("res://Lobby/Client.tscn")
 
-
 var users : Array
-
-var thread : Thread
-var mutex : Mutex
-var should_exit_thread = false
 
 var host
 var client
@@ -24,13 +19,20 @@ var client
 const DHCP_SEND_PORT = 4243
 const DHCP_GET_PORT = 4244
 
+var lobby_ui_elements : Array = [
+	$LevelPickerContainer,
+	$CenterContainer,
+	$Debug,
+	$JoinBTN,
+	$HostBTN,
+	$Back
+]
+
 
 func _ready():
 	assert(colors.size() >= 4)
 	
 	Global.set_lobby(self)
-
-	mutex = Mutex.new()
 	
 	# Everybody gets it including server
 	get_tree().connect("network_peer_connected", self, "_player_connected")
@@ -64,6 +66,7 @@ func _player_disconnected(id):
 
 
 func _on_HostBTN_button_down():
+	print("host button down")
 	_hide_join_btns()
 	host = host_prefab.instance()
 	add_child(host)
@@ -92,7 +95,7 @@ func add_lobby_user(id : int, username : String, icon : Texture) -> LobbyUser:
 		return null
 	
 	var user := lobby_user_resource.instance() as LobbyUser
-	user.initalize(username, colors[user_count], icon)
+	user.initalize(str(id), colors[user_count], icon)
 	user.set_disconnect_btn_active(false)
 	user.set_network_id(id)
 	user_count += 1
@@ -197,12 +200,13 @@ func _remove_level_picker():
 
 func load_level_signal(level : String):
 	rpc("load_level", level)
-	
+
 
 remotesync func load_level(level : String):
 	var level_instance = load(level).instance()
-	level_instance.activate_multiplayer()
 	add_child(level_instance)
+	hide()
+	
 
 
 func get_user_by_id(id : int) -> LobbyUser:
@@ -219,3 +223,21 @@ func get_user_order_by_id(id : int) -> int:
 			return order
 		order += 1
 	return -1
+
+
+func hide():
+	$LevelPickerContainer.hide()
+	$CenterContainer.hide()
+	$Debug.hide()
+	$JoinBTN.hide()
+	$HostBTN.hide()
+	$Back.hide()
+
+
+func show():
+	$LevelPickerContainer.show()
+	$CenterContainer.show()
+	$Debug.show()
+
+func _exit_tree():
+	Global.lobby = null;

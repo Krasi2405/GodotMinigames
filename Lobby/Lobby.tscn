@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Lobby/Lobby.gd" type="Script" id=1]
 [ext_resource path="res://Lobby/Debug.gd" type="Script" id=2]
 [ext_resource path="res://back_btn.png" type="Texture" id=3]
 [ext_resource path="res://GoToSceneBtn.gd" type="Script" id=4]
+[ext_resource path="res://Lobby/LobbyInputSimulator.gd" type="Script" id=5]
 
 [node name="Lobby" type="Control"]
 anchor_right = 1.0
@@ -75,5 +76,10 @@ expand = true
 script = ExtResource( 4 )
 scene = "res://MainMenu.tscn"
 
+[node name="InputSimulator" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 5 )
+level_to_load = "res://Minigames/2P/Pong2P.tscn"
 [connection signal="button_down" from="JoinBTN" to="." method="_on_JoinBTN_button_down"]
 [connection signal="button_down" from="HostBTN" to="." method="_on_HostBTN_button_down"]
