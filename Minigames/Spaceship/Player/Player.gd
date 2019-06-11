@@ -25,7 +25,7 @@ func press_action():
 
 
 func press_action_synchronize():
-	print("press action synchronize")
+	print("press action synchronize " + str(get_parent().player_id))
 	synchronize_movement()
 
 

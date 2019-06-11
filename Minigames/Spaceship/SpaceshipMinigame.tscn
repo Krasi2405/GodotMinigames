@@ -68,3 +68,6 @@ texture = ExtResource( 8 )
 
 [node name="OnVictoryRestartTimer" parent="." index="10"]
 wait_time = 2.0
+
+[node name="OnWinDelayTimer" parent="." index="11"]
+wait_time = 0.25

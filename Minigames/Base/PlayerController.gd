@@ -19,11 +19,12 @@ func _ready() -> void:
 	player = ($Player as Player)
 
 
-
 func press_action() -> void:
 	player.press_action()
 	emit_signal("press_action")
+	print("press action " + str(player_id))
 	if Global.lobby and is_network_master():
+		print("in press action synchronize " + str(player_id))
 		player.press_action_synchronize()
 
 
@@ -48,6 +49,7 @@ func die() -> void:
 			rpc("_die")
 	else:
 		_die()
+
 
 remotesync func _die():
 	if not Global.lobby or is_network_master():

@@ -56,8 +56,14 @@ func _ready() -> void:
 			if x != order:
 				Global.input_manager.remove_button(x)
 		
-		current_player = get_node("PlayerController" + str(order) + "/Player")
-		current_player.set_network_master(peer.get_unique_id())
+		for player in lobby.users:
+			var player_net_id = player.get_network_id()
+			var player_game_id = lobby.get_user_order_by_id(player_net_id)
+			
+			current_player = get_node("PlayerController" + str(player_game_id))
+			current_player.set_network_master(player_net_id)
+			
+			print("net master for player " + str(player_game_id) + ":" + str(player_net_id))
 
 		get_tree().set_pause(true)
 		print("rpc synchronize!")
