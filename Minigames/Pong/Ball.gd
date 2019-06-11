@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends KinematicBody2D
 
 
 
@@ -9,26 +9,31 @@ onready var synchronization_component := (
 	$Node2DSynchronizationComponent as Node2DSynchronizationComponent
 )
 
-export var velocity := Vector2(300, 0)
+export var speed = 300
+export var direction := Vector2(1, -1)
+
+const normal_hit_register_threshold = 0.5
+var start_position : Vector2
 
 func _ready():
-	apply_impulse(Vector2.ZERO, velocity)
+	start_position = position
 
 
 func _process(delta):
+	var collision := move_and_collide(direction * speed * delta)
+	if collision:
+		var body := collision.collider
+		var normal = collision.normal
+		
+		if abs(normal.y) > normal_hit_register_threshold:
+			direction.y *= -1
+		
+		if abs(normal.x) > normal_hit_register_threshold:
+			direction.x *= -1
+		
+	
 	synchronization_component.synchronize_position_unreliable(position)
 
 
 func reset():
-	reset_ball = true
-
-
-func _integrate_forces(state : Physics2DDirectBodyState):
-	if reset_ball:
-		var xform = state.get_transform()
-		xform.origin = (get_viewport().size / 2)
-		state.set_linear_velocity(Vector2(0, 0))
-		state.set_transform(xform)
-		velocity *= -1
-		apply_impulse(Vector2.ZERO, velocity)
-		reset_ball = false
+	position = start_position

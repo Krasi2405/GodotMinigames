@@ -11,7 +11,6 @@ var client_icon = preload("res://Lobby/ClientIcon.png")
 var host_prefab = preload("res://Lobby/Host.tscn")
 var client_prefab = preload("res://Lobby/Client.tscn")
 
-
 var users : Array
 
 var host
@@ -19,6 +18,15 @@ var client
 
 const DHCP_SEND_PORT = 4243
 const DHCP_GET_PORT = 4244
+
+var lobby_ui_elements : Array = [
+	$LevelPickerContainer,
+	$CenterContainer,
+	$Debug,
+	$JoinBTN,
+	$HostBTN,
+	$Back
+]
 
 
 func _ready():
@@ -197,6 +205,8 @@ func load_level_signal(level : String):
 remotesync func load_level(level : String):
 	var level_instance = load(level).instance()
 	add_child(level_instance)
+	hide()
+	
 
 
 func get_user_by_id(id : int) -> LobbyUser:
@@ -214,6 +224,20 @@ func get_user_order_by_id(id : int) -> int:
 		order += 1
 	return -1
 
+
+func hide():
+	$LevelPickerContainer.hide()
+	$CenterContainer.hide()
+	$Debug.hide()
+	$JoinBTN.hide()
+	$HostBTN.hide()
+	$Back.hide()
+
+
+func show():
+	$LevelPickerContainer.show()
+	$CenterContainer.show()
+	$Debug.show()
 
 func _exit_tree():
 	Global.lobby = null;

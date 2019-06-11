@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Minigames/Base/Minigame_Base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Minigames/Pong/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Minigames/Pong/Ball.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Minigames/Pong/winManager.gd" type="Script" id=4]
+[ext_resource path="res://Minigames/Pong/Ball.gd" type="Script" id=4]
+[ext_resource path="res://Minigames/Pong/winManager.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 206.399, 79.5535 )
@@ -26,6 +27,9 @@ anchor_bottom = 1.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 color = Color( 0, 0, 0, 1 )
+
+[node name="CanvasLayer" parent="." index="2"]
+editor/display_folded = true
 
 [node name="ShowButtonMenu" parent="CanvasLayer" index="2"]
 position = Vector2( 623.367, 38.9604 )
@@ -56,17 +60,15 @@ rotation = 1.57381
 position = Vector2( 56.876, 354.821 )
 rotation = 1.5708
 
-[node name="Ball" parent="." index="9" instance=ExtResource( 3 )]
+[node name="Ball" type="KinematicBody2D" parent="." index="9" instance=ExtResource( 3 )]
 position = Vector2( 605.811, 358.541 )
-gravity_scale = 1.0
-custom_integrator = true
-can_sleep = false
-velocity = Vector2( 400, 0 )
-
-[node name="winManager" type="Node2D" parent="." index="10"]
 script = ExtResource( 4 )
 
+[node name="winManager" type="Node2D" parent="." index="10"]
+script = ExtResource( 5 )
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="11"]
+editor/display_folded = true
 position = Vector2( 710.901, -37.0905 )
 scale = Vector2( 97.3083, 4.35798 )
 physics_material_override = SubResource( 2 )

@@ -160,6 +160,7 @@ remotesync func win(player_id_win_order) -> void:
 
 func _on_OnVictoryRestartTimer_timeout() -> void:
 	if is_multiplayer_active:
+		Global.lobby.show()
 		queue_free()
 	else:
 		get_tree().reload_current_scene()
