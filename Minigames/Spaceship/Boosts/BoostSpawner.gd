@@ -14,19 +14,28 @@ func _ready():
 	for boost in boost_list:
 		boost_instances.push_back(load(boost))
 
-	$SpawnDelayTimer.wait_time = spawn_delay;
-	$SpawnDelayTimer.start()
+	if is_network_master():
+		$SpawnDelayTimer.wait_time = spawn_delay;
+		$SpawnDelayTimer.start()
 
 
-func _on_SpawnDelayTimer_timeout():
-	_spawn_boost();
+master func _on_SpawnDelayTimer_timeout():
+	print("SpawnDelayTimer timeout")
+	
+	var boost_index = randi() % boost_list.size();
+	var boost_position = _get_random_position()
+	if Global.lobby:
+		rpc("_spawn_boost", boost_position, boost_index)
+	else:
+		_spawn_boost(boost_position, boost_index);
 	$SpawnDelayTimer.start();
 
 
-func _spawn_boost():
-	var boost_index = randi() % boost_list.size();
+puppetsync func _spawn_boost(boost_position : Vector2, boost_index : int):
+	print("_spawn_boost")
+	
 	var boost = boost_instances[boost_index].instance()
-	boost.position = _get_random_position()
+	boost.position = boost_position
 	Global.get_minigame_manager().add_child(boost)
 	
 
