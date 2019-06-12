@@ -30,11 +30,30 @@ var synchronized_player_count = 0
 var start_game_time : float
 var peer : NetworkedMultiplayerENet
 var current_player : Player
+var has_won = false
 
 
 func _enter_tree() -> void:
 	Global.set_minigame_manager(self)
 	active_player_count = player_count
+	
+	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
+	get_tree().connect("server_disconnected", self, "_server_disconnect")
+
+
+func _player_disconnected(id : int):
+	print("player " + str(id) + " disconnected from minigame!")
+	var order = Global.lobby.get_user_order_by_id(id)
+	var player_controller = get_node("PlayerController" + str(order))
+	if player_controller:
+		player_controller.queue_free()
+	if is_network_master():
+		rpc("add_loser", order)
+
+
+func _server_disconnect():
+	Global.set_minigame_manager(null)
+	queue_free()
 
 
 func _ready() -> void:
@@ -111,17 +130,18 @@ func _bind_signals() -> void:
 		Global.get_input_manager().connect("on_button_release", self, "_on_InputManager_on_button_release")
 
 
-master func add_loser(player_id : int) -> void:
-	_add_player_to_list(player_id, player_id_lose_order, true)
+func add_loser(player_id : int) -> void:
+	if is_network_master():
+		_add_player_to_list(player_id, player_id_lose_order, true)
 
 
-master func add_winner(player_id : int) -> void:
-	print("Add winner called!")
-	_add_player_to_list(player_id,  player_id_win_order, false)
+func add_winner(player_id : int) -> void:
+	if is_network_master():
+		_add_player_to_list(player_id,  player_id_win_order, false)
 
 
 func _add_player_to_list(player_id : int, list : Array, should_push_front : bool) -> void:
-	if active_player_count <= 0 or not player_map.has(player_id):
+	if active_player_count <= 0 or not player_map.has(player_id) or has_won:
 		return
 
 	player_map.erase(player_id)
@@ -133,6 +153,8 @@ func _add_player_to_list(player_id : int, list : Array, should_push_front : bool
 
 	if $OnWinDelayTimer && active_player_count <= 1:
 		($OnWinDelayTimer as Timer).start()
+		has_won = true
+
 
 
 func _on_WinTimer_timeout() -> void:

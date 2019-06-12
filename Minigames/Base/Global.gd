@@ -19,7 +19,10 @@ func get_minigame_manager() -> MinigameManager:
 
 func set_minigame_manager(minigame_manager : MinigameManager) -> void:
 	self.minigame_manager = minigame_manager
-	camera = (minigame_manager as Node2D).get_node("Camera")
+	if minigame_manager != null:
+		camera = (minigame_manager as Node2D).get_node("Camera")
+	else:
+		camera = null
 
 
 func get_input_manager() -> InputManager:

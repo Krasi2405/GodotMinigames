@@ -9,5 +9,9 @@ func _ready():
 
 
 func go_to_scene():
-	print("Button down")
+	if Global.lobby:
+		Global.lobby.reset_local_state()
+		Global.lobby.queue_free()
+		Global.lobby = null
+
 	get_tree().change_scene(scene)

@@ -58,6 +58,9 @@ func _player_disconnected(id):
 	$CenterContainer/Users.remove_child(user)
 	users.erase(user)
 	user_count -= 1
+	
+	if user_count <= 1:
+		_remove_level_picker()
 
 
 func _on_HostBTN_button_down():
@@ -132,6 +135,8 @@ func reset_local_state():
 	
 	user_count = 0
 	users = []
+	host = null
+	client = null
 
 
 func _close_network():
@@ -233,6 +238,7 @@ func show():
 	$LevelPickerContainer.show()
 	$CenterContainer.show()
 	$Debug.show()
+
 
 func _exit_tree():
 	Global.lobby = null;
