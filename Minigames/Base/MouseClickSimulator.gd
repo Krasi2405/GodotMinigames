@@ -9,6 +9,11 @@ extends Control
 # var a = 2
 # var b = "textvar"
 
+func _enter_tree():
+	if OS.get_name() != "Windows":
+		disconnect("gui_input", self, "_on_GUI_gui_input")
+
+
 func _on_GUI_gui_input(event : InputEvent):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 		var mobile_event : InputEventScreenTouch = InputEventScreenTouch.new()
