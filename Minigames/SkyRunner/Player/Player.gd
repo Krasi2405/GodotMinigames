@@ -43,13 +43,24 @@ func _process(delta):
 	
 	if !$VisibilityNotifier2D.is_on_screen():
 		die()
+	
+	if Global.lobby and is_network_master():
+		rpc_unreliable("synchronize_position", position)
+
+
+puppet func synchronize_position(position : Vector2):
+	self.position = position
 
 
 func press_action():
 	if player.is_on_floor():
 		is_jumbing = true
 		
-		
+
+func press_action_synchronize():
+	pass
+
+
 func die():
 	get_parent().die()
 

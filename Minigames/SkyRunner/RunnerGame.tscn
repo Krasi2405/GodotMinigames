@@ -15,7 +15,6 @@
 extents = Vector2( 46.9965, 397.558 )
 
 [node name="MinigameManager" instance=ExtResource( 1 )]
-player_count = 4
 use_hold_signal = false
 use_release_signal = false
 
