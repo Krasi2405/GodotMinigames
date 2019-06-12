@@ -22,34 +22,36 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if not player.is_on_floor():
-		motion.y += GRAVITY * delta;
-
-	if motion.y >= terminal_velocity:
-		motion.y = terminal_velocity
+	if Global.lobby and is_network_master():
+		if not player.is_on_floor():
+			motion.y += GRAVITY * delta;
+	
+		if motion.y >= terminal_velocity:
+			motion.y = terminal_velocity
+		
+		
+		
+		if(is_jumbing): 
+			motion.y = jumping_height
+			is_jumbing = false
 	
 	
-	
-	if(is_jumbing): 
-		motion.y = jumping_height
-		is_jumbing = false
-
-
-	if player.is_on_ceiling() and not player.is_on_floor():
-		motion.y = 0
-	
+		if player.is_on_ceiling() and not player.is_on_floor():
+			motion.y = 0
 	
 	move_and_slide(motion, UP, false, 4, deg2rad(80))
 	
-	if !$VisibilityNotifier2D.is_on_screen():
-		die()
+	if is_network_master() and !$VisibilityNotifier2D.is_on_screen():
+		commit_neck_rope()
 	
 	if Global.lobby and is_network_master():
-		rpc_unreliable("synchronize_position", position)
+		rpc_unreliable("synchronize_synchronization", position, motion)
+		
 
 
-puppet func synchronize_position(position : Vector2):
+puppet func synchronize_synchronization(position : Vector2, motion : Vector2):
 	self.position = position
+	self.motion = motion
 
 
 func press_action():
@@ -62,6 +64,10 @@ func press_action_synchronize():
 
 
 func die():
+	commit_neck_rope()
+
+
+func commit_neck_rope():
 	get_parent().die()
 
 
