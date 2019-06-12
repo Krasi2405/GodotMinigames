@@ -41,10 +41,14 @@ func get_dchp_get_port() -> int:
 func _player_connected(id):
 	$Debug.print_d("Connect player with id " + str(id))
 	# id == 1 is server
+	var lobby_user : LobbyUser
 	if(id == 1):
-		add_lobby_host()
+		lobby_user = add_lobby_host()
 	else:
-		add_lobby_client(id)
+		lobby_user = add_lobby_client(id)
+
+	lobby_user.rpc("set_username")
+
 	_hide_join_btns()
 
 

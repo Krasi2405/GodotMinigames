@@ -42,5 +42,4 @@ valign = 1
 [node name="NetworkScript" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-
 [connection signal="button_down" from="TextureRect/LeaveButton" to="." method="_on_LeaveButton_button_down"]

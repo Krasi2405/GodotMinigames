@@ -16,6 +16,20 @@ func initalize(
 	_set_icon(icon)
 
 
+func _ready():
+	set_network_master(get_network_id())
+
+
+master func set_username():
+	var username = OS.get_model_name()
+	_set_name(username)
+	rpc("set_username_remote", username)
+
+
+remote func set_username_remote(username : String):
+	_set_name(username)
+
+
 func set_network_id(network_id : int) -> void:
 	self.network_id = network_id
 
